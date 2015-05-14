@@ -5,6 +5,12 @@ We make these freely available to the community under the apache License [http:/
 
 We are in the process of adding more controls to this library, and will shortly create an official nuget package.
 
+##Xamarin Forms
+We will contribute some of these controls to the xamarin forms project once we do more testing/development and have more time to integrate them. We figured it'd be great to get these out there for others to use, and build their ideas upon.
+
+##Caveat emptor (buyer beware)
+This library is in an alpha stage. Do not use in a production environment unless you know what you are doing, know what these controls are doing, and have budget to investigate and contribute to resolving any issues which may arise.
+
 #Controls
 
 ## FastCell
