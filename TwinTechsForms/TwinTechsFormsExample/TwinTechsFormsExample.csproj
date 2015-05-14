@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{6B080A35-79E7-4A45-B9FC-25B3D157E2C3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>TwinTechs</RootNamespace>
+    <AssemblyName>TwinTechsFormsExample</AssemblyName>
+    <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="TwinTechsFormsExample.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TwinTechs\Example\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\AppHelper.cs" />
+    <Compile Include="TwinTechs\Example\DataProvider.cs" />
+    <Compile Include="TwinTechs\Example\FastCellComplexSamplePage.xaml.cs">
+      <DependentUpon>FastCellComplexSamplePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\FastCellSamplePage.xaml.cs">
+      <DependentUpon>FastCellSamplePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\MediaItem.cs" />
+    <Compile Include="TwinTechs\Example\ViewCellComplexSamplePage.xaml.cs">
+      <DependentUpon>ViewCellComplexSamplePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\ViewCellSimple.xaml.cs">
+      <DependentUpon>ViewCellSimple.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\Cells\ComplexFastCell.xaml.cs">
+      <DependentUpon>ComplexFastCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\Cells\ComplexViewCell.xaml.cs">
+      <DependentUpon>ComplexViewCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\Cells\SimpleFastCell.xaml.cs">
+      <DependentUpon>SimpleFastCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\Cells\SimpleViewCell.xaml.cs">
+      <DependentUpon>SimpleViewCell.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <Import Project="..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <ItemGroup>
+    <EmbeddedResource Include="TwinTechs\Example\FastCellSamplePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\FastCellComplexSamplePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\About.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\ViewCellSimple.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\Cells\ComplexFastCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\Cells\ComplexViewCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\Cells\SimpleFastCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\Cells\SimpleViewCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\ViewCellComplexSamplePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Xamarin.Forms.Core">
+      <HintPath>..\packages\Xamarin.Forms.1.4.2.6359\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Xaml">
+      <HintPath>..\packages\Xamarin.Forms.1.4.2.6359\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Forms.Platform">
+      <HintPath>..\packages\Xamarin.Forms.1.4.2.6359\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TwinTechsForms.Core\TwinTechsForms.Core.csproj">
+      <Project>{7C5D7E33-C77E-475F-BE8B-359CD164A4E5}</Project>
+      <Name>TwinTechsForms.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TwinTechs\" />
+  </ItemGroup>
+</Project>

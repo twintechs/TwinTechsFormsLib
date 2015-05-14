@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:cells="clr-namespace:TwinTechs.Example.Cells;assembly=TwinTechsFormsExample" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="TwinTechs.Example.ViewCellSimple" Title="ViewCell">
+	<ContentPage.Content>
+		<ListView x:Name="MediaItemsListView" BackgroundColor="Transparent"
+			ItemSelected="OnItemSelected" SeparatorVisibility="None"
+			RowHeight="300">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<cells:SimpleViewCell />
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+	</ContentPage.Content>
+</ContentPage>

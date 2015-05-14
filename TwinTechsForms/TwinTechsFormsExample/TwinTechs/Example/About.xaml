@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="TwinTechs.Example.About"
+	Title="About">
+
+	<ContentPage.Content>
+
+		<StackLayout
+			Padding="40,40">
+
+			<Label
+				Text="This project contains a fast cell implementation which has some optimizaitons which drastically improve performance of listview cells, when using xaml. See the README for more info." />
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>
