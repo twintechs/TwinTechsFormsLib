@@ -6,23 +6,30 @@ using UIKit;
 using Foundation;
 using CoreGraphics;
 using TwinTechs.Ios.Controls;
+using System.Collections.Generic;
+
 
 [assembly: ExportRenderer (typeof(FastCell), typeof(FastCellRenderer))]
-namespace TwinTechs.Ios.Controls
+namespace TwinTechs.Controls
 {
-	internal class NativeCell : UITableViewCell
+	public class NativeCell : UITableViewCell
 	{
 
 		UIView _view;
-		object _originalBindingContext;
-
 		FastCell _fastCell;
+
+		public override string ToString ()
+		{
+			return string.Format ("[NativeCell: FC.BC={0}  FC.OBC={1}]", _fastCell.BindingContext, _fastCell.OriginalBindingContext);
+		}
+
 
 		public NativeCell (NSString cellId, FastCell fastCell) : base (UITableViewCellStyle.Default, cellId)
 		{
 			_fastCell = fastCell;
 			_fastCell.PrepareCell ();
-			_originalBindingContext = fastCell.BindingContext;
+//			_fastCell.OriginalBindingContext = _fastCell.BindingContext;
+
 			var renderer = RendererFactory.GetRenderer (fastCell.View);
 			_view = renderer.NativeView;
 			ContentView.AddSubview (_view);
@@ -31,10 +38,11 @@ namespace TwinTechs.Ios.Controls
 		public void RecycleCell (FastCell newCell)
 		{
 			if (newCell == _fastCell) {
-				_fastCell.BindingContext = _originalBindingContext;
+				_fastCell.BindingContext = _fastCell.OriginalBindingContext;
 			} else {
 				_fastCell.BindingContext = newCell.BindingContext;
 			}
+			_fastCell.BindingContext = newCell.BindingContext;
 		}
 
 		CGSize _lastSize;
@@ -85,15 +93,19 @@ namespace TwinTechs.Ios.Controls
 		public override UITableViewCell GetCell (Cell item, UITableViewCell reusableCell, UITableView tv)
 		{
 			cellId = cellId ?? new NSString (item.GetType ().FullName);
+			var cellCache = FastCellCache.Instance.GetCellCache (tv);
+			var fastCell = item as FastCell;
 			var nativeCell = reusableCell as NativeCell;
-			var viewCell = item as FastCell;
 
-			if (reusableCell == null) {
-				nativeCell = new NativeCell (cellId, viewCell);
+			if (reusableCell != null && cellCache.IsCached (nativeCell)) {
+				cellCache.RecycleCell (nativeCell, fastCell);
 			} else {
-				nativeCell.RecycleCell (viewCell);
+				if (!fastCell.IsInitialized) {
+					fastCell.PrepareCell ();
+				}
+				nativeCell = new NativeCell (cellId, fastCell);
+				cellCache.CacheCell (fastCell, nativeCell);
 			}
-
 			return nativeCell;
 		}
 

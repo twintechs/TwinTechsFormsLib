@@ -6,10 +6,10 @@ x:Class="TwinTechs.Example.Cells.SimpleFastCell"
 xmlns:controls="clr-namespace:TwinTechs.Controls;assembly=TwinTechsLib"
 >
 	<AbsoluteLayout BackgroundColor="Black">
-		<controls:FastImage x:Name="ImageView" AbsoluteLayout.LayoutFlags="WidthProportional" AbsoluteLayout.LayoutBounds="0,0,1,260"/>
-		<controls:FastImage x:Name="UserThumbnailView" AbsoluteLayout.LayoutFlags="None" AbsoluteLayout.LayoutBounds="5,240,40,40"/>
-		<Label x:Name="NameLabel" Text="Someone" TextColor="White"  AbsoluteLayout.LayoutFlags="None" FontSize="Small"  AbsoluteLayout.LayoutBounds="50,250,100,30"/>
-		<Label x:Name="DescriptionLabel" Text="Description" TextColor="White" AbsoluteLayout.LayoutFlags="None" FontSize="Small" AbsoluteLayout.LayoutBounds="50,280,100,40"/>
+<!--		<controls:FastImage x:Name="ImageView" AbsoluteLayout.LayoutFlags="WidthProportional" AbsoluteLayout.LayoutBounds="0,0,1,260"/>
+		<controls:FastImage x:Name="UserThumbnailView" AbsoluteLayout.LayoutFlags="None" AbsoluteLayout.LayoutBounds="5,240,40,40"/>-->
+		<Label x:Name="NameLabel" Text="Someone" TextColor="White"  AbsoluteLayout.LayoutFlags="None" FontSize="Small"  AbsoluteLayout.LayoutBounds="50,0,100,30"/>
+		<Label x:Name="DescriptionLabel" Text="Description" TextColor="White" AbsoluteLayout.LayoutFlags="None" FontSize="Small" AbsoluteLayout.LayoutBounds="100,0,100,40"/>
 	</AbsoluteLayout>
 
 </controls:FastCell>

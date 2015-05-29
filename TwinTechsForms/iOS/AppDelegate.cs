@@ -7,6 +7,7 @@ using UIKit;
 using TwinTechs;
 using TwinTechs.Example;
 using TwinTechs.Ios.Controls;
+using TwinTechs.Controls;
 
 namespace TwinTechsFormsExample.iOS
 {

@@ -1,6 +1,9 @@
 ﻿using System;
 using Xamarin.Forms;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo ("TwinTechsLib.iOS")]
+[assembly: InternalsVisibleTo ("TwinTechsLib.Droid")]
 namespace TwinTechs.Controls
 {
 	/*
@@ -45,6 +48,8 @@ namespace TwinTechs.Controls
 		/// </summary>
 		/// <param name="isRecycled">If set to <c>true</c> is recycled.</param>
 		protected abstract void SetupCell (bool isRecycled);
+
+		internal object OriginalBindingContext;
 	}
 }
 

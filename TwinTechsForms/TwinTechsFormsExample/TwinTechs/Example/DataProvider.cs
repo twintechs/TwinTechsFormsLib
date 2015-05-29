@@ -84,10 +84,12 @@ namespace TwinTechs.Example
 
 			ObservableCollection<MediaItem> items = new ObservableCollection<MediaItem> ();
 
+			int counter = 0;
 			for (int index = 0; index < 10; index++) {
 				for (int i = 0; i < imagePaths.Length; i++) {
-					var item = new MediaItem (imageNames [i], imageNames [i], userNames [i], imagePaths [i], imagePaths [i], thumbnailPaths [i]);
+					var item = new MediaItem (imageNames [i], imageNames [i], userNames [i], imagePaths [i], imagePaths [i], thumbnailPaths [i], counter);
 					items.Add (item);
+					counter++;
 				}
 					
 			}

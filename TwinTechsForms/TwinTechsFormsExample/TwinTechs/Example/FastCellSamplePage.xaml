@@ -3,7 +3,7 @@
 	<ContentPage.Content>
 		<ListView x:Name="MediaItemsListView" BackgroundColor="Transparent"
 			ItemSelected="OnItemSelected" SeparatorVisibility="None"
-			RowHeight="300">
+			RowHeight="60">
 			<ListView.ItemTemplate>
 				<DataTemplate>
 					<cells:SimpleFastCell />

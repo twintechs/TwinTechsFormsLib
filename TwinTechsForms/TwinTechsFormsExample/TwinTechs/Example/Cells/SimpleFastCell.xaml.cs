@@ -17,8 +17,8 @@ namespace TwinTechs.Example.Cells
 		{
 			var mediaItem = BindingContext as MediaItem;
 			if (mediaItem != null) {
-				UserThumbnailView.ImageUrl = mediaItem.ImagePath ?? "";
-				ImageView.ImageUrl = mediaItem.ThumbnailImagePath ?? "";
+//				UserThumbnailView.ImageUrl = mediaItem.ImagePath ?? "";
+//				ImageView.ImageUrl = mediaItem.ThumbnailImagePath ?? "";
 				NameLabel.Text = mediaItem.Name;
 				DescriptionLabel.Text = mediaItem.Description;
 			}
