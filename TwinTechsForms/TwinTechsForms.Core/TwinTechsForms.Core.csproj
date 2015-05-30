@@ -7,7 +7,7 @@
     <ProjectGuid>{7C5D7E33-C77E-475F-BE8B-359CD164A4E5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>TwinTechs</RootNamespace>
-    <AssemblyName>TwinTechsLib</AssemblyName>
+    <AssemblyName>TwinTechsForms</AssemblyName>
     <TargetFrameworkProfile>Profile78</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -30,27 +30,40 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MyPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TwinTechs\Controls\FastCell.cs" />
     <Compile Include="TwinTechs\Controls\FastImage.cs" />
     <Compile Include="TwinTechs\Controls\IFastCellCache.cs" />
+    <Compile Include="XLabs\EventArgs{T}.cs" />
+    <Compile Include="XLabs\Forms\Controls\FastGridCell.cs" />
+    <Compile Include="XLabs\Forms\Controls\GridView.cs" />
+    <Compile Include="TwinTechs\Extensions\ViewExtensions.cs" />
+    <Compile Include="TwinTechs\Gestures\BaseGestureRecognizer.cs" />
+    <Compile Include="TwinTechs\Gestures\GestureRecognizerExtensions.cs" />
+    <Compile Include="TwinTechs\Gestures\INativeGestureRecognizer.cs" />
+    <Compile Include="TwinTechs\Gestures\INativeGestureRecognizerFactory.cs" />
+    <Compile Include="TwinTechs\Gestures\LongPressGestureRecognizer.cs" />
+    <Compile Include="TwinTechs\Gestures\PanGestureRecognizer.cs" />
+    <Compile Include="TwinTechs\Gestures\PinchGestureRecognizer.cs" />
+    <Compile Include="TwinTechs\Gestures\SwipeGestureRecognizer.cs" />
+    <Compile Include="TwinTechs\Controls\PageViewContainer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.3.6358-pre2\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.3.6358-pre2\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
+  <Import Project="..\..\..\twinEventsXamarin\TwinEvents\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\..\twinEventsXamarin\TwinEvents\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <ItemGroup>
     <Folder Include="TwinTechs\" />
     <Folder Include="TwinTechs\Controls\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
-      <HintPath>..\packages\Xamarin.Forms.1.4.3.6358-pre2\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
+      <HintPath>..\..\..\twinEventsXamarin\TwinEvents\packages\Xamarin.Forms.1.4.2.6359\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Core.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml">
-      <HintPath>..\packages\Xamarin.Forms.1.4.3.6358-pre2\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
+      <HintPath>..\..\..\twinEventsXamarin\TwinEvents\packages\Xamarin.Forms.1.4.2.6359\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform">
-      <HintPath>..\packages\Xamarin.Forms.1.4.3.6358-pre2\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
+      <HintPath>..\..\..\twinEventsXamarin\TwinEvents\packages\Xamarin.Forms.1.4.2.6359\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.Platform.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
