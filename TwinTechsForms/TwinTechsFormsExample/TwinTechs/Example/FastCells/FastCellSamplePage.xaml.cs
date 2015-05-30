@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 
 using Xamarin.Forms;
-using TwinTechs.Controls;
 
-namespace TwinTechs.Example
+namespace TwinTechs.Example.FastCells
 {
-	public partial class FastCellComplexSamplePage : ContentPage
+	public partial class FastCellSamplePage : ContentPage
 	{
-		public FastCellComplexSamplePage ()
+		public FastCellSamplePage ()
 		{
 			InitializeComponent ();
 			MediaItemsListView.ItemsSource = DataProvider.GetMediaItems ();
 		}
-
 
 		void OnItemSelected (object sender, SelectedItemChangedEventArgs e)
 		{
@@ -26,6 +24,7 @@ namespace TwinTechs.Example
 			base.OnDisappearing ();
 			AppHelper.FastCellCache.FlushAllCaches ();
 		}
+
 	}
 }
 

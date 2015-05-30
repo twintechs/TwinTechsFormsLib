@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="TwinTechs.Example.SampleMenu">
+
+	<ContentPage.Content>
+
+		<TableView
+			Intent="Form">
+
+			<TableSection
+				Title="Fast ListView Cells">
+
+				<TextCell
+					Text="Default Simple cell"
+					Detail="Using a standard ViewCell with simple xaml"
+					Tapped="OnDefaultSimpleCell" />
+
+				<TextCell
+					Text="Simple FastCell"
+					Detail="Using a FastCell with simple xaml"
+					Tapped="OnFastSimpleCell" />
+
+				<TextCell
+					Text="Verifying FastCell Order"
+					Detail="There was a bug with recylcing, this proves it's fixed"
+					Tapped="OnFastSimpleCellLots" />
+
+				<TextCell
+					Text="Default Complex cell"
+					Detail="Using standard ViewCell with complex xaml"
+					Tapped="OnDefaultComplexCell" />
+
+				<TextCell
+					Text="Complex FastCell"
+					Detail="Using a FastCell with complex xaml"
+					Tapped="OnFastComplexCell" />
+
+			</TableSection>
+
+		</TableView>
+
+	</ContentPage.Content>
+
+</ContentPage>

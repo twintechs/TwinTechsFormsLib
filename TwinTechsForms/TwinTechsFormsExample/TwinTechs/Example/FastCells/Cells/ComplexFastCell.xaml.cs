@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using TwinTechs.Controls;
 
-namespace TwinTechs.Example.Cells
+namespace TwinTechs.Example.FastCells.Cells
 {
 	public partial class ComplexFastCell : FastCell
 	{

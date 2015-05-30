@@ -37,60 +37,78 @@
     </Compile>
     <Compile Include="TwinTechs\Example\AppHelper.cs" />
     <Compile Include="TwinTechs\Example\DataProvider.cs" />
-    <Compile Include="TwinTechs\Example\FastCellComplexSamplePage.xaml.cs">
-      <DependentUpon>FastCellComplexSamplePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TwinTechs\Example\FastCellSamplePage.xaml.cs">
-      <DependentUpon>FastCellSamplePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TwinTechs\Example\MediaItem.cs" />
-    <Compile Include="TwinTechs\Example\ViewCellComplexSamplePage.xaml.cs">
-      <DependentUpon>ViewCellComplexSamplePage.xaml</DependentUpon>
+    <Compile Include="TwinTechs\Example\SampleMenu.xaml.cs">
+      <DependentUpon>SampleMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TwinTechs\Example\ViewCellSimple.xaml.cs">
-      <DependentUpon>ViewCellSimple.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TwinTechs\Example\Cells\ComplexFastCell.xaml.cs">
+    <Compile Include="TwinTechs\Example\FastCells\Cells\ComplexFastCell.xaml.cs">
       <DependentUpon>ComplexFastCell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TwinTechs\Example\Cells\ComplexViewCell.xaml.cs">
+    <Compile Include="TwinTechs\Example\FastCells\Cells\ComplexViewCell.xaml.cs">
       <DependentUpon>ComplexViewCell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TwinTechs\Example\Cells\SimpleFastCell.xaml.cs">
+    <Compile Include="TwinTechs\Example\FastCells\Cells\SimpleFastCell.xaml.cs">
       <DependentUpon>SimpleFastCell.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TwinTechs\Example\Cells\SimpleViewCell.xaml.cs">
+    <Compile Include="TwinTechs\Example\FastCells\Cells\SimpleViewCell.xaml.cs">
       <DependentUpon>SimpleViewCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\FastCells\Cells\SmallSimpleFastCell.xaml.cs">
+      <DependentUpon>SmallSimpleFastCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\FastCells\FastCellComplexSamplePage.xaml.cs">
+      <DependentUpon>FastCellComplexSamplePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\FastCells\FastCellSamplePage.xaml.cs">
+      <DependentUpon>FastCellSamplePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\FastCells\FastSimpleCellLots.xaml.cs">
+      <DependentUpon>FastSimpleCellLots.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\FastCells\ViewCellComplexSamplePage.xaml.cs">
+      <DependentUpon>ViewCellComplexSamplePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\FastCells\ViewCellSimple.xaml.cs">
+      <DependentUpon>ViewCellSimple.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <ItemGroup>
-    <EmbeddedResource Include="TwinTechs\Example\FastCellSamplePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TwinTechs\Example\FastCellComplexSamplePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="TwinTechs\Example\About.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="TwinTechs\Example\ViewCellSimple.xaml">
+    <EmbeddedResource Include="TwinTechs\Example\SampleMenu.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="TwinTechs\Example\Cells\ComplexFastCell.xaml">
+    <EmbeddedResource Include="TwinTechs\Example\FastCells\Cells\ComplexFastCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="TwinTechs\Example\Cells\ComplexViewCell.xaml">
+    <EmbeddedResource Include="TwinTechs\Example\FastCells\Cells\ComplexViewCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="TwinTechs\Example\Cells\SimpleFastCell.xaml">
+    <EmbeddedResource Include="TwinTechs\Example\FastCells\Cells\SimpleFastCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="TwinTechs\Example\Cells\SimpleViewCell.xaml">
+    <EmbeddedResource Include="TwinTechs\Example\FastCells\Cells\SimpleViewCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="TwinTechs\Example\ViewCellComplexSamplePage.xaml">
+    <EmbeddedResource Include="TwinTechs\Example\FastCells\Cells\SmallSimpleFastCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\FastCells\FastCellComplexSamplePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\FastCells\FastCellSamplePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\FastCells\FastSimpleCellLots.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\FastCells\ViewCellComplexSamplePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\FastCells\ViewCellSimple.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

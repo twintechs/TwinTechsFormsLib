@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Xamarin.Forms;
 
-namespace TwinTechs.Example.Cells
+namespace TwinTechs.Example.FastCells.Cells
 {
 	public partial class SimpleViewCell : ViewCell
 	{
