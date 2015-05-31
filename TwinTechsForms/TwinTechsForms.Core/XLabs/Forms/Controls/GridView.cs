@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Xamarin.Forms;
+using System.Diagnostics;
 
 namespace XLabs.Forms.Controls
 {

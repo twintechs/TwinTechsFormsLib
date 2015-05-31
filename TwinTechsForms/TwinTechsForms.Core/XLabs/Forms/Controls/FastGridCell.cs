@@ -42,6 +42,16 @@ namespace XLabs.Forms.Controls
 		/// </summary>
 		/// <param name="isRecycled">If set to <c>true</c> is recycled.</param>
 		protected abstract void SetupCell (bool isRecycled);
+
+		/// <summary>
+		/// Called when the size of the view changes. Override to do layout task if required
+		/// </summary>
+		/// <param name="size">Size.</param>
+		public virtual void OnSizeChanged (Size size)
+		{
+			
+		}
+
 	}
 }
 

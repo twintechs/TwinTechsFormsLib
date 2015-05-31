@@ -129,7 +129,7 @@ namespace XLabs.Forms.Controls
 			}
 			if (e.PropertyName == "IsHorizontal") {
 				UICollectionViewFlowLayout flowLayout = (UICollectionViewFlowLayout)_gridCollectionView.CollectionViewLayout;
-				flowLayout.ScrollDirection = UICollectionViewScrollDirection.Horizontal;
+				flowLayout.ScrollDirection = Element.IsHorizontal ? UICollectionViewScrollDirection.Horizontal : UICollectionViewScrollDirection.Vertical;
 			}
 			if (e.PropertyName == "IsContentCentered") {
 				InvalidatePadding ();
@@ -318,8 +318,7 @@ namespace XLabs.Forms.Controls
 			var item = Element.ItemsSource.Cast<object> ().ElementAt (indexPath.Row);
 			var collectionCell = collectionView.DequeueReusableCell (cellId, indexPath) as GridViewCell;
 
-			collectionCell.RecycleCell (item, Element.ItemTemplate);
-
+			collectionCell.RecycleCell (item, Element.ItemTemplate, Element);
 			return collectionCell;
 		}
 
@@ -349,7 +348,9 @@ namespace XLabs.Forms.Controls
 		{
 			if (_gridCollectionView != null && _gridCollectionView.NumberOfItemsInSection (0) > index) {
 				var indexPath = NSIndexPath.FromRowSection (index, 0);
-				_gridCollectionView.ScrollToItem (indexPath, UICollectionViewScrollPosition.Top, animated);
+				InvokeOnMainThread (() => {
+					_gridCollectionView.ScrollToItem (indexPath, UICollectionViewScrollPosition.Top, animated);
+				});
 			} else {
 				_initialIndex = index;
 			}

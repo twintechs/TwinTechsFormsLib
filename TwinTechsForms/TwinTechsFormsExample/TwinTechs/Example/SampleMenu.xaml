@@ -39,7 +39,25 @@
 					Tapped="OnFastComplexCell" />
 
 			</TableSection>
+			<TableSection Title="XLabs GridView improvements">
+					<TextCell
+						Text="Performance 1"
+						Detail="Using better view recyling for native performance"
+						Tapped="OnGridViewPerformance" />
+					<TextCell
+						Text="Performance 2"
+						Detail="Showing grid view in gridview performance"
+						Tapped="OnGridViewPerformance2" />
+							<TextCell
+						Text="Performance 3"
+						Detail="Showing grid view's performance with xaml more complex cells"
+						Tapped="OnGridViewPerformance3" />
 
+				<TextCell
+					Text="Additional Properties"
+					Detail="Showing off some extra properties we added"
+					Tapped="OnGridViewProperties" />
+			</TableSection>
 		</TableView>
 
 	</ContentPage.Content>

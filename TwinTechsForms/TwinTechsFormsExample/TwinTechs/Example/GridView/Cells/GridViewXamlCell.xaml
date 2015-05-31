@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<xlabs:FastGridCell
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="TwinTechs.Example.GridView.Cells.GridViewXamlCell"
+	xmlns:xlabs="clr-namespace:XLabs.Forms.Controls;assembly=TwinTechsForms"
+	xmlns:controls="clr-namespace:TwinTechs.Controls;assembly=TwinTechsForms">
+
+		<StackLayout Spacing="0">
+
+			<controls:FastImage
+				x:Name="ImageView"
+				WidthRequest="150"
+				HeightRequest="150" />
+
+			<StackLayout
+				Orientation="Horizontal"
+				HeightRequest="50"
+				BackgroundColor="Red"
+				Opacity="0.8"
+				>
+
+				<controls:FastImage
+					WidthRequest="30"
+					HeightRequest="50"
+					x:Name="UserThumbnailView" />
+
+				<Label
+					x:Name="NameLabel"
+					Text="Someone"
+					TextColor="White"
+					FontSize="Small" />
+
+				<Label
+					x:Name="DescriptionLabel"
+					Text="Description"
+					TextColor="White"
+					FontSize="Small" />
+
+			</StackLayout>
+
+		</StackLayout>
+
+</xlabs:FastGridCell>

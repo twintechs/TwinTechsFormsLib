@@ -71,6 +71,26 @@
     <Compile Include="TwinTechs\Example\FastCells\ViewCellSimple.xaml.cs">
       <DependentUpon>ViewCellSimple.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TwinTechs\Example\GridView\Cells\EmbeddedGridViewCell.xaml.cs">
+      <DependentUpon>EmbeddedGridViewCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\GridView\Cells\GridViewThumbnailCell.cs" />
+    <Compile Include="TwinTechs\Example\GridView\Cells\InnerGridViewThumbnailCell.cs" />
+    <Compile Include="TwinTechs\Example\GridView\GridViewPerformance.xaml.cs">
+      <DependentUpon>GridViewPerformance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\GridView\GridViewPerformance2.xaml.cs">
+      <DependentUpon>GridViewPerformance2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\GridView\Cells\GridViewXamlCell.xaml.cs">
+      <DependentUpon>GridViewXamlCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\GridView\GridViewXamlPerformance.xaml.cs">
+      <DependentUpon>GridViewXamlPerformance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\GridView\GridViewOptions.xaml.cs">
+      <DependentUpon>GridViewOptions.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.2.6359\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -109,6 +129,24 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="TwinTechs\Example\FastCells\ViewCellSimple.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\GridView\Cells\EmbeddedGridViewCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\GridView\GridViewPerformance.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\GridView\GridViewPerformance2.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\GridView\Cells\GridViewXamlCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\GridView\GridViewXamlPerformance.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\GridView\GridViewOptions.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
