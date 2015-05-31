@@ -11,18 +11,26 @@
 
 		<StackLayout>
 
-			<StackLayout 
+			<StackLayout
 				Orientation="Horizontal">
 
 				<Button
-					Text="Toggle Centered"
-					Clicked="OnToggleCentered" />
+					Text="Toggle AutoPad1"
+					Clicked="OnToggleAutoPad1" />
+						<Button
+					Text="Toggle AutoPad2"
+					Clicked="OnToggleAutoPad2" />
 
-				<Button
-					Text="Toggle row align"
+			
+
+			</StackLayout>
+
+			<StackLayout
+				Orientation="Horizontal">
+					<Button
+					Text="Toggle always center"
 					Clicked="OnToggleCenteredMode"
 					x:Name="CenteredMode" />
-
 				<Button
 					Text="Toggle Horizontal"
 					Clicked="OnToggleHorizontal" />
