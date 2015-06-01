@@ -6,6 +6,8 @@ We make these freely available to the community under the apache License [http:/
 
 We are in the process of adding more controls to this library, and will shortly create an official nuget package.
 
+This Lirbary is the result of a series of blog posts I wrote describing how to push Xamarin Forms to it's limits: h[ttp://blog.twintechs.com/advanced-xamarin-forms-techniques-for-flexible-and-performant-cross-platform-apps-part-1.-xamarin-forms-how-far-can-we-push-it](http://blog.twintechs.com/advanced-xamarin-forms-techniques-for-flexible-and-performant-cross-platform-apps-part-1.-xamarin-forms-how-far-can-we-push-it)
+
 ##Xamarin Forms
 We will contribute some of these controls to the xamarin forms project once we do more testing/development and have more time to integrate them. We figured it'd be great to get these out there for others to use, and build their ideas upon.
 
@@ -83,6 +85,7 @@ The reference is set in the appdelegate/main activity, and used in on dissapear.
 
 We will improve the cache situation over the next few weeks, as we do more work on android projects.
 
+The accompanying blog post for the FastImage and FastViewCell is here: [http://blog.twintechs.com/how-to-achieve-native-list-performance-with-xamarin-forms-listview](http://blog.twintechs.com/how-to-achieve-native-list-performance-with-xamarin-forms-listview)
 
 ### Implementation notes
 The following work:
@@ -107,3 +110,20 @@ A control which provides ram/disk caching of network loaded images, to give grea
 Usage 
 
 	UserThumbnailView.ImageUrl = mediaItem.ImagePath ?? "";
+	
+## FastGridCell
+This is an optimization to XLabs GridView implmentation which greatly improves performance. For convenience we have included the GridView sources. You can use them as is, or patch your own version of XLabs, or copy them into your project. 
+
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/VUJpIlUR6KQ/0.jpg)](https://www.youtube.com/watch?v=VUJpIlUR6KQ)
+
+
+Usage of the GridView is the same as in XLabs, with a few additional properties
+
+  * IsHorizontal - sets the grid to horizontal mode
+  * ContentPadding(Top|Left|Right|Bottom) - to set content padding,
+  * Reload() - relaods the grid
+  * ScrollToItemAtIndex(index,animated) - to scroll to the given item,
+  * IsContentCentered - automatically adjusts contentPadding to center items in your grid,
+  * CenterAsFilledRow - if set to false, then the content will always be "truly" centered, so if you have just one item, it will appear in the middle of your grid, as opposed to padded to fit into where it would if you had sufficient items to fill a row.
+  
+The FastGridCell is described fully in our blog post : [http://blog.twintechs.com/advanced-xamarin-forms-techniques-for-flexible-and-performant-cross-platform-apps-part-3](http://blog.twintechs.com/advanced-xamarin-forms-techniques-for-flexible-and-performant-cross-platform-apps-part-3): 
