@@ -23,11 +23,12 @@ namespace XLabs.Forms.Controls
 		FastGridCell _viewCell;
 
 
-		public void RecycleCell (object data, DataTemplate dataTemplate)
+		public void RecycleCell (object data, DataTemplate dataTemplate, VisualElement parent)
 		{
 			if (_viewCell == null) {
 				_viewCell = (dataTemplate.CreateContent () as FastGridCell);
 				_viewCell.BindingContext = data;
+				_viewCell.Parent = parent;
 				_viewCell.PrepareCell ();
 				_originalBindingContext = _viewCell.BindingContext;
 				var renderer = RendererFactory.GetRenderer (_viewCell.View);
@@ -42,11 +43,6 @@ namespace XLabs.Forms.Controls
 				_viewCell.BindingContext = data;
 			}
 		}
-
-
-
-
-
 
 		/// <summary>
 		/// The key
@@ -71,33 +67,14 @@ namespace XLabs.Forms.Controls
 		public override void LayoutSubviews ()
 		{
 			base.LayoutSubviews ();
-			//TODO update sizes of the xamarin view
 			if (_lastSize.Equals (CGSize.Empty) || !_lastSize.Equals (Frame.Size)) {
 
-				var layout = _viewCell.View as Layout<View>;
-				if (layout != null) {
-					layout.Layout (Frame.ToRectangle ());
-					layout.ForceLayout ();
-					FixChildLayouts (layout);
-				}
+				_viewCell.View.Layout (Frame.ToRectangle ());
+				_viewCell.OnSizeChanged (new Xamarin.Forms.Size (Frame.Size.Width, Frame.Size.Height));
 				_lastSize = Frame.Size;
 			}
 
 			_view.Frame = ContentView.Bounds;
-		}
-
-		void FixChildLayouts (Layout<View> layout)
-		{
-			foreach (var child in layout.Children) {
-				if (child is StackLayout) {
-					((StackLayout)child).ForceLayout ();
-					FixChildLayouts (child as Layout<View>);
-				}
-				if (child is AbsoluteLayout) {
-					((AbsoluteLayout)child).ForceLayout ();
-					FixChildLayouts (child as Layout<View>);
-				}
-			}
 		}
 	}
 }

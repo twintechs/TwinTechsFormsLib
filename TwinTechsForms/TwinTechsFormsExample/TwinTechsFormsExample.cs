@@ -10,15 +10,7 @@ namespace TwinTechs
 		public App ()
 		{
 			// The root page of your application
-			MainPage = new TabbedPage {
-				Children = {
-					new About (),
-					new ViewCellSimple (),
-					new ViewCellComplexSamplePage (),
-					new FastCellSamplePage (),
-					new FastCellComplexSamplePage (),
-				}
-			};
+			MainPage = new NavigationPage (new SampleMenu ());
 		}
 
 		protected override void OnStart ()

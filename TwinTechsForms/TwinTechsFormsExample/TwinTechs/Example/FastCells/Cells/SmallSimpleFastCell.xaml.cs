@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using TwinTechs.Controls;
 
-namespace TwinTechs.Example.Cells
+namespace TwinTechs.Example.FastCells.Cells
 {
-	public partial class SimpleFastCell : FastCell
+	public partial class SmallSimpleFastCell : FastCell
 	{
 
 		protected override void InitializeCell ()
@@ -17,8 +17,6 @@ namespace TwinTechs.Example.Cells
 		{
 			var mediaItem = BindingContext as MediaItem;
 			if (mediaItem != null) {
-//				UserThumbnailView.ImageUrl = mediaItem.ImagePath ?? "";
-//				ImageView.ImageUrl = mediaItem.ThumbnailImagePath ?? "";
 				NameLabel.Text = mediaItem.Name;
 				DescriptionLabel.Text = mediaItem.Description;
 			}

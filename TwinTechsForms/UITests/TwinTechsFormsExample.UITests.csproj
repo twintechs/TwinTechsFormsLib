@@ -48,12 +48,6 @@
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Droid\TwinTechsFormsExample.Droid.csproj">
-      <Project>{98C72D6A-9016-4881-978D-55C98C743918}</Project>
-      <Name>TwinTechsFormsExample.Droid</Name>
-      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
-      <Private>False</Private>
-    </ProjectReference>
     <ProjectReference Include="..\TwinTechsForms.Core\TwinTechsForms.Core.csproj">
       <Project>{7C5D7E33-C77E-475F-BE8B-359CD164A4E5}</Project>
       <Name>TwinTechsForms.Core</Name>

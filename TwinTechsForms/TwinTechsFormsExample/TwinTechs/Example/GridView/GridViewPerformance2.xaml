@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:xlabs="clr-namespace:XLabs.Forms.Controls;assembly=TwinTechsForms"
+	xmlns:cells="clr-namespace:TwinTechs.Example.GridView.Cells;assembly=TwinTechsFormsExample"
+	x:Class="TwinTechs.Example.GridView.GridViewPerformance2">
+
+	<ContentPage.Content>
+
+		<AbsoluteLayout>
+
+			<xlabs:GridView
+				x:Name="MediaItemsGridView"
+				RowSpacing="5"
+				ColumnSpacing="5"
+				ContentPaddingBottom="60"
+				ContentPaddingTop="10"
+				ContentPaddingLeft="10"
+				ContentPaddingRight="10"
+				IsContentCentered="false"
+				ItemWidth="320"
+				ItemHeight="140"
+				SelectionEnabled="false"
+				AbsoluteLayout.LayoutFlags="SizeProportional"
+				AbsoluteLayout.LayoutBounds="0,0,1,1">
+
+				<xlabs:GridView.ItemTemplate>
+
+					<DataTemplate>
+
+						<cells:EmbeddedGridViewCell />
+
+					</DataTemplate>
+
+				</xlabs:GridView.ItemTemplate>
+
+			</xlabs:GridView>
+
+		</AbsoluteLayout>
+
+	</ContentPage.Content>
+
+</ContentPage>

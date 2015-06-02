@@ -13,6 +13,9 @@
 
 			<Label
 				Text="This project contains a fast cell implementation which has some optimizaitons which drastically improve performance of listview cells, when using xaml. See the README for more info." />
+
 		</StackLayout>
+
 	</ContentPage.Content>
+
 </ContentPage>
