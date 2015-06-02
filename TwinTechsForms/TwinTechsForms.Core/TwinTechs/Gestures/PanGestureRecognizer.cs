@@ -7,6 +7,8 @@ namespace TwinTechs.Gestures
 	{
 		Point GetVelocityInView (VisualElement view);
 
+		void SetTranslationInView (Point translation, VisualElement view);
+
 		Point GetTranslationInView (VisualElement view);
 	}
 
@@ -20,6 +22,11 @@ namespace TwinTechs.Gestures
 		public Point GetVelocityInView (VisualElement view)
 		{
 			return (NativeGestureRecognizer as INativePanGestureRecognizer).GetVelocityInView (view);
+		}
+
+		public void SetTranslationInView (Point translation, VisualElement view)
+		{
+			(NativeGestureRecognizer as INativePanGestureRecognizer).SetTranslationInView (translation, view);
 		}
 
 		public Point GetTranslationInView (VisualElement view)

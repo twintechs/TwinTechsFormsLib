@@ -4,6 +4,7 @@ using CoreGraphics;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace TwinTechs.Ios.Controls
 {
@@ -32,25 +33,24 @@ namespace TwinTechs.Ios.Controls
 				_viewController = value;
 
 				if (_viewController != null) {
-					if (ParentViewController == null) {
-						throw new Exception ("No Parent View controller was found");
-					}
+					
+					AddViewController ();
 				}
-				AddViewController ();
 			}
 		}
 
 		void AddViewController ()
 		{
-//			var testView = new UIView (new CGRect (0, 0, 200, 200)) {
-//				BackgroundColor = UIColor.Blue,
-//			};
-			AddSubview (_viewController.View);
-//			AddSubview (testView);
-			ParentViewController.AddChildViewController (_viewController);
-			_viewController.View.Frame = Bounds;
-			_viewController.View.Tag = 2;
+			if (ParentViewController == null) {
+				throw new Exception ("No Parent View controller was found");
+			}
 
+			Debug.WriteLine ("vc.v is " + _viewController.View);
+
+			ParentViewController.AddChildViewController (_viewController);
+			AddSubview (_viewController.View);
+
+			_viewController.View.Frame = Bounds;
 			_viewController.DidMoveToParentViewController (ParentViewController);
 
 		}

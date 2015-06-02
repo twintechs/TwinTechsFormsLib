@@ -373,11 +373,8 @@ namespace XLabs.Forms.Controls
 					int numberOfItemsToUse = Element.CenterAsFilledRow ? numberOfItemsThatFit : (int)Math.Min (numberOfItemsThatFit, numberOfItems);
 					var remainingWidth = width - (numberOfItemsToUse * (_gridCollectionView.ItemSize.Width));
 					var padding = remainingWidth / (numberOfItemsToUse + 1);
-
-					Console.WriteLine (" width {0} items using {1} padding {2} iwdith {3} ", _gridCollectionView?.Frame.Width, numberOfItemsToUse, padding, _gridCollectionView.ItemSize.Width);
 					_gridCollectionView.ColumnSpacing = padding;
 					_edgeInsets = new UIEdgeInsets ((float)Element.ContentPaddingTop, (float)padding, (float)Element.ContentPaddingBottom, (float)padding);
-					Console.WriteLine ("final insets " + _edgeInsets);
 					_gridCollectionView.ContentInset = _edgeInsets;
 				}
 				flowLayout.SectionInset = new UIEdgeInsets ((float)Element.SectionPaddingTop, 0, (float)Element.SectionPaddingBottom, 0);

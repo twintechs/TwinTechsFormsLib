@@ -4,6 +4,7 @@ using System.Drawing;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using TwinTechs.Ios.Extensions;
+using CoreGraphics;
 
 namespace TwinTechs.Gestures
 {
@@ -25,6 +26,7 @@ namespace TwinTechs.Gestures
 
 		#endregion
 
+		#region INativePanGestureRecognizer impl
 
 		public Xamarin.Forms.Point GetVelocityInView (VisualElement view)
 		{
@@ -37,6 +39,16 @@ namespace TwinTechs.Gestures
 			var renderer = view.GetRenderer ();
 			return NativeRecognizer.TranslationInView (renderer.NativeView).ToPoint ();
 		}
+
+		public void SetTranslationInView (Xamarin.Forms.Point translation, VisualElement view)
+		{
+			var renderer = view.GetRenderer ();
+			NativeRecognizer.SetTranslation (new CGPoint (translation.X, translation.Y), renderer.NativeView);
+		}
+
+		#endregion
+
+
 	}
 }
 

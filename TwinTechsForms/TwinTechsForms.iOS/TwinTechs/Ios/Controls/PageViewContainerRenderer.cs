@@ -6,6 +6,7 @@ using TwinTechs.Ios.Extensions;
 using TwinTechs.Extensions;
 using UIKit;
 using TwinTechs.Controls;
+using System.Diagnostics;
 
 [assembly: ExportRenderer (typeof(PageViewContainer), typeof(PageViewContainerRenderer))]
 namespace TwinTechs.Ios.Controls
@@ -23,40 +24,34 @@ namespace TwinTechs.Ios.Controls
 			base.OnElementChanged (e);
 			var pageViewContainer = e.NewElement as PageViewContainer;
 
+			if (_viewControllerContainer != null) {
+				_viewControllerContainer.ViewController = null;
+				_viewControllerContainer = null;
+			}
+
 			if (e.NewElement != null) {
 				_viewControllerContainer = new ViewControllerContainer (Bounds);
-				_viewControllerContainer.BackgroundColor = UIColor.Orange;
 				SetNativeControl (_viewControllerContainer);
-
 			}
+			 
+
 		}
+
+		Page _initializedPage;
 
 		void ChangePage (Page page)
 		{
 			if (page != null) {
-				try {
-					var viewController = page.CreateViewController ();
-					var parentPage = Element.GetParentPage ();
-					var renderer = parentPage.GetRenderer ();
-					_viewControllerContainer.ParentViewController = renderer.ViewController;
-					_viewControllerContainer.ViewController = viewController;
-				} catch (Exception ex) {
-					Console.WriteLine ("error creating page " + ex.Message);
-				}
+				var pageRenderer = page.GetRenderer ();
+				var viewController = pageRenderer?.ViewController != null ? pageRenderer?.ViewController : page.CreateViewController ();
+				var parentPage = Element.GetParentPage ();
+				var renderer = parentPage.GetRenderer ();
+				_viewControllerContainer.ParentViewController = renderer.ViewController;
+				_viewControllerContainer.ViewController = viewController;
+				_initializedPage = page;
 			} else {
 				_viewControllerContainer = null;
 			}
-		}
-
-		Page GetPageFromVisualElement (Element e)
-		{
-			Page returnPage = null;
-			var currentElement = e;
-			while (currentElement != null && returnPage == null) {
-				currentElement = currentElement.Parent;
-				returnPage = currentElement as Page;
-			}
-			return returnPage;
 		}
 
 		public override void LayoutSubviews ()
