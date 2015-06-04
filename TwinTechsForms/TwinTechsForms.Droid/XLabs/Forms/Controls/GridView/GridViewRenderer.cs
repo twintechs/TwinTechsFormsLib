@@ -1,6 +1,7 @@
 ﻿using Xamarin.Forms;
 
 using XLabs.Forms.Controls;
+using TwinTechs.Droid.Controls;
 
 [assembly: ExportRenderer (typeof(GridView), typeof(GridViewRenderer))]
 namespace XLabs.Forms.Controls
@@ -23,7 +24,7 @@ namespace XLabs.Forms.Controls
 	/// <summary>
 	/// Class GridViewRenderer.
 	/// </summary>
-	public class GridViewRenderer : ViewRenderer<GridView, Android.Widget.GridView>, IGridViewProvider
+	public class GridViewRenderer : ViewRenderer<GridView, Android.Widget.GridView>
 	{
 		/// <summary>
 		/// The orientation
@@ -73,6 +74,7 @@ namespace XLabs.Forms.Controls
 			collectionView.SetGravity (GravityFlags.Center);
 			collectionView.SetColumnWidth (Convert.ToInt32 (Element.ItemWidth));
 			collectionView.StretchMode = StretchMode.StretchColumnWidth;
+
 
 			var metrics = Resources.DisplayMetrics;
 			var spacing = (int)e.NewElement.ColumnSpacing;
@@ -205,7 +207,7 @@ namespace XLabs.Forms.Controls
 		/// <returns>System.Int32.</returns>
 		public int RowsInSection ()
 		{
-			return (this.Element.ItemsSource as ICollection).Count;
+			return (this.Element?.ItemsSource as ICollection) != null ? (this.Element.ItemsSource as ICollection).Count : 0;
 		}
 
 		/// <summary>
@@ -218,69 +220,37 @@ namespace XLabs.Forms.Controls
 		public  global::Android.Views.View GetCell (int position, global::Android.Views.View convertView, ViewGroup parent)
 		{
 			var item = this.Element.ItemsSource.Cast<object> ().ElementAt (position);
-			var viewCellBinded = (Element.ItemTemplate.CreateContent () as ViewCell);
-			viewCellBinded.BindingContext = item;
-			var view = RendererFactory.GetRenderer (viewCellBinded.View);
-			// Platform.SetRenderer (viewCellBinded.View, view);
-			view.ViewGroup.LayoutParameters = new  Android.Widget.GridView.LayoutParams (Convert.ToInt32 (this.Element.ItemWidth), Convert.ToInt32 (this.Element.ItemHeight));
-			view.ViewGroup.SetBackgroundColor (global::Android.Graphics.Color.Blue);
-			return view.ViewGroup;
-			//                this.AddView (this.view.ViewGroup);
 
-			//            GridViewCellRenderer render = new GridViewCellRenderer ();
-			//           
-			//            return render.GetCell (viewCellBinded, convertView, parent, this.Context);;
-			//          //  view.LayoutParameters = new GridView.LayoutParams (this.Element.ItemWidth,this.Element.ItemHeight);
-			//            return view;
-			//            ImageView imageView;
-			//
-			//            if (convertView == null) {  // if it's not recycled, initialize some attributes
-			//                imageView = new ImageView (Forms.Context);
-			//                imageView.LayoutParameters = new GridView.LayoutParams (85, 85);
-			//                imageView.SetScaleType (ImageView.ScaleType.CenterCrop);
-			//                imageView.SetPadding (8, 8, 8, 8);
-			//            } else {
-			//                imageView = (ImageView)convertView;
-			//            }
-			//            var imageBitmap = GetImageBitmapFromUrl("http://xamarin.com/resources/design/home/devices.png");
-			//            imageView.SetImageBitmap(imageBitmap);
-			//            return imageView;
-		}
+			var fastCell = (Element.ItemTemplate.CreateContent () as FastGridCell);
 
-		/// <summary>
-		/// Gets the image bitmap from URL.
-		/// </summary>
-		/// <param name="url">The URL.</param>
-		/// <returns>Bitmap.</returns>
-		private Bitmap GetImageBitmapFromUrl (string url)
-		{
-			Bitmap imageBitmap = null;
-
-			using (var webClient = new WebClient ()) {
-				var imageBytes = webClient.DownloadData (url);
-				if (imageBytes != null && imageBytes.Length > 0) {
-					imageBitmap = BitmapFactory.DecodeByteArray (imageBytes, 0, imageBytes.Length);
+			var cellCache = FastGridCellCache.Instance.GetCellCache (parent);
+			Android.Views.View cellCore = convertView;
+			if (cellCore != null && cellCache.IsCached (cellCore)) {
+				cellCache.RecycleCell (cellCore, fastCell);
+			} else {
+				if (!fastCell.IsInitialized) {
+					fastCell.PrepareCell ();
 				}
+				fastCell.BindingContext = item;
+				cellCore = GetCellCore (fastCell, convertView, parent);
+				cellCache.CacheCell (fastCell, cellCore);
 			}
-
-			return imageBitmap;
+			return cellCore;
 		}
 
-		#region IGridViewProvider implementation
-
-		public void ReloadData ()
+		Android.Views.View GetCellCore (FastGridCell fastCell, Android.Views.View convertView, ViewGroup parent)
 		{
-			//TODO check?
-			this.DataSource.NotifyDataSetChanged ();
+			GridViewCellRenderer render = new GridViewCellRenderer ();
+			
+			var nativecell = render.GetCell (fastCell, convertView, parent, this.Context);
+			nativecell.LayoutParameters = new  Android.Widget.GridView.LayoutParams (Convert.ToInt32 (this.Element.ItemWidth), Convert.ToInt32 (this.Element.ItemHeight));
+			fastCell.View.Layout (new Rectangle (0, 0, Element.ItemWidth, Element.ItemHeight));
+			nativecell.SetBackgroundColor (global::Android.Graphics.Color.Blue);
+			return nativecell;
+
 		}
 
-		public void ScrollToItemWithIndex (int index, bool animated)
-		{
-			//TODO
-//			this.Control.ScrollTo ();
-		}
-
-		#endregion
+	
 	}
 
 	public class GridDataSource : BaseAdapter
@@ -370,40 +340,42 @@ namespace XLabs.Forms.Controls
 			public void Update (ViewCell cell)
 			{
 				IVisualElementRenderer visualElementRenderer = this.GetChildAt (0) as IVisualElementRenderer;
-				//              Type type = Registrar.Registered.GetHandlerType (cell.View.GetType ()) ?? typeof(RendererFactory.DefaultRenderer);
-				//                if (visualElementRenderer != null && visualElementRenderer.GetType () == type) {
-				//                    this.viewCell = cell;
-				//                    visualElementRenderer.SetElement (cell.View);
-				//                    Platform.SetRenderer (cell.View, this.view);
-				//                    cell.View.IsPlatformEnabled = true;
-				//                    this.Invalidate ();
-				//                    return;
-				//                }
-				//                this.RemoveView (this.view.ViewGroup);
-				//                Platform.SetRenderer (this.viewCell.View, null);
-				//                this.viewCell.View.IsPlatformEnabled = false;
-				//                this.view.ViewGroup.Dispose ();
-				//                this.viewCell = cell;
-				//                this.view = RendererFactory.GetRenderer (this.viewCell.View);
-				//                Platform.SetRenderer (this.viewCell.View, this.view);
-				//                this.AddView (this.view.ViewGroup);
+
 			}
-			//
+
+
+			Size _previousSize;
+
 			protected override void OnLayout (bool changed, int l, int t, int r, int b)
 			{
 				double width = base.Context.FromPixels ((double)(r - l));
 				double height = base.Context.FromPixels ((double)(b - t));
-				this._view.Element.Layout (new Rectangle (0, 0, width, height));
-				this._view.UpdateLayout ();
+				var size = new Size (width, height);
+				if (size != _previousSize) {
+					
+					var layout = _viewCell.View as Layout<Xamarin.Forms.View>;
+					if (layout != null) {
+						layout.Layout (new Rectangle (0, 0, width, height));
+						layout.ForceLayout ();
+						FixChildLayouts (layout);
+					}
+					this._view.Element.Layout (new Rectangle (0, 0, width, height));
+					this._view.UpdateLayout ();
+					_previousSize = size;
+				}
 			}
-			//
-			//            protected override void OnMeasure (int widthMeasureSpec, int heightMeasureSpec)
-			//            {
-			//                int size = View.MeasureSpec.GetSize (widthMeasureSpec);
-			//                int measuredHeight;
-			//               measuredHeight = (int)base.Context.ToPixels ((this.ParentRowHeight == -1) ? 44 : ((double)this.ParentRowHeight));
-			//                base.SetMeasuredDimension (size, measuredHeight);
-			//            }
+
+
+
+			void FixChildLayouts (Layout<Xamarin.Forms.View> layout)
+			{
+				foreach (var child in layout.Children) {
+					if (child is Layout<Xamarin.Forms.View>) {
+						((Layout<Xamarin.Forms.View>)child).ForceLayout ();
+						FixChildLayouts (child as Layout<Xamarin.Forms.View>);
+					}
+				}
+			}
 		}
 	}
 }

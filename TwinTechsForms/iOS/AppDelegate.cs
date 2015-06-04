@@ -8,6 +8,7 @@ using TwinTechs;
 using TwinTechs.Example;
 using TwinTechs.Ios.Controls;
 using TwinTechs.Controls;
+using System.Drawing;
 
 namespace TwinTechsFormsExample.iOS
 {
@@ -19,7 +20,7 @@ namespace TwinTechsFormsExample.iOS
 			global::Xamarin.Forms.Forms.Init ();
 
 			AppHelper.FastCellCache = FastCellCache.Instance;
-
+			AppHelper.ScreenSize = new Xamarin.Forms.Size (UIScreen.MainScreen.Bounds.Size.Width, UIScreen.MainScreen.Bounds.Size.Height);
 			// Code for starting up the Xamarin Test Cloud Agent
 			#if ENABLE_TEST_CLOUD
 			Xamarin.Calabash.Start ();

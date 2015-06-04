@@ -50,6 +50,10 @@ namespace TwinTechs.Gestures
 			throw new NotImplementedException ();
 		}
 
+		public void SetTranslationInView (Xamarin.Forms.Point translation, Xamarin.Forms.VisualElement view)
+		{
+			throw new NotImplementedException ();
+		}
 	}
 }
 

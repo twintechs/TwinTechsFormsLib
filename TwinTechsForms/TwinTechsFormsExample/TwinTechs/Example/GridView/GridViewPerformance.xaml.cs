@@ -12,6 +12,10 @@ namespace TwinTechs.Example.GridView
 		public GridViewPerformance ()
 		{
 			InitializeComponent ();
+			if (AppHelper.ScreenSize.Width > 320 && AppHelper.ScreenSize.Height > 320) {
+				MediaItemsGridView.ItemWidth = 300;
+				MediaItemsGridView.ItemHeight = 320;
+			}
 			MediaItemsGridView.ItemsSource = DataProvider.GetMediaItems ();
 		}
 

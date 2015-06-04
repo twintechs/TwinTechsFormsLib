@@ -35,6 +35,7 @@ namespace XLabs.Forms.Controls
 		GridCollectionView _gridCollectionView;
 		UIEdgeInsets _edgeInsets;
 		int? _initialIndex;
+		nfloat _previousWidth;
 
 		/// <summary>
 		/// Called when [element changed].
@@ -88,7 +89,6 @@ namespace XLabs.Forms.Controls
 			SetNeedsLayout ();
 		}
 
-		nfloat _previousWidth;
 
 		public override void LayoutSubviews ()
 		{
