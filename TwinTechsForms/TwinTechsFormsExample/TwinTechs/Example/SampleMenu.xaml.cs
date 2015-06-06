@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using TwinTechs.Example.FastCells;
 using TwinTechs.Example.GridView;
+using TwinTechs.Example.Gestures;
 
 namespace TwinTechs.Example
 {
@@ -64,6 +65,45 @@ namespace TwinTechs.Example
 		void OnGridViewProperties (object sender, object args)
 		{
 			Navigation.PushAsync (new GridViewOptions ());
+		}
+
+		#endregion
+
+		#region gestures
+
+		void OnTapGesture (object sender, object args)
+		{
+			Navigation.PushAsync (new TapGestureExample ());
+		}
+
+		void OnLongPressGesture (object sender, object args)
+		{
+			Navigation.PushAsync (new GridViewOptions ());
+
+		}
+
+		void OnSwipeGesture (object sender, object args)
+		{
+			Navigation.PushAsync (new SwipeGestureExample ());
+
+		}
+
+		void OnPanGesture (object sender, object args)
+		{
+			Navigation.PushAsync (new GridViewOptions ());
+
+		}
+
+		void OnPinchGesture (object sender, object args)
+		{
+			Navigation.PushAsync (new GridViewOptions ());
+
+		}
+
+		void OnMixedGestures (object sender, object args)
+		{
+			Navigation.PushAsync (new GridViewOptions ());
+
 		}
 
 		#endregion

@@ -47,6 +47,7 @@
     <Compile Include="TwinTechs\Gestures\SwipeGestureRecognizer.cs" />
     <Compile Include="TwinTechs\Controls\PageViewContainer.cs" />
     <Compile Include="XLabs\GridEventArgs{T}.cs" />
+    <Compile Include="TwinTechs\Gestures\TapGestureRecognizer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.3.6358-pre2\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.3.6358-pre2\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

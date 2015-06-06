@@ -22,6 +22,11 @@ namespace TwinTechs.Gestures
 		Recognized = 3
 	}
 
+
+	//TODO I would love to make this generic!
+	/// <summary>
+	/// Base gesture recognizer.
+	/// </summary>
 	public class BaseGestureRecognizer : IGestureRecognizer
 	{
 		#region IGestureRecognizer impl
@@ -54,10 +59,7 @@ namespace TwinTechs.Gestures
 		/// Gets or sets the OnAction callback. Made available in case your views need access to the gesture responses
 		/// </summary>
 		/// <value>The tapped callback.</value>
-		public Action<BaseGestureRecognizer> OnAction {
-			get;
-			set;
-		}
+		public event Action<BaseGestureRecognizer, GestureRecognizerState> OnAction;
 
 		public bool DelaysTouchesEnded { get; set; } = false;
 
@@ -68,14 +70,25 @@ namespace TwinTechs.Gestures
 
 		public GestureRecognizerState State { get { return NativeGestureRecognizer == null ? GestureRecognizerState.Failed : NativeGestureRecognizer.State; } }
 
-		public int NumberOfTouches { get { return NativeGestureRecognizer == null ? 0 : NumberOfTouches; } }
+		public int NumberOfTouches { get { return NativeGestureRecognizer == null ? 0 : NativeGestureRecognizer.NumberOfTouches; } }
+
+
+		public Point LocationInView (VisualElement view)
+		{
+			return NativeGestureRecognizer.LocationInView (view);
+		}
+
+		public Point LocationOfTouch (int touchIndex, VisualElement view)
+		{
+			return NativeGestureRecognizer.LocationOfTouch (touchIndex, view);
+		}
 
 		#region internal impl
 
 		internal void SendAction ()
 		{
 			Command?.Execute (CommandParameter);
-			OnAction?.Invoke (this);
+			OnAction?.Invoke (this, State);
 		}
 
 		/// <summary>
@@ -92,15 +105,6 @@ namespace TwinTechs.Gestures
 			return string.Format ("[BaseGestureRecognizer: View={0}, State={1}]", View, State);
 		}
 
-		public Point LocationInView (VisualElement view)
-		{
-			return NativeGestureRecognizer.LocationInView (view);
-		}
-
-		public Point LocationOfTouch (int touchIndex, VisualElement view)
-		{
-			return NativeGestureRecognizer.LocationOfTouch (touchIndex, view);
-		}
 	}
 }
 

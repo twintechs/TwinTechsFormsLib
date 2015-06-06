@@ -9,6 +9,7 @@ using TwinTechs.Example;
 using TwinTechs.Ios.Controls;
 using TwinTechs.Controls;
 using System.Drawing;
+using TwinTechs.Gestures;
 
 namespace TwinTechsFormsExample.iOS
 {
@@ -21,6 +22,8 @@ namespace TwinTechsFormsExample.iOS
 
 			AppHelper.FastCellCache = FastCellCache.Instance;
 			AppHelper.ScreenSize = new Xamarin.Forms.Size (UIScreen.MainScreen.Bounds.Size.Width, UIScreen.MainScreen.Bounds.Size.Height);
+			GestureRecognizerExtensions.Factory = new NativeGestureRecognizerFactory ();
+
 			// Code for starting up the Xamarin Test Cloud Agent
 			#if ENABLE_TEST_CLOUD
 			Xamarin.Calabash.Start ();

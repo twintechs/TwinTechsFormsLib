@@ -39,25 +39,67 @@
 					Tapped="OnFastComplexCell" />
 
 			</TableSection>
-			<TableSection Title="XLabs GridView improvements">
-					<TextCell
-						Text="Performance 1"
-						Detail="Using better view recyling for native performance"
-						Tapped="OnGridViewPerformance" />
-					<TextCell
-						Text="Performance 2"
-						Detail="Showing grid view in gridview performance"
-						Tapped="OnGridViewPerformance2" />
-							<TextCell
-						Text="Performance 3"
-						Detail="Showing grid view's performance with xaml more complex cells"
-						Tapped="OnGridViewPerformance3" />
+
+			<TableSection
+				Title="XLabs GridView improvements">
+
+				<TextCell
+					Text="Performance 1"
+					Detail="Using better view recyling for native performance"
+					Tapped="OnGridViewPerformance" />
+
+				<TextCell
+					Text="Performance 2"
+					Detail="Showing grid view in gridview performance"
+					Tapped="OnGridViewPerformance2" />
+
+				<TextCell
+					Text="Performance 3"
+					Detail="Showing grid view's performance with xaml more complex cells"
+					Tapped="OnGridViewPerformance3" />
 
 				<TextCell
 					Text="Additional Properties"
 					Detail="Showing off some extra properties we added"
 					Tapped="OnGridViewProperties" />
+
 			</TableSection>
+
+			<TableSection
+				Title="Gestures">
+
+				<TextCell
+					Height="60"
+					Text="CROSS PLATFORM GESTURES"
+					Detail="All of these gestures work by composition, so they will work for any view. Subclassing is not required" />
+
+				<TextCell
+					Text="Tap"
+					Tapped="OnTapGesture" />
+
+				<TextCell
+					Text="LongPress"
+					Tapped="OnLongPressGesture" />
+
+				<TextCell
+					Text="Swipe"
+					Tapped="OnSwipeGesture" />
+
+				<TextCell
+					Text="Pan"
+					Tapped="OnPanGesture" />
+
+				<TextCell
+					Text="Pinch"
+					Tapped="OnPanGesture" />
+
+				<TextCell
+					Text="Mixed"
+					Detail="Example showing how to mix gestures together"
+					Tapped="OnMixedGestures" />
+
+			</TableSection>
+
 		</TableView>
 
 	</ContentPage.Content>
