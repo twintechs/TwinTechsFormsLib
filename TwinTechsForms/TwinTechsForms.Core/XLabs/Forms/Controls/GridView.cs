@@ -44,6 +44,7 @@ namespace XLabs.Forms.Controls
 		/// </summary>
 		public static readonly BindableProperty RowSpacingProperty = BindableProperty.Create ("RowSpacing", typeof(double), typeof(GridView), (double)0, BindingMode.OneWay, null, null, null, null);
 
+		public static readonly BindableProperty MaxItemsPerRowProperty = BindableProperty.Create ("MaxItemsPerRow", typeof(int), typeof(GridView), -1, BindingMode.OneWay, null, null, null, null);
 		/// <summary>
 		/// The row spacing property
 		/// </summary>
@@ -166,6 +167,15 @@ namespace XLabs.Forms.Controls
 			}
 			set {
 				base.SetValue (GridView.RowSpacingProperty, value);
+			}
+		}
+
+		public int MaxItemsPerRow {
+			get {
+				return (int)base.GetValue (GridView.MaxItemsPerRowProperty);
+			}
+			set {
+				base.SetValue (GridView.MaxItemsPerRowProperty, value);
 			}
 		}
 
@@ -302,7 +312,7 @@ namespace XLabs.Forms.Controls
 		/// <summary>
 		/// Occurs when item is selected.
 		/// </summary>
-		public event EventHandler<EventArgs<object>> ItemSelected;
+		public event EventHandler<GridEventArgs<object>> ItemSelected;
 
 		/// <summary>
 		/// Invokes the item selected event.
@@ -312,7 +322,7 @@ namespace XLabs.Forms.Controls
 		public void InvokeItemSelectedEvent (object sender, object item)
 		{
 			if (this.ItemSelected != null) {
-				this.ItemSelected.Invoke (sender, new EventArgs<object> (item));
+				this.ItemSelected.Invoke (sender, new GridEventArgs<object> (item));
 			}
 		}
 

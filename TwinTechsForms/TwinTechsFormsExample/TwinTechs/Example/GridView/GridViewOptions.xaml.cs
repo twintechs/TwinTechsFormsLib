@@ -57,6 +57,11 @@ namespace TwinTechs.Example.GridView
 			MediaItemsGridView.IsHorizontal = !MediaItemsGridView.IsHorizontal;
 
 		}
+
+		void OnToggleMaxPerRow (object sender, object e)
+		{
+			MediaItemsGridView.MaxItemsPerRow = MediaItemsGridView.MaxItemsPerRow == -1 ? 2 : -1;
+		}
 	}
 }
 

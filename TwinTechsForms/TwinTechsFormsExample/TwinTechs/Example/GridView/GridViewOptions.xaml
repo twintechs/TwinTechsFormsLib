@@ -17,20 +17,25 @@
 				<Button
 					Text="Toggle AutoPad1"
 					Clicked="OnToggleAutoPad1" />
-						<Button
+
+				<Button
 					Text="Toggle AutoPad2"
 					Clicked="OnToggleAutoPad2" />
 
-			
+				<Button
+					Text="Toggle Max per row = 2"
+					Clicked="OnToggleMaxPerRow" />
 
 			</StackLayout>
 
 			<StackLayout
 				Orientation="Horizontal">
-					<Button
+
+				<Button
 					Text="Toggle always center"
 					Clicked="OnToggleCenteredMode"
 					x:Name="CenteredMode" />
+
 				<Button
 					Text="Toggle Horizontal"
 					Clicked="OnToggleHorizontal" />

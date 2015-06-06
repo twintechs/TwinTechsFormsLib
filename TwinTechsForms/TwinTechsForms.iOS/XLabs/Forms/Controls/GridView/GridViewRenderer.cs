@@ -35,7 +35,6 @@ namespace XLabs.Forms.Controls
 		GridCollectionView _gridCollectionView;
 		UIEdgeInsets _edgeInsets;
 		int? _initialIndex;
-		nfloat _previousWidth;
 
 		/// <summary>
 		/// Called when [element changed].
@@ -89,6 +88,7 @@ namespace XLabs.Forms.Controls
 			SetNeedsLayout ();
 		}
 
+		nfloat _previousWidth;
 
 		public override void LayoutSubviews ()
 		{
@@ -151,6 +151,9 @@ namespace XLabs.Forms.Controls
 				InvalidatePadding ();
 			}
 			if (e.PropertyName == "SectionPaddingBottom") {
+				InvalidatePadding ();
+			}	
+			if (e.PropertyName == "MaxItemsPerRow") {
 				InvalidatePadding ();
 			}
 			if (e.PropertyName == "SectionPaddingTop") {
@@ -372,6 +375,9 @@ namespace XLabs.Forms.Controls
 					float width = (float)_gridCollectionView.Frame.Width - 2;
 					int numberOfItemsThatFit = (int)Math.Floor (width / (_gridCollectionView.ItemSize.Width));
 					int numberOfItemsToUse = Element.CenterAsFilledRow ? numberOfItemsThatFit : (int)Math.Min (numberOfItemsThatFit, numberOfItems);
+					if (Element.MaxItemsPerRow != -1) {
+						numberOfItemsToUse = Element.MaxItemsPerRow;
+					}
 					var remainingWidth = width - (numberOfItemsToUse * (_gridCollectionView.ItemSize.Width));
 					var padding = remainingWidth / (numberOfItemsToUse + 1);
 

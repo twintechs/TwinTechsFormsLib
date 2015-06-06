@@ -10,13 +10,15 @@ namespace XLabs.Forms.Controls
 			private set;
 		}
 
-		//		public Layout<Xamarin.Forms.View> Content { get; set; }
+		public Size CellSize { get; private set; }
 
 		/// <summary>
-		/// Initializes the cell.
+		/// passes in the cell size as a convenience
 		/// </summary>
-		public void PrepareCell ()
+		/// <param name="cellSize">Cell size.</param>
+		public void PrepareCell (Size cellSize)
 		{
+			CellSize = cellSize;
 			InitializeCell ();
 			if (BindingContext != null) {
 				SetupCell (false);
@@ -49,7 +51,7 @@ namespace XLabs.Forms.Controls
 		/// <param name="size">Size.</param>
 		public virtual void OnSizeChanged (Size size)
 		{
-			
+
 		}
 
 	}

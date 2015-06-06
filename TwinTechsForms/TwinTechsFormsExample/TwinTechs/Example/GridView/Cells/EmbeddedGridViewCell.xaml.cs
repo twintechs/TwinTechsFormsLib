@@ -28,7 +28,7 @@ namespace TwinTechs.Example.GridView.Cells
 		}
 
 
-		void OnItemSelected (object sender, XLabs.EventArgs<object> e)
+		void OnItemSelected (object sender, XLabs.GridEventArgs<object> e)
 		{
 			var item = e.Value as MediaItem;
 			this.ParentView.GetParentPage ().DisplayAlert ("you selected an item", item.Name, "Ok");

@@ -29,7 +29,7 @@ namespace XLabs.Forms.Controls
 				_viewCell = (dataTemplate.CreateContent () as FastGridCell);
 				_viewCell.BindingContext = data;
 				_viewCell.Parent = parent;
-				_viewCell.PrepareCell ();
+				_viewCell.PrepareCell (new Size (Bounds.Width, Bounds.Height));
 				_originalBindingContext = _viewCell.BindingContext;
 				var renderer = RendererFactory.GetRenderer (_viewCell.View);
 				_view = renderer.NativeView;
