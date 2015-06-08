@@ -46,6 +46,13 @@ namespace TwinTechs.Ios.Controls
 				var viewController = pageRenderer?.ViewController != null ? pageRenderer?.ViewController : page.CreateViewController ();
 				var parentPage = Element.GetParentPage ();
 				var renderer = parentPage.GetRenderer ();
+
+				if (_viewControllerContainer == null) {
+					_viewControllerContainer = new ViewControllerContainer (Bounds);
+					SetNeedsLayout ();
+					SetNativeControl (_viewControllerContainer);
+				}
+
 				_viewControllerContainer.ParentViewController = renderer.ViewController;
 				_viewControllerContainer.ViewController = viewController;
 				_initializedPage = page;

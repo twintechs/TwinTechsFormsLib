@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using TwinTechs.Example.FastCells;
 using TwinTechs.Example.GridView;
 using TwinTechs.Example.Gestures;
+using TwinTechs.Example.PageInPage;
 
 namespace TwinTechs.Example
 {
@@ -104,6 +105,16 @@ namespace TwinTechs.Example
 		{
 			Navigation.PushAsync (new GridViewOptions ());
 
+		}
+
+		#endregion
+
+		#region Page in page
+
+		void OnPageInPageSimple (object sender, object args)
+		{
+			Navigation.PushAsync (new PageInPageSample ());
+			
 		}
 
 		#endregion

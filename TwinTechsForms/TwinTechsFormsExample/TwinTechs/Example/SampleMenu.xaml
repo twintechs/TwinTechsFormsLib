@@ -100,6 +100,18 @@
 
 			</TableSection>
 
+			<TableSection
+				Title="Page in Page">
+
+				<TextCell
+					Detail="This section has examples of the PageContainer control which you can use to create custom UIs, embedding a page inside another page" />
+
+				<TextCell
+					Text="Simple example"
+					Tapped="OnPageInPageSimple" />
+
+			</TableSection>
+
 		</TableView>
 
 	</ContentPage.Content>

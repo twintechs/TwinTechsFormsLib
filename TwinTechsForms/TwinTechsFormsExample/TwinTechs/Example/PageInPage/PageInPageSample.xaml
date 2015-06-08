@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="TwinTechs.Example.PageInPage.PageInPageSample"
+	xmlns:controls="clr-namespace:TwinTechs.Controls;assembly=TwinTechsForms">
+
+	<StackLayout
+		HorizontalOptions="Fill"
+		VerticalOptions="Fill"
+		BackgroundColor="Yellow"
+		>
+
+		<Label
+			LineBreakMode="WordWrap"
+			BackgroundColor="Green"
+			TextColor="White"
+			Text="This component allows you to embed a page inside a page. This opens up all kinds of possibilities for creating totally custom UIs. Note however, at the time of writing, there is no means of embedding a navigation page inside a page. If that's what you need to do, you will have to do something else."
+			HeightRequest="100" />
+
+		<StackLayout
+			Orientation="Horizontal"
+			BackgroundColor="Gray">
+
+			<Button
+				Text="First"
+				Clicked="OnPage1" />
+
+			<Button
+				Text="Second"
+				Clicked="OnPage2" />
+
+			<Button
+				Text="Third"
+				Clicked="OnPage3" />
+
+		</StackLayout>
+
+		<controls:PageViewContainer
+			x:Name="PageContainer"
+			HorizontalOptions="FillAndExpand"
+			VerticalOptions="FillAndExpand" />
+
+	</StackLayout>
+
+</ContentPage>

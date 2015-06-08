@@ -21,7 +21,7 @@
 		<StackLayout
 			x:Name="MyStack"
 			Spacing="20"
-			AbsoluteLayout.LayoutBounds="0, 200, 320, 200"
+			AbsoluteLayout.LayoutBounds="0, 220, 320, 110"
 			BackgroundColor="Red"
 			AbsoluteLayout.LayoutFlags="None">
 
@@ -29,7 +29,7 @@
 				Text="Tap me twice"
 				x:Name="Label1"
 				BackgroundColor="Olive"
-				HeightRequest="120"
+				HeightRequest="90"
 				TextColor="White"
 				FontSize="20">
 
@@ -45,7 +45,7 @@
 			</Label>
 
 			<Label
-				HeightRequest="120"
+				HeightRequest="90"
 				Text="Needs 2 touches"
 				x:Name="Label2"
 				BackgroundColor="Fuchsia"
@@ -73,7 +73,7 @@
 		<BoxView
 			Color="Green"
 			x:Name="Box2"
-			AbsoluteLayout.LayoutBounds="50, 200, 200, 80"
+			AbsoluteLayout.LayoutBounds="50, 130, 200, 80"
 			AbsoluteLayout.LayoutFlags="None">
 		</BoxView>
 
