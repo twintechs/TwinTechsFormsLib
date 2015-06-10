@@ -229,7 +229,7 @@ namespace XLabs.Forms.Controls
 				cellCache.RecycleCell (cellCore, fastCell);
 			} else {
 				if (!fastCell.IsInitialized) {
-					fastCell.PrepareCell ();
+					fastCell.PrepareCell (new Size (Element.ItemWidth, Element.ItemHeight));
 				}
 				fastCell.BindingContext = item;
 				cellCore = GetCellCore (fastCell, convertView, parent);
