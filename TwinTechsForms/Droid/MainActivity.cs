@@ -11,12 +11,16 @@ using TwinTechs.Example;
 using TwinTechs.Droid.Controls;
 using TwinTechs;
 using Android.Util;
+using System.Runtime.InteropServices;
+using Xamarin.Forms.Platform.Android;
 
 namespace TwinTechsFormsExample.Droid
 {
 	[Activity (Label = "TwinTechsFormsExample.Droid", Icon = "@drawable/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
 	{
+		DummyIncludes _dummyIncludes;
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);

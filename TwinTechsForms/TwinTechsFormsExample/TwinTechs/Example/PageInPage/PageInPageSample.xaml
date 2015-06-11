@@ -7,10 +7,11 @@
 	xmlns:controls="clr-namespace:TwinTechs.Controls;assembly=TwinTechsForms">
 
 	<StackLayout
+		x:Name="Stack"
 		HorizontalOptions="Fill"
 		VerticalOptions="Fill"
 		BackgroundColor="Yellow"
-		>
+		Spacing="0">
 
 		<Label
 			LineBreakMode="WordWrap"
@@ -34,6 +35,10 @@
 			<Button
 				Text="Third"
 				Clicked="OnPage3" />
+
+					<Button
+				Text="reuse pages on"
+				Clicked="OnToggleReuse" />
 
 		</StackLayout>
 

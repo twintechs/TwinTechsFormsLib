@@ -42,12 +42,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\iOS\TwinTechsFormsExample.iOS.csproj">
-      <Project>{7745D829-648E-4D59-8959-53721D3DFA03}</Project>
-      <Name>TwinTechsFormsExample.iOS</Name>
-      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
-      <Private>False</Private>
-    </ProjectReference>
     <ProjectReference Include="..\TwinTechsForms.Core\TwinTechsForms.Core.csproj">
       <Project>{7C5D7E33-C77E-475F-BE8B-359CD164A4E5}</Project>
       <Name>TwinTechsForms.Core</Name>
@@ -55,6 +49,12 @@
     <ProjectReference Include="..\TwinTechsFormsExample\TwinTechsFormsExample.csproj">
       <Project>{6B080A35-79E7-4A45-B9FC-25B3D157E2C3}</Project>
       <Name>TwinTechsFormsExample</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\iOS\TwinTechsFormsExample.iOS.csproj">
+      <Project>{7745D829-648E-4D59-8959-53721D3DFA03}</Project>
+      <Name>TwinTechsFormsExample.iOS</Name>
+      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

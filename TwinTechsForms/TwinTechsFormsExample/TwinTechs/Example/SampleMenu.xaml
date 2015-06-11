@@ -11,6 +11,18 @@
 			Intent="Form">
 
 			<TableSection
+				Title="Page in Page">
+
+				<TextCell
+					Detail="This section has examples of the PageContainer control which you can use to create custom UIs, embedding a page inside another page" />
+
+				<TextCell
+					Text="Simple example"
+					Tapped="OnPageInPageSimple" />
+
+			</TableSection>
+
+			<TableSection
 				Title="Fast ListView Cells">
 
 				<TextCell
@@ -97,18 +109,6 @@
 					Text="Mixed"
 					Detail="Example showing how to mix gestures together"
 					Tapped="OnMixedGestures" />
-
-			</TableSection>
-
-			<TableSection
-				Title="Page in Page">
-
-				<TextCell
-					Detail="This section has examples of the PageContainer control which you can use to create custom UIs, embedding a page inside another page" />
-
-				<TextCell
-					Text="Simple example"
-					Tapped="OnPageInPageSimple" />
 
 			</TableSection>
 

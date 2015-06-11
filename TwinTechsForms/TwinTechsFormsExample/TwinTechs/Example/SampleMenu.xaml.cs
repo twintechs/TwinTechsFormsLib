@@ -113,7 +113,8 @@ namespace TwinTechs.Example
 
 		void OnPageInPageSimple (object sender, object args)
 		{
-			Navigation.PushAsync (new PageInPageSample ());
+			var pageInPage = new PageInPageSample ();
+			Navigation.PushAsync (pageInPage);
 			
 		}
 

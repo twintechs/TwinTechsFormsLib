@@ -21,12 +21,16 @@ namespace TwinTechs.Droid.Extensions
 
 		public static IVisualElementRenderer GetRenderer (this BindableObject bindableObject)
 		{
+			var value = bindableObject.GetValue (RendererProperty);
 			return (IVisualElementRenderer)bindableObject.GetValue (RendererProperty);
 		}
 
 		public static Android.Views.View GetNativeView (this BindableObject bindableObject)
 		{
-			return bindableObject.GetRenderer ().ViewGroup.RootView;
+			var renderer = bindableObject.GetRenderer ();
+			var viewGroup = renderer.ViewGroup;
+			var rootView = viewGroup.RootView;
+			return rootView;
 		}
 	}
 }
