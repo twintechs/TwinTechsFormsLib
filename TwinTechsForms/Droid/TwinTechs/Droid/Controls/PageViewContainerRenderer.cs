@@ -9,6 +9,7 @@ using TwinTechs.Extensions;
 using Android.App;
 using Android;
 using System.Reflection;
+using TwinTechs.Droid.Helper;
 
 [assembly: ExportRenderer (typeof(PageViewContainer), typeof(PageViewContainerRenderer))]
 namespace TwinTechs.Droid.Controls
@@ -68,12 +69,7 @@ namespace TwinTechs.Droid.Controls
 				var parentPage = Element.GetParentPage ();
 				page.Parent = parentPage;
 
-				var existingRenderer = GetRenderer (page);
-				if (existingRenderer == null) {
-					var renderer = RendererFactory.GetRenderer (page);
-					SetRenderer (page, renderer);
-					existingRenderer = GetRenderer (page);
-				}
+				var existingRenderer = RendererHelper.GetOrCreateRenderer (page);
 				_contentNeedsLayout = true;
 				SetNativeControl (existingRenderer.ViewGroup);
 				Invalidate ();
@@ -92,39 +88,6 @@ namespace TwinTechs.Droid.Controls
 			}
 		}
 
-
-
-		private static readonly Type _platformType = Type.GetType ("Xamarin.Forms.Platform.Android.Platform, Xamarin.Forms.Platform.Android", true);
-		private static BindableProperty _rendererProperty;
-
-		public static BindableProperty RendererProperty {
-			get {
-				_rendererProperty = (BindableProperty)_platformType.GetField ("RendererProperty", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)
-					.GetValue (null);
-
-				return _rendererProperty;
-			}
-		}
-
-		public static void SetRenderer (BindableObject bindableObject, IVisualElementRenderer renderer)
-		{
-			var value = bindableObject.GetValue (RendererProperty);
-			bindableObject.SetValue (RendererProperty, renderer);
-		}
-
-		public static IVisualElementRenderer GetRenderer (BindableObject bindableObject)
-		{
-			var value = bindableObject.GetValue (RendererProperty);
-			return (IVisualElementRenderer)bindableObject.GetValue (RendererProperty);
-		}
-
-		public static Android.Views.View GetNativeView (BindableObject bindableObject)
-		{
-			var renderer = bindableObject.GetRenderer ();
-			var viewGroup = renderer.ViewGroup;
-			var rootView = viewGroup.RootView;
-			return rootView;
-		}
 
 	}
 }

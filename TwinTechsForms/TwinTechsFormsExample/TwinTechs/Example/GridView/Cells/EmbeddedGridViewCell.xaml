@@ -7,8 +7,6 @@
 	xmlns:cells="clr-namespace:TwinTechs.Example.GridView.Cells;assembly=TwinTechsFormsExample"
 	x:Class="TwinTechs.Example.GridView.Cells.EmbeddedGridViewCell">
 
-	<StackLayout>
-
 		<xlabs:GridView
 			x:Name="ItemsGrid"
 			RowSpacing="5"
@@ -36,7 +34,4 @@
 			</xlabs:GridView.ItemTemplate>
 
 		</xlabs:GridView>
-
-	</StackLayout>
-
 </xlabs:FastGridCell>

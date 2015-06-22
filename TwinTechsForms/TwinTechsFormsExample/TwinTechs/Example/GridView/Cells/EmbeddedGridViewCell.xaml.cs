@@ -23,6 +23,7 @@ namespace TwinTechs.Example.GridView.Cells
 		protected override void SetupCell (bool isRecycled)
 		{
 			var items = BindingContext as ObservableCollection<MediaItem>;
+			ItemsGrid.Layout (new Rectangle (0, 0, CellSize.Width, CellSize.Height));
 			ItemsGrid.ScrollToItemWithIndex (0, false);
 			ItemsGrid.ItemsSource = items;
 		}

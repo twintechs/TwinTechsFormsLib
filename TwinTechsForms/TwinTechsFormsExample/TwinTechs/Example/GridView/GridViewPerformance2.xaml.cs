@@ -12,18 +12,12 @@ namespace TwinTechs.Example.GridView
 		public GridViewPerformance2 ()
 		{
 			InitializeComponent ();
-
-			if (AppHelper.ScreenSize.Width > 320 && AppHelper.ScreenSize.Height > 320) {
-				MediaItemsGridView.ItemWidth = 300;
-				MediaItemsGridView.ItemHeight = 320;
-			}
-
-
+			MediaItemsGridView.ItemSize = new Size (AppHelper.ScreenSize.Width, 120);
 			var outerRandomNumberGenerator = new Random ();
 			var innerRandomNumberGenererator = new Random ();
 			var allItems = DataProvider.GetMediaItems ();
 			var targetItems = new ObservableCollection<ObservableCollection<MediaItem>> ();
-			for (int i = 0; i < 50; i++) {
+			for (int i = 0; i < 30; i++) {
 				var allInnerItems = new ObservableCollection<MediaItem> (allItems);
 				var targetInnerItems = new ObservableCollection<MediaItem> ();
 				var numberToUse = outerRandomNumberGenerator.Next (1, 20);

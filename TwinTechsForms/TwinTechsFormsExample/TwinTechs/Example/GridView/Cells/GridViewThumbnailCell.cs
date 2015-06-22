@@ -9,8 +9,6 @@ namespace TwinTechs.Example.GridView.Cells
 	public class GridViewThumbnailCell : FastGridCell
 	{
 		//TODO read this from the parent grid
-		const int CellWidth = 150;
-		const int CellHeight = 160;
 
 		FastImage _image;
 
@@ -31,15 +29,15 @@ namespace TwinTechs.Example.GridView.Cells
 
 		protected override void InitializeCell ()
 		{
-			var width = CellWidth;
-			var height = CellHeight;
+			var width = CellSize.Width;
+			var height = CellSize.Height;
 
 			_titleLabel = new Label ();
 
 			AbsoluteLayout simpleLayout = new AbsoluteLayout {
 				VerticalOptions = LayoutOptions.FillAndExpand,
-				WidthRequest = CellWidth,
-				HeightRequest = CellHeight,
+				WidthRequest = width,
+				HeightRequest = height,
 			};
 
 			_image = new FastImage () {

@@ -68,7 +68,6 @@
     <Compile Include="MonoDroidToolkit\ImageLoader\FileCache.cs" />
     <Compile Include="MonoDroidToolkit\ImageLoader\ImageLoader.cs" />
     <Compile Include="MonoDroidToolkit\ImageLoader\MemoryCache.cs" />
-    <Compile Include="XLabs\Forms\Controls\GridView\GridViewRenderer.cs" />
     <Compile Include="TwinTechs\Gestures\BaseNativeGestureRecognizer.cs" />
     <Compile Include="TwinTechs\Gestures\MultiCastOnTouchListener.cs" />
     <Compile Include="TwinTechs\Gestures\NativeGestureRecognizerFactory.cs" />

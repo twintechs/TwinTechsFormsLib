@@ -16,6 +16,7 @@
     <AssemblyName>TwinTechsFormsExample.Droid</AssemblyName>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -27,6 +28,7 @@
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
     <ConsolePause>false</ConsolePause>
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -34,7 +36,6 @@
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
@@ -60,6 +61,9 @@
     <Reference Include="Xamarin.Android.Support.v4">
       <HintPath>..\packages\Xamarin.Android.Support.v4.22.2.0.0-beta3\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.RecyclerView">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.22.1.1.1\lib\MonoAndroid403\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -67,6 +71,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DummyIncludes.cs" />
     <Compile Include="TwinTechs\Droid\Controls\PageViewContainerRenderer.cs" />
+    <Compile Include="XLabs\Forms\Controls\GridDataSource.cs" />
+    <Compile Include="XLabs\Forms\Controls\GridViewAdapter.cs" />
+    <Compile Include="XLabs\Forms\Controls\GridViewRenderer.cs" />
+    <Compile Include="XLabs\Forms\Controls\GridViewRendererOld.cs" />
+    <Compile Include="XLabs\Forms\Controls\GridViewCellContainer.cs" />
+    <Compile Include="TwinTechs\Droid\Helper\RendererHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -80,6 +90,7 @@
     <Folder Include="TwinTechs\" />
     <Folder Include="TwinTechs\Droid\" />
     <Folder Include="TwinTechs\Droid\Controls\" />
+    <Folder Include="TwinTechs\Droid\Helper\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon.png" />

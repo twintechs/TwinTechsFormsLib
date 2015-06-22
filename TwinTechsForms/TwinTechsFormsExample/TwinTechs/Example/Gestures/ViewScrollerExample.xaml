@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:local="clr-namespace:TwinTechs.Example.Gestures;assembly=TwinTechsFormsExample"
+	x:Class="TwinTechs.Example.Gestures.ViewScrollerExample">
+
+	<ContentPage.Content>
+
+		<StackLayout
+			BackgroundColor="Black">
+
+			<Label
+				Text="Example of using gestures to create a view pager in xamarin forms"
+				TextColor="White" />
+
+			<local:PageScrollerControl
+				VerticalOptions="FillAndExpand"
+				x:Name="PagerView">
+
+				<local:PageScrollerControl.Pages>
+
+					<StackLayout
+						VerticalOptions="Fill"
+						BackgroundColor="Aqua">
+
+						<Label
+							Text="item 1" />
+
+						<Button
+							Text="Goto next"
+							Clicked="OnClicked" />
+
+					</StackLayout>
+
+					<StackLayout
+						VerticalOptions="Fill"
+						BackgroundColor="Yellow">
+
+						<Label
+							Text="item 2" />
+
+						<Button
+							Text="Goto next"
+							Clicked="OnClicked" />
+
+					</StackLayout>
+
+					<StackLayout
+						BackgroundColor="Purple">
+
+						<Label
+							Text="item 3" />
+
+						<Button
+							Text="Goto next"
+							Clicked="OnClicked" />
+
+					</StackLayout>
+
+					<StackLayout
+						BackgroundColor="Olive">
+
+						<Label
+							Text="item 4" />
+
+						<Button
+							Text="Goto next"
+							Clicked="OnClicked" />
+
+					</StackLayout>
+
+					<StackLayout
+						BackgroundColor="Green">
+
+						<Label
+							Text="item 5" />
+
+						<Button
+							Text="Goto next"
+							Clicked="OnClicked" />
+
+					</StackLayout>
+
+					<StackLayout
+						BackgroundColor="Red">
+
+						<Label
+							Text="item 6" />
+
+						<Button
+							Text="Goto next"
+							Clicked="OnClicked" />
+
+					</StackLayout>
+
+				</local:PageScrollerControl.Pages>
+
+			</local:PageScrollerControl>
+
+		</StackLayout>
+
+	</ContentPage.Content>
+
+</ContentPage>

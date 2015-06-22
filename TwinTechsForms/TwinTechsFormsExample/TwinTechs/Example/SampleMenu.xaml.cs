@@ -77,15 +77,22 @@ namespace TwinTechs.Example
 			Navigation.PushAsync (new TapGestureExample ());
 		}
 
-		void OnLongPressGesture (object sender, object args)
+
+		void OnPageScrollerExample (object sender, object args)
 		{
-			Navigation.PushAsync (new GridViewOptions ());
+			Navigation.PushAsync (new ViewScrollerExample ());
 
 		}
 
 		void OnSwipeGesture (object sender, object args)
 		{
 			Navigation.PushAsync (new SwipeGestureExample ());
+
+		}
+
+		void OnLongPressGesture (object sender, object args)
+		{
+			Navigation.PushAsync (new GridViewOptions ());
 
 		}
 

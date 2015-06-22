@@ -20,7 +20,7 @@
 				ContentPaddingLeft="10"
 				ContentPaddingRight="10"
 				IsContentCentered="false"
-				ItemWidth="320"
+				ItemWidth="700"
 				ItemHeight="140"
 				SelectionEnabled="false"
 				AbsoluteLayout.LayoutFlags="SizeProportional"

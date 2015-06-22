@@ -3,7 +3,6 @@
 using XLabs.Forms.Controls;
 using TwinTechs.Droid.Controls;
 
-[assembly: ExportRenderer (typeof(GridView), typeof(GridViewRenderer))]
 namespace XLabs.Forms.Controls
 {
 	using System;
@@ -21,10 +20,13 @@ namespace XLabs.Forms.Controls
 	using Xamarin.Forms;
 	using Xamarin.Forms.Platform.Android;
 
+	/*
 	/// <summary>
 	/// Class GridViewRenderer.
 	/// </summary>
-	public class GridViewRenderer : ViewRenderer<GridView, Android.Widget.GridView>
+
+	public class GridViewRendererOld : ViewRenderer<GridView, Android.Views.View>
+//	public class GridViewRenderer : ViewRenderer<Android.Views.View, Android.Widget.GridView>
 	{
 		/// <summary>
 		/// The orientation
@@ -34,7 +36,7 @@ namespace XLabs.Forms.Controls
 		/// <summary>
 		/// Initializes a new instance of the <see cref="GridViewRenderer"/> class.
 		/// </summary>
-		public GridViewRenderer ()
+		public GridViewRendererOld ()
 		{
 		}
 
@@ -55,12 +57,14 @@ namespace XLabs.Forms.Controls
 		///     <a href="http://developer.android.com/reference/android/view/View.html#onConfigurationChanged(android.content.res.Configuration)" target="_blank">[Android Documentation]</a>
 		///   </format>
 		/// </para></remarks>
-		protected override void OnConfigurationChanged (Configuration newConfig)
-		{
-			base.OnConfigurationChanged (newConfig);
-			if (newConfig.Orientation != _orientation)
-				OnElementChanged (new ElementChangedEventArgs<GridView> (this.Element, this.Element));
-		}
+		//		protected override void OnConfigurationChanged (Configuration newConfig)
+		//		{
+		//			base.OnConfigurationChanged (newConfig);
+		//			if (newConfig.Orientation != _orientation)
+		//				OnElementChanged (new ElementChangedEventArgs<GridView> (this.Element, this.Element));
+		//		}
+
+		GridViewContainer _gridViewContainer;
 
 		/// <summary>
 		/// Called when [element changed].
@@ -69,41 +73,24 @@ namespace XLabs.Forms.Controls
 		protected override void OnElementChanged (ElementChangedEventArgs<GridView> e)
 		{
 			base.OnElementChanged (e);
+			if (e.NewElement != null) {
+				
+				_gridViewContainer = new GridViewContainer (Context, null, e.NewElement);
 
-			var collectionView = new Android.Widget.GridView (Xamarin.Forms.Forms.Context);
-			collectionView.SetGravity (GravityFlags.Center);
-			collectionView.SetColumnWidth (Convert.ToInt32 (Element.ItemWidth));
-			collectionView.StretchMode = StretchMode.StretchColumnWidth;
+				_gridViewContainer.GridView.Adapter = this.DataSource;
 
-
-			var metrics = Resources.DisplayMetrics;
-			var spacing = (int)e.NewElement.ColumnSpacing;
-			var width = metrics.WidthPixels;
-			var itemWidth = (int)e.NewElement.ItemWidth;
-
-			int noOfColumns = width / (itemWidth + spacing);
-			// If possible add another row without spacing (because the number of columns will be one less than the number of spacings)
-			if (width - (noOfColumns * (itemWidth + spacing)) >= itemWidth)
-				noOfColumns++;
-
-			collectionView.SetNumColumns (noOfColumns);
-			collectionView.SetPadding (Convert.ToInt32 (Element.Padding.Left), Convert.ToInt32 (Element.Padding.Top), Convert.ToInt32 (Element.Padding.Right), Convert.ToInt32 (Element.Padding.Bottom));
-
-			collectionView.SetBackgroundColor (Element.BackgroundColor.ToAndroid ());
-			collectionView.SetHorizontalSpacing (Convert.ToInt32 (Element.RowSpacing));
-			collectionView.SetVerticalSpacing (Convert.ToInt32 (Element.ColumnSpacing));
-
+				_gridViewContainer.GridView.ItemClick += CollectionViewItemClick;
+//				_gridViewContainer.GridView.RemoveFromParent ();
+				base.SetNativeControl (_gridViewContainer);
+//				base.SetNativeControl (_gridViewContainer.GridView);
+			}
+			//TODO unset
 			this.Unbind (e.OldElement);
 			this.Bind (e.NewElement);
 
-			collectionView.Adapter = this.DataSource;
 
-			collectionView.ItemClick += CollectionViewItemClick;
-
-			base.SetNativeControl (collectionView);
 
 		}
-
 
 		/// <summary>
 		/// Handles the ItemClick event of the collectionView control.
@@ -246,6 +233,9 @@ namespace XLabs.Forms.Controls
 			nativecell.LayoutParameters = new  Android.Widget.GridView.LayoutParams (Convert.ToInt32 (this.Element.ItemWidth), Convert.ToInt32 (this.Element.ItemHeight));
 			fastCell.View.Layout (new Rectangle (0, 0, Element.ItemWidth, Element.ItemHeight));
 			nativecell.SetBackgroundColor (global::Android.Graphics.Color.Blue);
+//			if (Element.IsHorizontal) {
+//				nativecell.Rotation = 90;
+//			}
 			return nativecell;
 
 		}
@@ -253,129 +243,6 @@ namespace XLabs.Forms.Controls
 	
 	}
 
-	public class GridDataSource : BaseAdapter
-	{
-		Context _context;
+	*/
 
-		public delegate global::Android.Views.View OnGetCell (int position, global::Android.Views.View convertView, ViewGroup parent);
-
-		public delegate int OnRowsInSection ();
-
-		private readonly OnGetCell _onGetCell;
-		private readonly OnRowsInSection _onRowsInSection;
-
-		public GridDataSource (OnGetCell onGetCell, OnRowsInSection onRowsInSection)
-		{
-			this._onGetCell = onGetCell;
-			this._onRowsInSection = onRowsInSection;
-		}
-
-		public GridDataSource (Context c)
-		{
-			_context = c;
-		}
-
-		public override int Count {
-			get { return _onRowsInSection (); }
-		}
-
-		public override Java.Lang.Object GetItem (int position)
-		{
-			return null;
-		}
-
-		public override long GetItemId (int position)
-		{
-			return 0;
-		}
-
-		public override global::Android.Views.View GetView (int position, global::Android.Views.View convertView, ViewGroup parent)
-		{
-			return _onGetCell (position, convertView, parent);
-		}
-
-	}
-
-	public class GridViewCellRenderer : CellRenderer
-	{
-		//
-		// Methods
-		//
-		protected override global::Android.Views.View GetCellCore (Cell item, global::Android.Views.View convertView, ViewGroup parent, Context context)
-		{
-			ViewCell viewCell = (ViewCell)item;
-			GridViewCellRenderer.ViewCellContainer viewCellContainer = convertView as GridViewCellRenderer.ViewCellContainer;
-			if (viewCellContainer != null) {
-				viewCellContainer.Update (viewCell);
-				return viewCellContainer;
-			}
-
-			IVisualElementRenderer renderer = RendererFactory.GetRenderer (viewCell.View);
-			//   Platform.SetRenderer (viewCell.View, renderer);
-			// viewCell.View.IsPlatformEnabled = true;
-			return new GridViewCellRenderer.ViewCellContainer (context, renderer, viewCell, parent);
-		}
-
-		//
-		// Nested Types
-		//
-		private class ViewCellContainer : ViewGroup
-		{
-
-			IVisualElementRenderer _view;
-			global::Android.Views.View _parent;
-			ViewCell _viewCell;
-
-			public ViewCellContainer (Context context, IVisualElementRenderer view, ViewCell viewCell, global::Android.Views.View parent) : base (context)
-			{
-
-				this._view = view;
-				this._parent = parent;
-				//                this.unevenRows = unevenRows;
-				//                this.rowHeight = rowHeight;
-				this._viewCell = viewCell;
-				this.AddView (view.ViewGroup);
-			}
-
-			public void Update (ViewCell cell)
-			{
-				IVisualElementRenderer visualElementRenderer = this.GetChildAt (0) as IVisualElementRenderer;
-
-			}
-
-
-			Size _previousSize;
-
-			protected override void OnLayout (bool changed, int l, int t, int r, int b)
-			{
-				double width = base.Context.FromPixels ((double)(r - l));
-				double height = base.Context.FromPixels ((double)(b - t));
-				var size = new Size (width, height);
-				if (size != _previousSize) {
-					
-					var layout = _viewCell.View as Layout<Xamarin.Forms.View>;
-					if (layout != null) {
-						layout.Layout (new Rectangle (0, 0, width, height));
-						layout.ForceLayout ();
-						FixChildLayouts (layout);
-					}
-					this._view.Element.Layout (new Rectangle (0, 0, width, height));
-					this._view.UpdateLayout ();
-					_previousSize = size;
-				}
-			}
-
-
-
-			void FixChildLayouts (Layout<Xamarin.Forms.View> layout)
-			{
-				foreach (var child in layout.Children) {
-					if (child is Layout<Xamarin.Forms.View>) {
-						((Layout<Xamarin.Forms.View>)child).ForceLayout ();
-						FixChildLayouts (child as Layout<Xamarin.Forms.View>);
-					}
-				}
-			}
-		}
-	}
 }
