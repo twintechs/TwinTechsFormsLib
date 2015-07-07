@@ -42,159 +42,22 @@
 
 			</StackLayout>
 
-			<!--				ContentPaddingBottom="60"
-				ContentPaddingTop="10"
-				ContentPaddingLeft="10"
-				ContentPaddingRight="10"
-				VerticalOptions="Fill"-->
-
-			<AbsoluteLayout HeightRequest="100"
-				BackgroundColor="Yellow">
-							<xlabs:GridView
-					x:Name="MediaItemsGridView"
-					RowSpacing="5"
-					ColumnSpacing="5"
-					AbsoluteLayout.LayoutFlags="WidthProportional"
-					AbsoluteLayout.LayoutBounds="0,0,1,120"
-					ItemWidth="100"
-					ItemHeight="100"
-					ItemSelected="OnItemSelected"
-					SelectionEnabled="true">
-
-					<xlabs:GridView.ItemTemplate>
-
-						<DataTemplate>
-
-							<cells:GridViewThumbnailCell />
-
-						</DataTemplate>
-
-					</xlabs:GridView.ItemTemplate>
-
-				</xlabs:GridView>
-			</AbsoluteLayout>
-
-<!--			<AbsoluteLayout HeightRequest="100"
-				BackgroundColor="Yellow">
-							<xlabs:GridView
-					x:Name="MediaItemsGridView1"
-					RowSpacing="5"
-					ColumnSpacing="5"
-					AbsoluteLayout.LayoutFlags="WidthProportional"
-					AbsoluteLayout.LayoutBounds="0,0,1,100"
-					ItemWidth="200"
-					ItemHeight="200"
-					ItemSelected="OnItemSelected"
-					SelectionEnabled="true">
-
-					<xlabs:GridView.ItemTemplate>
-
-						<DataTemplate>
-
-							<cells:GridViewThumbnailCell />
-
-						</DataTemplate>
-
-					</xlabs:GridView.ItemTemplate>
-
-				</xlabs:GridView>
-			</AbsoluteLayout>
-
-
-			<AbsoluteLayout HeightRequest="100"
-				BackgroundColor="Yellow">
-							<xlabs:GridView
-					x:Name="MediaItemsGridView2"
-					RowSpacing="5"
-					ColumnSpacing="5"
-					AbsoluteLayout.LayoutFlags="WidthProportional"
-					AbsoluteLayout.LayoutBounds="0,0,1,100"
-					ItemWidth="200"
-					ItemHeight="200"
-					ItemSelected="OnItemSelected"
-					SelectionEnabled="true">
-
-					<xlabs:GridView.ItemTemplate>
-
-						<DataTemplate>
-
-							<cells:GridViewThumbnailCell />
-
-						</DataTemplate>
-
-					</xlabs:GridView.ItemTemplate>
-
-				</xlabs:GridView>
-			</AbsoluteLayout>
-
-
-			<AbsoluteLayout HeightRequest="100"
-				BackgroundColor="Yellow">
-							<xlabs:GridView
-					x:Name="MediaItemsGridView3"
-					RowSpacing="5"
-					ColumnSpacing="5"
-					AbsoluteLayout.LayoutFlags="WidthProportional"
-					AbsoluteLayout.LayoutBounds="0,0,1,100"
-					ItemWidth="200"
-					ItemHeight="200"
-					ItemSelected="OnItemSelected"
-					SelectionEnabled="true">
-
-					<xlabs:GridView.ItemTemplate>
-
-						<DataTemplate>
-
-							<cells:GridViewThumbnailCell />
-
-						</DataTemplate>
-
-					</xlabs:GridView.ItemTemplate>
-
-				</xlabs:GridView>
-			</AbsoluteLayout>
-
-
-			<AbsoluteLayout HeightRequest="100"
-				BackgroundColor="Yellow">
-							<xlabs:GridView
-					x:Name="MediaItemsGridView4"
-					RowSpacing="5"
-					ColumnSpacing="5"
-					AbsoluteLayout.LayoutFlags="WidthProportional"
-					AbsoluteLayout.LayoutBounds="0,0,1,100"
-					ItemWidth="200"
-					ItemHeight="200"
-					ItemSelected="OnItemSelected"
-					SelectionEnabled="true">
-
-					<xlabs:GridView.ItemTemplate>
-
-						<DataTemplate>
-
-							<cells:GridViewThumbnailCell />
-
-						</DataTemplate>
-
-					</xlabs:GridView.ItemTemplate>
-
-				</xlabs:GridView>
-			</AbsoluteLayout>-->
-
-	
-
 			<xlabs:GridView
-				x:Name="NormalItemsGridView"
+				x:Name="MediaItemsGridView"
 				RowSpacing="5"
 				ColumnSpacing="5"
 				ContentPaddingBottom="60"
 				ContentPaddingTop="10"
 				ContentPaddingLeft="10"
 				ContentPaddingRight="10"
-				HeightRequest="1000"
+				ItemWidth="100"
+				ItemHeight="100"
+				HeightRequest="600"
+				WidthRequest="320"
+				HorizontalOptions="Fill"
 				VerticalOptions="Fill"
-				ItemWidth="200"
-				ItemHeight="200">
+				ItemSelected="OnItemSelected"
+				SelectionEnabled="true">
 
 				<xlabs:GridView.ItemTemplate>
 
@@ -207,6 +70,7 @@
 				</xlabs:GridView.ItemTemplate>
 
 			</xlabs:GridView>
+
 		</StackLayout>
 
 	</ContentPage.Content>

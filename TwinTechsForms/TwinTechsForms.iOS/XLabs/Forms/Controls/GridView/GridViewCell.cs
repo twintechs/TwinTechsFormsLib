@@ -22,6 +22,7 @@ namespace XLabs.Forms.Controls
 
 		FastGridCell _viewCell;
 
+		public FastGridCell ViewCell { get { return _viewCell; } }
 
 		public void RecycleCell (object data, DataTemplate dataTemplate, VisualElement parent)
 		{

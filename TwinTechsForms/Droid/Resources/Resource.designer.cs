@@ -28,13 +28,37 @@ namespace TwinTechsFormsExample.Droid
 		{
 			global::Xamarin.Forms.Platform.Resource.String.ApplicationName = global::TwinTechsFormsExample.Droid.Resource.String.ApplicationName;
 			global::Xamarin.Forms.Platform.Resource.String.Hello = global::TwinTechsFormsExample.Droid.Resource.String.Hello;
+			global::TwinTechsLib.Droid.Resource.Attribute.layoutManager = global::TwinTechsFormsExample.Droid.Resource.Attribute.layoutManager;
+			global::TwinTechsLib.Droid.Resource.Attribute.reverseLayout = global::TwinTechsFormsExample.Droid.Resource.Attribute.reverseLayout;
+			global::TwinTechsLib.Droid.Resource.Attribute.spanCount = global::TwinTechsFormsExample.Droid.Resource.Attribute.spanCount;
+			global::TwinTechsLib.Droid.Resource.Attribute.stackFromEnd = global::TwinTechsFormsExample.Droid.Resource.Attribute.stackFromEnd;
+			global::TwinTechsLib.Droid.Resource.Dimension.item_touch_helper_max_drag_scroll_per_frame = global::TwinTechsFormsExample.Droid.Resource.Dimension.item_touch_helper_max_drag_scroll_per_frame;
+			global::TwinTechsLib.Droid.Resource.Id.item_touch_helper_previous_elevation = global::TwinTechsFormsExample.Droid.Resource.Id.item_touch_helper_previous_elevation;
 			global::TwinTechsLib.Droid.Resource.String.ApplicationName = global::TwinTechsFormsExample.Droid.Resource.String.ApplicationName;
 			global::TwinTechsLib.Droid.Resource.String.Hello = global::TwinTechsFormsExample.Droid.Resource.String.Hello;
 			global::TwinTechsLib.Droid.Resource.String.library_name = global::TwinTechsFormsExample.Droid.Resource.String.library_name;
+			global::TwinTechsLib.Droid.Resource.Styleable.RecyclerView = global::TwinTechsFormsExample.Droid.Resource.Styleable.RecyclerView;
+			global::TwinTechsLib.Droid.Resource.Styleable.RecyclerView_android_orientation = global::TwinTechsFormsExample.Droid.Resource.Styleable.RecyclerView_android_orientation;
+			global::TwinTechsLib.Droid.Resource.Styleable.RecyclerView_layoutManager = global::TwinTechsFormsExample.Droid.Resource.Styleable.RecyclerView_layoutManager;
+			global::TwinTechsLib.Droid.Resource.Styleable.RecyclerView_reverseLayout = global::TwinTechsFormsExample.Droid.Resource.Styleable.RecyclerView_reverseLayout;
+			global::TwinTechsLib.Droid.Resource.Styleable.RecyclerView_spanCount = global::TwinTechsFormsExample.Droid.Resource.Styleable.RecyclerView_spanCount;
+			global::TwinTechsLib.Droid.Resource.Styleable.RecyclerView_stackFromEnd = global::TwinTechsFormsExample.Droid.Resource.Styleable.RecyclerView_stackFromEnd;
 		}
 		
 		public partial class Attribute
 		{
+			
+			// aapt resource value: 0x7f010000
+			public const int layoutManager = 2130771968;
+			
+			// aapt resource value: 0x7f010002
+			public const int reverseLayout = 2130771970;
+			
+			// aapt resource value: 0x7f010001
+			public const int spanCount = 2130771969;
+			
+			// aapt resource value: 0x7f010003
+			public const int stackFromEnd = 2130771971;
 			
 			static Attribute()
 			{
@@ -42,6 +66,22 @@ namespace TwinTechsFormsExample.Droid
 			}
 			
 			private Attribute()
+			{
+			}
+		}
+		
+		public partial class Dimension
+		{
+			
+			// aapt resource value: 0x7f030000
+			public const int item_touch_helper_max_drag_scroll_per_frame = 2130903040;
+			
+			static Dimension()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Dimension()
 			{
 			}
 		}
@@ -62,17 +102,33 @@ namespace TwinTechsFormsExample.Droid
 			}
 		}
 		
+		public partial class Id
+		{
+			
+			// aapt resource value: 0x7f040000
+			public const int item_touch_helper_previous_elevation = 2130968576;
+			
+			static Id()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Id()
+			{
+			}
+		}
+		
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f030002
-			public const int ApplicationName = 2130903042;
+			// aapt resource value: 0x7f050002
+			public const int ApplicationName = 2131034114;
 			
-			// aapt resource value: 0x7f030001
-			public const int Hello = 2130903041;
+			// aapt resource value: 0x7f050001
+			public const int Hello = 2131034113;
 			
-			// aapt resource value: 0x7f030000
-			public const int library_name = 2130903040;
+			// aapt resource value: 0x7f050000
+			public const int library_name = 2131034112;
 			
 			static String()
 			{
@@ -80,6 +136,42 @@ namespace TwinTechsFormsExample.Droid
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Styleable
+		{
+			
+			public static int[] RecyclerView = new int[]
+			{
+					16842948,
+					2130771968,
+					2130771969,
+					2130771970,
+					2130771971};
+			
+			// aapt resource value: 0
+			public const int RecyclerView_android_orientation = 0;
+			
+			// aapt resource value: 1
+			public const int RecyclerView_layoutManager = 1;
+			
+			// aapt resource value: 3
+			public const int RecyclerView_reverseLayout = 3;
+			
+			// aapt resource value: 2
+			public const int RecyclerView_spanCount = 2;
+			
+			// aapt resource value: 4
+			public const int RecyclerView_stackFromEnd = 4;
+			
+			static Styleable()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Styleable()
 			{
 			}
 		}

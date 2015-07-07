@@ -54,6 +54,15 @@ namespace XLabs.Forms.Controls
 
 		}
 
+		/// <summary>
+		/// Override if you are intereted in when a cell moves (for parallaxe effects etc)
+		/// </summary>
+		/// <param name="contentOffset">Content offset.</param>
+		/// <param name="cellLocation">Cell location.</param>
+		public virtual void OnScroll (Point contentOffset, Point cellLocation)
+		{
+
+		}
 	}
 }
 

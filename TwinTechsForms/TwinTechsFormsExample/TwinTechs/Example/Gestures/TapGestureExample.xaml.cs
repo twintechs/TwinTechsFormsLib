@@ -62,7 +62,8 @@ namespace TwinTechs.Example.Gestures
 			var view = recognizer.View;
 			var message = "Tap";
 			message += "TAP " + recognizer + "\n";
-			message += "POS: " + recognizer.LocationInView (view.ParentView);
+			message += "POS: " + recognizer.LocationInView (view);
+			message += "PARENT POS: " + recognizer.LocationInView (view.ParentView);
 			message += "touches: " + recognizer.NumberOfTouches + ", taps required: " + tapRecognizer.NumberOfTapsRequired;
 			OutputLabel.Text = message;
 		}

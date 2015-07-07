@@ -9,7 +9,6 @@ using TwinTechs.Extensions;
 using Android.App;
 using Android;
 using System.Reflection;
-using TwinTechs.Droid.Helper;
 
 [assembly: ExportRenderer (typeof(PageViewContainer), typeof(PageViewContainerRenderer))]
 namespace TwinTechs.Droid.Controls
@@ -50,7 +49,7 @@ namespace TwinTechs.Droid.Controls
 			base.OnLayout (changed, l, t, r, b);
 			if ((changed || _contentNeedsLayout) && this.Control != null) {
 				if (_currentPage != null) {
-					_currentPage.Layout (new Rectangle (0, 0, r - l, b - t));
+					_currentPage.Layout (new Rectangle (0, 0, Element.Width, Element.Height));
 				}
 				var msw = MeasureSpec.MakeMeasureSpec (r - l, MeasureSpecMode.Exactly);
 				var msh = MeasureSpec.MakeMeasureSpec (b - t, MeasureSpecMode.Exactly);
@@ -58,6 +57,12 @@ namespace TwinTechs.Droid.Controls
 				this.Control.Layout (0, 0, r, b);
 				_contentNeedsLayout = false;
 			}
+		}
+
+		private int ConvertPixelsToDp (float pixelValue)
+		{
+			var dp = (int)((pixelValue) / Resources.DisplayMetrics.Density);
+			return dp;
 		}
 
 
@@ -69,7 +74,12 @@ namespace TwinTechs.Droid.Controls
 				var parentPage = Element.GetParentPage ();
 				page.Parent = parentPage;
 
-				var existingRenderer = RendererHelper.GetOrCreateRenderer (page);
+				var existingRenderer = GetRenderer (page);
+				if (existingRenderer == null) {
+					var renderer = RendererFactory.GetRenderer (page);
+					SetRenderer (page, renderer);
+					existingRenderer = GetRenderer (page);
+				}
 				_contentNeedsLayout = true;
 				SetNativeControl (existingRenderer.ViewGroup);
 				Invalidate ();
@@ -83,11 +93,44 @@ namespace TwinTechs.Droid.Controls
 			if (_currentPage == null) {
 				//have to set somethign for android not to get pissy
 				var view = new Android.Views.View (this.Context);
-				view.SetBackgroundColor (Android.Graphics.Color.White);
+				view.SetBackgroundColor (Element.BackgroundColor.ToAndroid ());
 				SetNativeControl (view);
 			}
 		}
 
+
+
+		private static readonly Type _platformType = Type.GetType ("Xamarin.Forms.Platform.Android.Platform, Xamarin.Forms.Platform.Android", true);
+		private static BindableProperty _rendererProperty;
+
+		public static BindableProperty RendererProperty {
+			get {
+				_rendererProperty = (BindableProperty)_platformType.GetField ("RendererProperty", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)
+					.GetValue (null);
+
+				return _rendererProperty;
+			}
+		}
+
+		public static void SetRenderer (BindableObject bindableObject, IVisualElementRenderer renderer)
+		{
+			var value = bindableObject.GetValue (RendererProperty);
+			bindableObject.SetValue (RendererProperty, renderer);
+		}
+
+		public static IVisualElementRenderer GetRenderer (BindableObject bindableObject)
+		{
+			var value = bindableObject.GetValue (RendererProperty);
+			return (IVisualElementRenderer)bindableObject.GetValue (RendererProperty);
+		}
+
+		public static Android.Views.View GetNativeView (BindableObject bindableObject)
+		{
+			var renderer = bindableObject.GetRenderer ();
+			var viewGroup = renderer.ViewGroup;
+			var rootView = viewGroup.RootView;
+			return rootView;
+		}
 
 	}
 }

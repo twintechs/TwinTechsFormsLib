@@ -98,7 +98,7 @@ namespace TwinTechs.Example
 
 		void OnPanGesture (object sender, object args)
 		{
-			Navigation.PushAsync (new GridViewOptions ());
+			Navigation.PushAsync (new PanGestureExample ());
 
 		}
 

@@ -1,3 +1,5 @@
+using CoreGraphics;
+
 namespace XLabs.Forms.Controls
 {
 	using Foundation;
@@ -15,21 +17,23 @@ namespace XLabs.Forms.Controls
 		/// <param name="indexPath">The index path.</param>
 		public delegate void OnItemSelected (UICollectionView tableView, NSIndexPath indexPath);
 
+		public delegate void OnScrolled (CGPoint contentOffset);
+
 		/// <summary>
 		/// The _on item selected
 		/// </summary>
 		private readonly OnItemSelected _onItemSelected;
+		private readonly OnScrolled _onScrolled;
 
-
-		public delegate void ItemDidEndDisplayingCell (UICollectionView collectionView, UICollectionViewCell cell, NSIndexPath indexPath);
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="GridViewDelegate"/> class.
 		/// </summary>
 		/// <param name="onItemSelected">The on item selected.</param>
-		public GridViewDelegate (OnItemSelected onItemSelected)
+		public GridViewDelegate (OnItemSelected onItemSelected, OnScrolled onScrolled)
 		{
 			_onItemSelected = onItemSelected;
+			_onScrolled = onScrolled;
 		}
 
 		/// <summary>
@@ -49,7 +53,11 @@ namespace XLabs.Forms.Controls
 		/// <param name="indexPath">The index path.</param>
 		public override void ItemHighlighted (UICollectionView collectionView, NSIndexPath indexPath)
 		{
-			//			_onItemSelected.Invoke (collectionView, indexPath);
+		}
+
+		public override void Scrolled (UIScrollView scrollView)
+		{
+			_onScrolled (scrollView.ContentOffset);
 		}
 
 	}

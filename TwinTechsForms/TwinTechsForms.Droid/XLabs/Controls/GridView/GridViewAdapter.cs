@@ -22,6 +22,8 @@ namespace XLabs.Forms.Controls
 
 		DisplayMetrics _displayMetrics;
 
+		GridView _gridView;
+
 		GridView Element { get; set; }
 
 		public IEnumerable Items {
@@ -38,9 +40,10 @@ namespace XLabs.Forms.Controls
 				if (newColleciton != null) {
 					newColleciton.CollectionChanged += NewColleciton_CollectionChanged;
 				}
+				NotifyDataSetChanged ();
 				//TODO add remove change listeners
 			}
-			
+
 		}
 
 		void NewColleciton_CollectionChanged (object sender, NotifyCollectionChangedEventArgs e)
@@ -67,6 +70,7 @@ namespace XLabs.Forms.Controls
 			_recyclerView = recyclerView;
 			Element = gridView;
 			_displayMetrics = displayMetrics;
+			_gridView = gridView;
 		}
 
 		public class GridViewCell : RecyclerView.ViewHolder
@@ -77,28 +81,27 @@ namespace XLabs.Forms.Controls
 			{
 				ViewCellContainer = view;
 			}
-
-			//			public Android.Views.View ViewCellContainer { get; set; }
-			//
-			//			public GridViewCell (Android.Views.View view) : base (view)
-			//			{
-			//				ViewCellContainer = view;
-			//			}
 		}
 
 		public override RecyclerView.ViewHolder OnCreateViewHolder (ViewGroup parent, int viewType)
 		{
 			var gridViewCell = Element.ItemTemplate.CreateContent () as FastGridCell;
+
 			var initialCellSize = new Xamarin.Forms.Size (Element.ItemWidth, Element.ItemHeight);
 			var view = new GridViewCellContainer (parent.Context, gridViewCell, parent, initialCellSize);
 			view.Click += mMainView_Click;
 
 			var width = Convert.ToInt32 (Element.ItemWidth);
-			var height = Convert.ToInt32 (Element.ItemHeight);
+			//TODO the height is just not working out correctly for us - views end up being too small
+			var height = Convert.ToInt32 (Element.ItemHeight + _gridView.RowSpacing);  
 			var dpW = ConvertDpToPixels (width);
 			var dpH = ConvertDpToPixels (height);
-			view.LayoutParameters = new  Android.Widget.GridView.LayoutParams (dpW, dpH);
+			view.SetMinimumWidth (dpW);
+			view.SetMinimumHeight (dpH);
+
+			view.LayoutParameters = new  GridLayoutManager.LayoutParams (dpW, dpH);
 			GridViewCell myView = new GridViewCell (view);
+
 			return myView;
 		}
 
@@ -120,11 +123,11 @@ namespace XLabs.Forms.Controls
 		{
 			int position = _recyclerView.GetChildPosition ((Android.Views.View)sender);
 			var item = Items.Cast<object> ().ElementAt (position);
-			Console.WriteLine (item);
+			Element.InvokeItemSelectedEvent (this, item);
 		}
 
 		public override int ItemCount {
-			
+
 			get {
 				var count = (Items as ICollection) != null ? (Items as ICollection).Count : 0;
 				return count;

@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="TwinTechs.Example.Gestures.PanGestureExample"
+	xmlns:gestures="clr-namespace:TwinTechs.Gestures;assembly=TwinTechsForms"
+	xmlns:local="clr-namespace:TwinTechs.Example.Gestures;assembly=TwinTechsFormsExample"
+	Title="SwipeExample">
+
+	<AbsoluteLayout
+		x:Name="MainLayout"
+		BackgroundColor="Gray">
+
+		<local:SimpleLayout.GestureRecognizers>
+
+			<gestures:PanGestureRecognizer
+				x:Name="BoxXamlGesture"
+				MinimumNumberOfTouches="2"
+				OnAction="OnAction" />
+
+		</local:SimpleLayout.GestureRecognizers>
+
+		<Label
+			x:Name="OutputLabel"
+			AbsoluteLayout.LayoutBounds="0, 0, 300, 60"
+			TextColor="White"
+			BackgroundColor="Black"
+			FontSize="8" />
+
+		<BoxView
+			x:Name="Box"
+			Color="Blue"
+			AbsoluteLayout.LayoutBounds="200, 200, 120, 120"
+			AbsoluteLayout.LayoutFlags="None">
+		</BoxView>
+
+		<Button
+			Text="Move "
+			Clicked="OnMoveClicked"
+			AbsoluteLayout.LayoutBounds="0, 300, 100, 80"
+			AbsoluteLayout.LayoutFlags="None" />
+
+		<BoxView
+			Color="Green"
+			x:Name="Box2"
+			AbsoluteLayout.LayoutBounds="50, 400, 200, 80"
+			AbsoluteLayout.LayoutFlags="None">
+		</BoxView>
+
+		<StackLayout
+			x:Name="MyStack"
+			AbsoluteLayout.LayoutBounds="0, 40, 320, 150"
+			BackgroundColor="Red"
+			AbsoluteLayout.LayoutFlags="None">
+
+			<Label
+				Text="Tap me twice"
+				x:Name="Label1"
+				TextColor="White"
+				FontSize="20">
+
+				<Label.GestureRecognizers>
+
+					<gestures:PanGestureRecognizer
+						x:Name="LabelXamlGesture"
+						OnAction="OnAction" />
+
+				</Label.GestureRecognizers>
+
+			</Label>
+
+			<Label
+				Text="Needs 2 touches"
+				x:Name="Label2"
+				TextColor="White"
+				FontSize="20" />
+
+		</StackLayout>
+
+	</AbsoluteLayout>
+
+</ContentPage>

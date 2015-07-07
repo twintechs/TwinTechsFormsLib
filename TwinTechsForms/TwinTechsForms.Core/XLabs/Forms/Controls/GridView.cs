@@ -2,6 +2,7 @@
 using System.Collections;
 using Xamarin.Forms;
 using System.Diagnostics;
+using TwinTechs.Controls;
 
 namespace XLabs.Forms.Controls
 {
@@ -15,7 +16,7 @@ namespace XLabs.Forms.Controls
 	/// <summary>
 	/// Class GridView.
 	/// </summary>
-	public class GridView : ContentView
+	public class GridView : ContentView, IScrollAwareElement
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="GridView"/> class.
@@ -360,5 +361,29 @@ namespace XLabs.Forms.Controls
 				_initialIndex = index;
 			}
 		}
+
+		#region ISCrollAwareElement
+
+		public event EventHandler OnStartScroll;
+		public event EventHandler OnStopScroll;
+		public event EventHandler<ControlScrollEventArgs> OnScroll;
+
+		public void RaiseOnScroll (float delta, float currentY)
+		{
+			var args = new ControlScrollEventArgs (delta, currentY);
+			OnScroll?.Invoke (this, args);
+		}
+
+		public void RaiseOnStartScroll ()
+		{
+			OnStartScroll?.Invoke (this, new EventArgs ());
+		}
+
+		public void RaiseOnStopScroll ()
+		{
+			OnStopScroll?.Invoke (this, new EventArgs ());
+		}
+
+		#endregion
 	}
 }

@@ -85,7 +85,8 @@ namespace TwinTechs.Gestures
 
 		#region internal impl
 
-		internal void SendAction ()
+		//FIXME - make internal
+		public void SendAction ()
 		{
 			Command?.Execute (CommandParameter);
 			OnAction?.Invoke (this, State);
@@ -95,7 +96,7 @@ namespace TwinTechs.Gestures
 		/// Sets the underlying gesture recognzier - used by the factory for adding/removal
 		/// </summary>
 		/// <value>The native gesture recognizer.</value>
-		internal INativeGestureRecognizer NativeGestureRecognizer { get; set; }
+		public INativeGestureRecognizer NativeGestureRecognizer { get; set; }
 
 
 		#endregion

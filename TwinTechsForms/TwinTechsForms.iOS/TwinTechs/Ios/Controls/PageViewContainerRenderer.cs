@@ -11,29 +11,25 @@ using System.Diagnostics;
 [assembly: ExportRenderer (typeof(PageViewContainer), typeof(PageViewContainerRenderer))]
 namespace TwinTechs.Ios.Controls
 {
-	public class PageViewContainerRenderer : ViewRenderer<PageViewContainer,UIView>
+	public class PageViewContainerRenderer : ViewRenderer<PageViewContainer,ViewControllerContainer>
 	{
 		public PageViewContainerRenderer ()
 		{
 		}
 
-		ViewControllerContainer _viewControllerContainer;
-
 		protected override void OnElementChanged (ElementChangedEventArgs<PageViewContainer> e)
 		{
 			base.OnElementChanged (e);
-			var pageViewContainer = e.NewElement as PageViewContainer;
 
-			if (_viewControllerContainer != null) {
-				_viewControllerContainer.ViewController = null;
-				_viewControllerContainer = null;
+			if (Control != null) {
+				Control.ViewController = null;
 			}
 
 			if (e.NewElement != null) {
-				_viewControllerContainer = new ViewControllerContainer (Bounds);
-				SetNativeControl (_viewControllerContainer);
+				var viewControllerContainer = new ViewControllerContainer (Bounds);
+				SetNativeControl (viewControllerContainer);
 			}
-			 
+
 
 		}
 
@@ -46,18 +42,13 @@ namespace TwinTechs.Ios.Controls
 				var viewController = pageRenderer?.ViewController != null ? pageRenderer?.ViewController : page.CreateViewController ();
 				var parentPage = Element.GetParentPage ();
 				var renderer = parentPage.GetRenderer ();
-
-				if (_viewControllerContainer == null) {
-					_viewControllerContainer = new ViewControllerContainer (Bounds);
-					SetNeedsLayout ();
-					SetNativeControl (_viewControllerContainer);
-				}
-
-				_viewControllerContainer.ParentViewController = renderer.ViewController;
-				_viewControllerContainer.ViewController = viewController;
+				Control.ParentViewController = renderer.ViewController;
+				Control.ViewController = viewController;
 				_initializedPage = page;
 			} else {
-				_viewControllerContainer = null;
+				if (Control != null) {
+					Control.ViewController = null;
+				}
 			}
 		}
 
@@ -68,7 +59,6 @@ namespace TwinTechs.Ios.Controls
 			if (page != null) {
 				page.Layout (new Rectangle (0, 0, Bounds.Width, Bounds.Height));
 			}
-			_viewControllerContainer.Frame = Bounds;
 		}
 
 		protected override void OnElementPropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)

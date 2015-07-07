@@ -16,7 +16,7 @@ namespace XLabs.Forms.Controls
 		/// <param name="collectionView">The collection view.</param>
 		/// <param name="indexPath">The index path.</param>
 		/// <returns>UICollectionViewCell.</returns>
-        public delegate UICollectionViewCell OnGetCell (UICollectionView collectionView, NSIndexPath indexPath);
+		public delegate UICollectionViewCell OnGetCell (UICollectionView collectionView, NSIndexPath indexPath);
 
 		/// <summary>
 		/// Delegate OnRowsInSection
@@ -24,14 +24,14 @@ namespace XLabs.Forms.Controls
 		/// <param name="collectionView">The collection view.</param>
 		/// <param name="section">The section.</param>
 		/// <returns>System.Int32.</returns>
-        public delegate int OnRowsInSection (UICollectionView collectionView, nint section);
+		public delegate int OnRowsInSection (UICollectionView collectionView, nint section);
 
 		/// <summary>
 		/// Delegate OnItemSelected
 		/// </summary>
 		/// <param name="collectionView">The collection view.</param>
 		/// <param name="indexPath">The index path.</param>
-        public delegate void OnItemSelected (UICollectionView collectionView, NSIndexPath indexPath);
+		public delegate void OnItemSelected (UICollectionView collectionView, NSIndexPath indexPath);
 
 		/// <summary>
 		/// The _on get cell
@@ -81,8 +81,6 @@ namespace XLabs.Forms.Controls
 		{
 			_onItemSelected (collectionView, indexPath);
 		}
-
-
 
 		/// <summary>
 		/// Gets the cell.

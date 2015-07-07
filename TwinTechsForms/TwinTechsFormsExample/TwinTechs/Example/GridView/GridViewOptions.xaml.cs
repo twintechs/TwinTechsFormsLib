@@ -13,19 +13,7 @@ namespace TwinTechs.Example.GridView
 		{
 			InitializeComponent ();
 			MediaItemsGridView.ItemsSource = DataProvider.GetMediaItems ();
-//			MediaItemsGridView1.ItemsSource = DataProvider.GetMediaItems ();
-//			MediaItemsGridView2.ItemsSource = DataProvider.GetMediaItems ();
-//			MediaItemsGridView3.ItemsSource = DataProvider.GetMediaItems ();
-//			MediaItemsGridView4.ItemsSource = DataProvider.GetMediaItems ();
-			NormalItemsGridView.ItemsSource = DataProvider.GetMediaItems ();
 			OnToggleHorizontal (null, null);
-		}
-
-		protected override void OnSizeAllocated (double width, double height)
-		{
-			base.OnSizeAllocated (width, height);
-//			MediaItemsGridView.WidthRequest = height;
-//			MediaItemsGridView.HeightRequest = width;
 		}
 
 		void OnItemSelected (object sender, XLabs.GridEventArgs<object> e)
@@ -76,11 +64,6 @@ namespace TwinTechs.Example.GridView
 		void OnToggleHorizontal (object sender, object e)
 		{
 			MediaItemsGridView.IsHorizontal = !MediaItemsGridView.IsHorizontal;
-//			MediaItemsGridView1.IsHorizontal = true;
-//			MediaItemsGridView2.IsHorizontal = true;
-//			MediaItemsGridView3.IsHorizontal = true;
-//			MediaItemsGridView4.IsHorizontal = true;
-
 		}
 
 		void OnToggleMaxPerRow (object sender, object e)

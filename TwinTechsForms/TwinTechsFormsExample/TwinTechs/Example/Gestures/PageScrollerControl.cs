@@ -11,6 +11,7 @@ namespace TwinTechs.Example.Gestures
 {
 	public class PageScrollerControl : AbsoluteLayout
 	{
+		public event EventHandler OnPageChanged;
 
 		StackLayout _contentView;
 
@@ -52,10 +53,10 @@ namespace TwinTechs.Example.Gestures
 			_contentView = new StackLayout () {Orientation = StackOrientation.Horizontal,
 				Spacing = 0
 			};
-			var gesture = new PanGestureRecognizer ();
-			gesture.OnAction += Gesture_OnAction;
 			Children.Add (_contentView);
-			_contentView.AddGestureRecognizer (gesture);
+			var gesture2 = new PanGestureRecognizer ();
+			gesture2.OnAction += Gesture_OnAction;
+			this.AddGestureRecognizer (gesture2);
 			IsClippedToBounds = true;
 			Pages.CollectionChanged += Pages_CollectionChanged;
 		}

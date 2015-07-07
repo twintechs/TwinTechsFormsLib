@@ -4,14 +4,17 @@ using Android.Graphics;
 using TwinTechs.Droid.Extensions;
 using Java.Lang;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace TwinTechs.Gestures
 {
-	public abstract class BaseNativeGestureRecognizer : Java.Lang.Object, INativeGestureRecognizer, IOnTouchListener
+	public abstract class BaseNativeGestureRecognizer : Java.Lang.Object, INativeGestureRecognizer,View.IOnTouchListener
 	{
 		public BaseNativeGestureRecognizer ()
 		{
 		}
+
+		public static List<BaseGestureRecognizer> GroupRecognizers = new List<BaseGestureRecognizer> ();
 
 		internal MultiCastOnTouchListener Listener { get; set; }
 
@@ -38,6 +41,7 @@ namespace TwinTechs.Gestures
 			} else {
 				InitializeNativeRecognizer ();
 			}
+		
 		}
 
 		public void RemoveRecognizer (BaseGestureRecognizer recognizer)
@@ -52,6 +56,7 @@ namespace TwinTechs.Gestures
 				if (!Listener.HasListeners) {
 					NativeView.SetOnTouchListener (null);
 				}
+				NativeView.SetOnTouchListener (null);
 				NativeGestureDetector = null;
 				IsGestureInitialized = false;
 			}
@@ -75,6 +80,10 @@ namespace TwinTechs.Gestures
 		void InitializeNativeRecognizer ()
 		{
 			NativeView = Recognizer.View.GetNativeView ();
+			//NEED A MECHANISM TO GET TOUCHES FROM A PARENT VIEW OBSCURED BY ANOTHER VIEW
+//			if (Recognizer.View is Xamarin.Forms.Layout<Xamarin.Forms.View>) {
+//				GroupRecognizers.Add (Recognizer);
+//			}
 			if (NativeView == null) {
 				throw new InvalidOperationException ("attempted to initialize a native gesture recognizers for a view before it had created it's renderer");
 			}
@@ -82,7 +91,14 @@ namespace TwinTechs.Gestures
 			Listener = GetMultiCastListener ();
 			if (Listener == null) {
 				Listener = new MultiCastOnTouchListener ();
-				NativeView.SetOnTouchListener (Listener);
+//				NativeView.SetOnTouchListener (Listener);
+				NativeView.Touch += (sender, e) => {
+					Console.WriteLine ("Touch " + e);
+					
+				};
+				NativeView.GenericMotion += (object sender, View.GenericMotionEventArgs e) => {
+					Console.WriteLine ("motion " + e);
+				};
 			}
 			Listener.AddListener (this);
 			NativeGestureDetector = CreateGestureDetector ();
@@ -107,10 +123,30 @@ namespace TwinTechs.Gestures
 
 		public bool OnTouch (View nativeView, MotionEvent e)
 		{
-			NativeGestureDetector.OnTouchEvent (e);
-			return true;
+			PreProcessMotionEvent (e);
+			var result = false;
+			if (NativeGestureDetector != null) {
+				result = NativeGestureDetector.OnTouchEvent (e);
+			}
+			PostProcessMotionEvent (e);
+			return result;
 		}
 
+		/// <summary>
+		/// Pre process motion event. Do anythign extra outside of the detector
+		/// </summary>
+		/// <param name="e">E.</param>
+		protected virtual void PreProcessMotionEvent (MotionEvent e)
+		{
+		}
+
+		/// <summary>
+		/// Posts the process motion event. Do anythign extra outside of the detector
+		/// </summary>
+		/// <param name="e">E.</param>
+		protected virtual void PostProcessMotionEvent (MotionEvent e)
+		{
+		}
 
 		#endregion
 
@@ -130,12 +166,12 @@ namespace TwinTechs.Gestures
 		//TODO work out how to do this..
 		public virtual Xamarin.Forms.Point LocationInView (Xamarin.Forms.VisualElement view)
 		{
-			return FirstTouchPoint;
+			return GetLocationInAncestorView (FirstTouchPoint, view);
 		}
 
 		public virtual  Xamarin.Forms.Point LocationOfTouch (int touchIndex, Xamarin.Forms.VisualElement view)
 		{
-			return FirstTouchPoint;
+			return GetLocationInAncestorView (FirstTouchPoint, view);
 		}
 
 		public int NumberOfTouches { get; protected set; }
@@ -147,11 +183,90 @@ namespace TwinTechs.Gestures
 			Recognizer.SendAction ();
 		}
 
+		protected Xamarin.Forms.Point GetLocationInAncestorView (Xamarin.Forms.Point location, Xamarin.Forms.VisualElement view)
+		{
+			var targetViewRenderer = view.GetRenderer ();
+			var targetView = targetViewRenderer.ViewGroup;
+			var parent = NativeView;
+			var returnPoint = location;
+			while (parent != null && parent != targetView) {
+				returnPoint.X += parent.Left;
+				returnPoint.Y += parent.Top;
+				parent = NativeView.Parent as View;
+			} 
+			return returnPoint;
+		}
+
 		/// <summary>
 		/// Creates the gesture detector. Your view should set up a detector which is using the 
 		/// Listener property to get touch events.
 		/// </summary>
 		protected abstract GestureDetector CreateGestureDetector ();
+
+		//		public override bool OnDown (MotionEvent e)
+		//		{
+		//			return base.OnDown (e);
+		//		}
+
+
+		#region handling gestures at a group level
+
+		/**
+		 * We have an issue with Android that makes it pretty much impossible to compose gestures. 
+		 * For now, this is all parked on android till I come up with a solution that works.
+		 */
+		/**
+		 * Because we are composing, we have to do a bit of hackery to get touches from the main activity
+		 */
+		#endregion
+		public bool ConsumesActivityTouch (MotionEvent ev)
+		{
+			//TODO work out if it's our view in here, then update the coordinates
+			var offset = GetOffsetInNativeView (ev.GetX (), ev.GetY ());
+			Console.WriteLine ("location " + ev.GetX () + ", " + ev.GetY () + " offset " + offset);
+			ev.OffsetLocation (-offset.X, -offset.Y);
+			Console.WriteLine ("ofseeted " + ev.GetX () + ", " + ev.GetY ());
+			if (ev.GetX () < 0 || ev.GetY () < 0 || ev.GetX () > NativeView.Width || ev.GetY () > NativeView.Height) {
+				return false;
+			} else {
+				//next check children
+//				var isConsumedByChild = IsTouchConsumedByChildren (NativeView as ViewGroup, ev);
+				//we need to check all views to see if they ate the touch
+				OnTouch (this.NativeView, ev);
+			}
+			return false;
+		}
+
+		//		bool IsTouchConsumedByChildren (ViewGroup viewGroup, MotionEvent ev)
+		//		{
+		//			var isConsumed = false;
+		//			if (viewGroup != null) {
+		//
+		//				for (int i = 0; i < viewGroup.ChildCount; i++) {
+		//					var view = viewGroup.GetChildAt (i);
+		//					//TODO offset the touch
+		//					view.OnTouchEvent (ev);
+		//					isConsumed = IsTouchConsumedByChildren (view as ViewGroup, ev);
+		//					if (isConsumed) {
+		////						break;
+		//					}
+		//				}
+		//			}
+		//			return isConsumed;
+		//			
+		//		}
+
+		protected Point GetOffsetInNativeView (double X, double Y)
+		{
+			var parent = NativeView;
+			var offset = new Point ();
+			while (parent != null) {
+				offset.X += parent.Left;
+				offset.Y += parent.Top;
+				parent = parent.Parent as View;
+			} 
+			return offset;
+		}
 	}
 }
 

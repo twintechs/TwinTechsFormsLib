@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using CoreGraphics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using TwinTechs.Controls;
 
 [assembly: ExportRenderer (typeof(GridView), typeof(GridViewRenderer))]
 namespace XLabs.Forms.Controls
@@ -67,7 +68,7 @@ namespace XLabs.Forms.Controls
 			Bind (e.NewElement);
 
 			_gridCollectionView.Source = (e.NewElement.ItemsSource != null) ? DataSource : null;
-			_gridCollectionView.Delegate = this.GridViewDelegate;
+			_gridCollectionView.Delegate = new GridViewDelegate (ItemSelected, HandleOnScrolled);
 			ScrollToInitialIndex ();
 			//			UpdatePadding ();
 			InvalidatePadding ();
@@ -125,6 +126,10 @@ namespace XLabs.Forms.Controls
 			if (e.PropertyName == "ItemSize") {
 				var gridView = sender as GridView;
 				_gridCollectionView.ItemSize = gridView.ItemSize.ToSizeF ();
+				//				foreach (GridViewCell nativeCell in _gridCollectionView.VisibleCells) {
+				//					nativeCell.SetNeedsLayout ();
+				//				}
+
 				InvalidatePadding ();
 			}
 			if (e.PropertyName == "IsHorizontal") {
@@ -257,19 +262,10 @@ namespace XLabs.Forms.Controls
 			}
 		}
 
-		/// <summary>
-		/// The _grid view delegate
-		/// </summary>
-		private GridViewDelegate _gridViewDelegate;
-
-		/// <summary>
-		/// Gets the grid view delegate.
-		/// </summary>
-		/// <value>The grid view delegate.</value>
-		private GridViewDelegate GridViewDelegate {
-			get {
-				return _gridViewDelegate ??
-				(_gridViewDelegate = new GridViewDelegate (ItemSelected));
+		void HandleOnScrolled (CGPoint contentOffset)
+		{
+			foreach (GridViewCell nativeCell in _gridCollectionView.VisibleCells) {
+				nativeCell.ViewCell.OnScroll (contentOffset.ToPoint (), new Xamarin.Forms.Point (nativeCell.Frame.X, nativeCell.Frame.Y));
 			}
 		}
 
@@ -335,6 +331,7 @@ namespace XLabs.Forms.Controls
 				InvokeOnMainThread (() => {
 					UpdatePadding ();
 					_gridCollectionView.ReloadData ();
+					_gridCollectionView.Delegate = new GridViewDelegate (ItemSelected, HandleOnScrolled);
 				}
 				);
 			}

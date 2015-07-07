@@ -6,26 +6,21 @@ using System.Collections.Generic;
 
 namespace TwinTechs.Gestures
 {
-	public interface IOnTouchListener
-	{
-		bool OnTouch (View v, MotionEvent e);
-	}
-
 	public class MultiCastOnTouchListener :  Java.Lang.Object, View.IOnTouchListener
 	{
-		private List<IOnTouchListener> Listeners { get; set; }
+		private List<View.IOnTouchListener> Listeners { get; set; }
 
 		public MultiCastOnTouchListener ()
 		{
-			Listeners = new List<IOnTouchListener> ();
+			Listeners = new List<View.IOnTouchListener> ();
 		}
 
-		public void AddListener (IOnTouchListener listener)
+		public void AddListener (View.IOnTouchListener listener)
 		{
 			Listeners.Add (listener);
 		}
 
-		public void RemoveListener (IOnTouchListener listener)
+		public void RemoveListener (View.IOnTouchListener listener)
 		{
 			Listeners.Remove (listener);
 		}

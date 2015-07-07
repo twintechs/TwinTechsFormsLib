@@ -1,6 +1,6 @@
 ﻿using System;
-using TwinTechs.Controls;
 using Xamarin.Forms;
+using TwinTechs.Controls;
 
 namespace TwinTechs.Example
 {

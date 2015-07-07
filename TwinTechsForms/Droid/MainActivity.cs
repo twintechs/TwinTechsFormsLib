@@ -13,6 +13,7 @@ using TwinTechs;
 using Android.Util;
 using System.Runtime.InteropServices;
 using Xamarin.Forms.Platform.Android;
+using TwinTechs.Gestures;
 
 namespace TwinTechsFormsExample.Droid
 {
@@ -28,7 +29,7 @@ namespace TwinTechsFormsExample.Droid
 
 			var metrics = Resources.DisplayMetrics;
 			AppHelper.ScreenSize = new Xamarin.Forms.Size (ConvertPixelsToDp (metrics.WidthPixels), ConvertPixelsToDp (metrics.HeightPixels));
-
+			GestureRecognizerExtensions.Factory = new NativeGestureRecognizerFactory ();
 
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 
@@ -40,6 +41,18 @@ namespace TwinTechsFormsExample.Droid
 			var dp = (int)((pixelValue) / Resources.DisplayMetrics.Density);
 			return dp;
 		}
+		//
+		//		public override bool DispatchTouchEvent (MotionEvent ev)
+		//		{
+		//			//find if there's a view container with a gesture, which is currently on the screen.
+		//			foreach (var recognizer in BaseNativeGestureRecognizer.GroupRecognizers) {
+		//				var nativeRecognizer = recognizer.NativeGestureRecognizer as BaseNativeGestureRecognizer;
+		//				if (nativeRecognizer.ConsumesActivityTouch (ev)) {
+		//					return true;
+		//				}
+		//			}
+		//			return base.DispatchTouchEvent (ev);
+		//		}
 	}
 }
 

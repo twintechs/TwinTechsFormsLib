@@ -10,10 +10,11 @@ namespace TwinTechs.Gestures
 		}
 
 		Dictionary<Type,Type> TypeDictionary = new Dictionary<Type, Type> () {
+			[typeof(TapGestureRecognizer) ] = typeof(NativeTapGestureRecognizer),
 			[typeof(SwipeGestureRecognizer) ] = typeof(NativeSwipeGestureRecognizer),
 			[typeof(PanGestureRecognizer) ] = typeof(NativePanGestureRecognizer),
 			[typeof(PinchGestureRecognizer) ] = typeof(NativePinchGestureRecgonizer),
-			[typeof(LongPressGestureRecognizer) ] = typeof(NativeLongPressGestureRecognizer),
+			[typeof(LongPressGestureRecognizer) ] = typeof(NativeTapGestureRecognizer),
 		};
 
 
