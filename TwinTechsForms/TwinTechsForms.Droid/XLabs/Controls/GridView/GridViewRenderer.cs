@@ -72,6 +72,8 @@ namespace XLabs.Forms.Controls
 		{
 			_recyclerView = new ScrollRecyclerView (Android.App.Application.Context);
 			_recyclerView.Touch += _recyclerView_Touch;
+			var scrollListener = new GridViewScrollListener (Element, _recyclerView);
+			_recyclerView.AddOnScrollListener (scrollListener);
 			if (Element.IsHorizontal) {
 				var linearLayoutManager = new LinearLayoutManager (Context, OrientationHelper.Horizontal, false);
 				_layoutManager = linearLayoutManager;
@@ -306,6 +308,26 @@ namespace XLabs.Forms.Controls
 		public int GetHorizontalScrollOffset ()
 		{
 			return ComputeHorizontalScrollOffset ();
+		}
+	}
+
+	public class GridViewScrollListener : RecyclerView.OnScrollListener
+	{
+		LabsGridView _gridView;
+
+		ScrollRecyclerView _recyclerView;
+
+		public GridViewScrollListener (GridView gridView, ScrollRecyclerView recyclerView)
+		{
+			_gridView = gridView;
+			_recyclerView = recyclerView;
+		}
+
+		public override void OnScrolled (RecyclerView recyclerView, int dx, int dy)
+		{
+			base.OnScrolled (recyclerView, dx, dy);
+			_gridView.RaiseOnScroll (dy, _recyclerView.GetVerticalScrollOffset ());
+			Console.WriteLine (">>>>>>>>> {0},{1}", dy, _recyclerView.GetVerticalScrollOffset ());
 		}
 	}
 }
