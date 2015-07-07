@@ -86,15 +86,21 @@ namespace TwinTechs.Droid.Controls
 		{
 			var cellCache = FastCellCache.Instance.GetCellCache (parent);
 			var fastCell = item as FastCell;
+			
 			Android.Views.View cellCore = convertView;
+			
 			if (cellCore != null && cellCache.IsCached (cellCore)) {
 				cellCache.RecycleCell (cellCore, fastCell);
 			} else {
-				if (!fastCell.IsInitialized) {
-					fastCell.PrepareCell ();
+				var newCell = (FastCell) Activator.CreateInstance (item.GetType ());
+				newCell.BindingContext = item.BindingContext;
+				newCell.Parent = item.Parent;				
+
+				if (!newCell.IsInitialized) {
+					newCell.PrepareCell ();
 				}
-				cellCore = base.GetCellCore (fastCell, convertView, parent, context);
-				cellCache.CacheCell (fastCell, cellCore);
+				cellCore = base.GetCellCore (newCell, convertView, parent, context);
+				cellCache.CacheCell (newCell, cellCore);
 			}
 			return cellCore;
 		}
