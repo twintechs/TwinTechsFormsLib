@@ -100,11 +100,15 @@ namespace TwinTechs.Controls
 			if (reusableCell != null && cellCache.IsCached (nativeCell)) {
 				cellCache.RecycleCell (nativeCell, fastCell);
 			} else {
-				if (!fastCell.IsInitialized) {
-					fastCell.PrepareCell ();
+				var newCell = (FastCell)Activator.CreateInstance (item.GetType ());
+				newCell.BindingContext = item.BindingContext;
+				newCell.Parent = item.Parent;				
+
+				if (!newCell.IsInitialized) {
+					newCell.PrepareCell ();
 				}
-				nativeCell = new NativeCell (cellId, fastCell);
-				cellCache.CacheCell (fastCell, nativeCell);
+				nativeCell = new NativeCell (cellId, newCell);
+				cellCache.CacheCell (newCell, nativeCell);
 			}
 			return nativeCell;
 		}
