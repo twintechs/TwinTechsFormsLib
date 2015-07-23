@@ -38,6 +38,13 @@ namespace TwinTechs.Gestures
 		public View View { get; set; }
 
 		/// <summary>
+		/// Gets or sets a value indicating whether this instance is consuming touches in parallel.
+		/// if true, then this gesture will register with the main touch dispatcher, and intercept touches as they occur at the system level
+		/// </summary>
+		/// <value><c>true</c> if this instance is consuming touches in parallel; otherwise, <c>false</c>.</value>
+		public bool IsConsumingTouchesInParallel { get; set; }
+
+		/// <summary>
 		/// Gets or sets the command.
 		/// </summary>
 		/// <value>The command.</value>

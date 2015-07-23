@@ -84,12 +84,13 @@ namespace TwinTechs.Gestures
 			//I was planning to have an activity level touch listner, which would check with a gesture recognizer registered
 			// with GroupRecognizers, before posting to view
 			// but I ran out of time.
-//			if (Recognizer.View is Xamarin.Forms.Layout<Xamarin.Forms.View>) {
-//				GroupRecognizers.Add (Recognizer);
-//			}
+			if (Recognizer.IsConsumingTouchesInParallel && Recognizer.View is Xamarin.Forms.Layout<Xamarin.Forms.View>) {
+				GroupRecognizers.Add (Recognizer);
+			}
 			if (NativeView == null) {
 				throw new InvalidOperationException ("attempted to initialize a native gesture recognizers for a view before it had created it's renderer");
 			}
+			Console.WriteLine ("splitting " + (NativeView as ViewGroup).MotionEventSplittingEnabled);
 			//check if we already have a multi-cast listener
 			//note - not actually using the multi cast listener right now -it'd be trivial to add it back in
 			//but I've been doign a lot of experiments with simultaneous touches on android and wanted to reduce noise
@@ -227,9 +228,9 @@ namespace TwinTechs.Gestures
 		{
 			//TODO work out if it's our view in here, then update the coordinates
 			var offset = GetOffsetInNativeView (ev.GetX (), ev.GetY ());
-			Console.WriteLine ("location " + ev.GetX () + ", " + ev.GetY () + " offset " + offset);
+//			Console.WriteLine ("location " + ev.GetX () + ", " + ev.GetY () + " offset " + offset);
 			ev.OffsetLocation (-offset.X, -offset.Y);
-			Console.WriteLine ("ofseeted " + ev.GetX () + ", " + ev.GetY ());
+//			Console.WriteLine ("ofseeted " + ev.GetX () + ", " + ev.GetY ());
 			if (ev.GetX () < 0 || ev.GetY () < 0 || ev.GetX () > NativeView.Width || ev.GetY () > NativeView.Height) {
 				return false;
 			} else {

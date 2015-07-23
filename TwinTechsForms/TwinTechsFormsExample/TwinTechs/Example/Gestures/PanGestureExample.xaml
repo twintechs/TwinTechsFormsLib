@@ -66,15 +66,19 @@
 				Text="CHECKING IF BUTTON STILL WORKS INSIDE PANNED BOX"
 				TextColor="White"
 				FontSize="20"
-				Clicked="OnClickedButtonInPanStack"
-			/>
-			<BoxView Color="Lime" WidthRequest="300" HeightRequest="150"/>
+				Clicked="OnClickedButtonInPanStack" />
+
+			<BoxView
+				Color="Lime"
+				WidthRequest="300"
+				HeightRequest="150" />
 
 			<StackLayout.GestureRecognizers>
 
 				<gestures:PanGestureRecognizer
-					x:Name="LabelXamlGesture"
+					x:Name="StackGesture"
 					OnAction="OnAction" />
+<!--					IsConsumingTouchesInParallel="true"-->
 
 			</StackLayout.GestureRecognizers>
 
@@ -92,12 +96,14 @@
 				FontSize="20">
 			</Label>
 
-			<ListView x:Name="MockList"></ListView>
-
+			<ListView
+				x:Name="MockList">
+			</ListView>
 
 			<StackLayout.GestureRecognizers>
 
 				<gestures:PanGestureRecognizer
+					IsConsumingTouchesInParallel="true"
 					OnAction="OnAction" />
 
 			</StackLayout.GestureRecognizers>

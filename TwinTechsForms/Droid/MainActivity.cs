@@ -41,18 +41,20 @@ namespace TwinTechsFormsExample.Droid
 			var dp = (int)((pixelValue) / Resources.DisplayMetrics.Density);
 			return dp;
 		}
-		//
-		//		public override bool DispatchTouchEvent (MotionEvent ev)
-		//		{
-		//			//find if there's a view container with a gesture, which is currently on the screen.
-		//			foreach (var recognizer in BaseNativeGestureRecognizer.GroupRecognizers) {
-		//				var nativeRecognizer = recognizer.NativeGestureRecognizer as BaseNativeGestureRecognizer;
-		//				if (nativeRecognizer.ConsumesActivityTouch (ev)) {
-		//					return true;
-		//				}
-		//			}
-		//			return base.DispatchTouchEvent (ev);
-		//		}
+
+		public override bool DispatchTouchEvent (MotionEvent ev)
+		{
+			var handle = base.DispatchTouchEvent (ev);
+			//find if there's a view container with a gesture, which is currently on the screen.
+			foreach (var recognizer in BaseNativeGestureRecognizer.GroupRecognizers) {
+				var nativeRecognizer = recognizer.NativeGestureRecognizer as BaseNativeGestureRecognizer;
+//				Console.WriteLine ("checkign gesture touch");
+				if (nativeRecognizer.ConsumesActivityTouch (ev)) {
+//					return true;
+				}
+			}
+			return handle;
+		}
 	}
 }
 
