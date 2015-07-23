@@ -3,9 +3,9 @@
 <ContentPage
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	x:Class="TwinTechs.Example.Gestures.TapGestureExample"
+	x:Class="TwinTechs.Example.Gestures.LongPressGestureExample"
 	xmlns:gestures="clr-namespace:TwinTechs.Gestures;assembly=TwinTechsForms"
-	Title="TapGestureExample">
+	Title="LongPress Gesture Example">
 
 	<AbsoluteLayout
 		BackgroundColor="Gray">
@@ -26,7 +26,7 @@
 			AbsoluteLayout.LayoutFlags="None">
 
 			<Label
-				Text="Tap me twice"
+				Text="Long press me"
 				x:Name="Label1"
 				BackgroundColor="Olive"
 				HeightRequest="90"
@@ -35,9 +35,8 @@
 
 				<Label.GestureRecognizers>
 
-					<gestures:TapGestureRecognizer
+					<gestures:LongPressGestureRecognizer
 						x:Name="LabelXamlGesture"
-						NumberOfTapsRequired="2"
 						OnAction="OnAction" />
 
 				</Label.GestureRecognizers>
@@ -62,7 +61,7 @@
 
 			<BoxView.GestureRecognizers>
 
-				<gestures:TapGestureRecognizer
+				<gestures:LongPressGestureRecognizer
 					x:Name="BoxXamlGesture"
 					OnAction="OnAction" />
 

@@ -52,6 +52,7 @@ namespace TwinTechs.Example.Gestures
 
 		void FixGesturesUsingXaml ()
 		{
+			//TODO write converter
 			BoxXamlGesture.Direction = SwipeGestureRecognizerDirection.Up;
 			LabelXamlGesture.Direction = SwipeGestureRecognizerDirection.Down;
 			LabelXamlGesture.NumberOfTouchesRequired = 2;

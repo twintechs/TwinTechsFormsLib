@@ -14,7 +14,7 @@ namespace TwinTechs.Gestures
 			[typeof(SwipeGestureRecognizer) ] = typeof(NativeSwipeGestureRecognizer),
 			[typeof(PanGestureRecognizer) ] = typeof(NativePanGestureRecognizer),
 			[typeof(PinchGestureRecognizer) ] = typeof(NativePinchGestureRecgonizer),
-			[typeof(LongPressGestureRecognizer) ] = typeof(NativeTapGestureRecognizer),
+			[typeof(LongPressGestureRecognizer) ] = typeof(NativeLongPressGestureRecognizer),
 		};
 
 

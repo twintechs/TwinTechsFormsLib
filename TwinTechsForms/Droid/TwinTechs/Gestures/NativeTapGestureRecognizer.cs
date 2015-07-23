@@ -13,12 +13,12 @@ namespace TwinTechs.Gestures
 
 		#region gesture stuff
 
+		System.Timers.Timer _multiTapTimer;
+
+		int _currentTapCount;
+
 		public void OnLongPress (MotionEvent e)
 		{
-//			FirstTouchPoint = new Xamarin.Forms.Point (e.GetX (0), e.GetY (0));
-//			Console.WriteLine ("OnLongPress");
-//			OnGesture ();
-//			base.OnLongPress (e);
 		}
 
 
@@ -51,12 +51,59 @@ namespace TwinTechs.Gestures
 
 		public bool OnSingleTapUp (MotionEvent e)
 		{
-			State = GestureRecognizerState.Recognized;
+			NumberOfTouches = e.PointerCount;
+			if (NumberOfTouches < (this.Recognizer as TapGestureRecognizer).NumberOfTouchesRequired) {
+				return false;
+			}
 			FirstTouchPoint = new Xamarin.Forms.Point (e.GetX (0), e.GetY (0));
-			Console.WriteLine ("On Tap");
+			_currentTapCount++;
+			Console.WriteLine ("Tapped current tap count " + _currentTapCount);
 
-			OnGesture ();
-			return true;
+			var requiredTaps = (this.Recognizer as TapGestureRecognizer).NumberOfTapsRequired;
+			if (requiredTaps == 1) {
+				State = GestureRecognizerState.Recognized;
+				OnGesture ();
+			} else {
+				
+				if (_currentTapCount == requiredTaps) {
+					Console.WriteLine ("did multi tap, required " + requiredTaps);
+					NumberOfTouches = 1;
+					State = GestureRecognizerState.Recognized;
+					OnGesture ();
+					_currentTapCount = 0;
+				} else {
+					ResetMultiTapTimer (true);
+					Console.WriteLine ("incomplete multi tap, " + _currentTapCount + "/" + requiredTaps);
+				}
+			}
+			
+			return false;
+		}
+
+		void _multiTapTimer_Elapsed (object sender, System.Timers.ElapsedEventArgs e)
+		{
+			Console.WriteLine ("didn't finish multi tap gesture");
+			_currentTapCount = 0;
+			ResetMultiTapTimer (false);
+		}
+
+		void ResetMultiTapTimer (bool isActive)
+		{
+			if (_multiTapTimer != null) {
+				_multiTapTimer.Elapsed -= _multiTapTimer_Elapsed;
+				_multiTapTimer.Stop ();
+			}
+			if (isActive) {
+				State = GestureRecognizerState.Possible;
+				_multiTapTimer = new System.Timers.Timer ();
+				_multiTapTimer.Interval = 300;
+				_multiTapTimer.Elapsed += _multiTapTimer_Elapsed;
+				_multiTapTimer.Start ();
+			} else {
+				_currentTapCount = 0;
+				State = GestureRecognizerState.Failed;
+			}
+			
 		}
 	}
 }

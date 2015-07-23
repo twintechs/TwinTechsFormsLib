@@ -21,6 +21,12 @@ namespace TwinTechs.Example.Gestures
 			FixGesturesUsingXaml ();
 			Box2.Layout (new Rectangle (100, 100, 50, 50));
 
+			var items = new List<string> ();
+			for (int i = 0; i < 200; i++) {
+				items.Add ("a test item " + i);
+			}
+			MockList.ItemsSource = items;
+
 		}
 
 		void AddSomeGesturesUsingCode ()
@@ -45,20 +51,13 @@ namespace TwinTechs.Example.Gestures
 			MainLayout.Children.Add (Box3);
 			Box3.Layout (new Rectangle (100, 400, 100, 100));
 //			Box3.AddGestureRecognizer (panRecognizer);
-
-			var panRecognizerWith2Tocuhes = new TwinTechs.Gestures.PanGestureRecognizer ();
-			panRecognizerWith2Tocuhes.OnAction += OnAction;
-			panRecognizerWith2Tocuhes.MinimumNumberOfTouches = 2;
-			Label2.GestureRecognizers.Add (panRecognizerWith2Tocuhes);
-			Label2.ProcessGestureRecognizers ();
-
-
 		}
 
 		void FixGesturesUsingXaml ()
 		{
 			Box.ProcessGestureRecognizers ();
-			Label1.ProcessGestureRecognizers ();
+			MyStack.ProcessGestureRecognizers ();
+			MyStack2.ProcessGestureRecognizers ();
 		}
 
 		Rectangle _startBounds;
@@ -69,7 +68,7 @@ namespace TwinTechs.Example.Gestures
 			var view = recognizer.View;
 			if (state == GestureRecognizerState.Began) {
 				_startBounds = recognizer.View.Bounds;
-				Debug.WriteLine ("START " + _startBounds); 
+//				Debug.WriteLine ("START " + _startBounds); 
 			}
 			if (state == GestureRecognizerState.Changed) {
 				var message = "PAN " + recognizer + "\n";
@@ -81,9 +80,9 @@ namespace TwinTechs.Example.Gestures
 				message += ", vb: " + bounds;
 				_startBounds.X += translation.X;
 				_startBounds.Y += translation.Y;
-				Debug.WriteLine ("MOVE " + bounds);
+//				Debug.WriteLine ("MOVE " + bounds);
 				Device.BeginInvokeOnMainThread (() => {
-					Label2.Layout (bounds);
+					MyStack.Layout (bounds);
 				});
 				OutputLabel.Text = message;
 			}
@@ -92,6 +91,14 @@ namespace TwinTechs.Example.Gestures
 		void OnMoveClicked (object s, EventArgs e)
 		{
 			Box2.Layout (new Rectangle (Box2.X + 50, 100, 50, 50));
+		}
+
+		int _clickedCount = 0;
+
+		void OnClickedButtonInPanStack (object sender, EventArgs ev)
+		{
+			_clickedCount++;
+			OutputLabel.Text = "Clicked button " + _clickedCount;
 		}
 	}
 }

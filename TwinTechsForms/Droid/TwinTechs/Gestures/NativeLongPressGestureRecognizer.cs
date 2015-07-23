@@ -15,10 +15,15 @@ namespace TwinTechs.Gestures
 
 		public void OnLongPress (MotionEvent e)
 		{
-//			FirstTouchPoint = new Xamarin.Forms.Point (e.GetX (0), e.GetY (0));
-//			Console.WriteLine ("OnLongPress");
-//			OnGesture ();
-//			base.OnLongPress (e);
+			NumberOfTouches = e.PointerCount;
+			if (NumberOfTouches < (this.Recognizer as LongPressGestureRecognizer).NumberOfTouchesRequired) {
+				return;
+			}
+			FirstTouchPoint = new Xamarin.Forms.Point (e.GetX (0), e.GetY (0));
+
+			Console.WriteLine ("OnLongPress");
+			State = GestureRecognizerState.Recognized;
+			OnGesture ();
 		}
 
 
@@ -31,27 +36,26 @@ namespace TwinTechs.Gestures
 
 		public bool OnDown (MotionEvent e)
 		{
-			throw new NotImplementedException ();
+			return false;
 		}
 
 		public bool OnFling (MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
 		{
-			throw new NotImplementedException ();
+			return false;
 		}
 
 		public bool OnScroll (MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
 		{
-			throw new NotImplementedException ();
+			return false;
 		}
 
 		public void OnShowPress (MotionEvent e)
 		{
-			throw new NotImplementedException ();
 		}
 
 		public bool OnSingleTapUp (MotionEvent e)
 		{
-			throw new NotImplementedException ();
+			return false;
 		}
 	}
 }

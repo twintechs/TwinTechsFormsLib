@@ -18,7 +18,7 @@ namespace TwinTechs.Gestures
 
 		internal MultiCastOnTouchListener Listener { get; set; }
 
-		BaseGestureRecognizer Recognizer { get; set; }
+		protected BaseGestureRecognizer Recognizer { get; set; }
 
 		protected View NativeView;
 
@@ -81,6 +81,9 @@ namespace TwinTechs.Gestures
 		{
 			NativeView = Recognizer.View.GetNativeView ();
 			//NEED A MECHANISM TO GET TOUCHES FROM A PARENT VIEW OBSCURED BY ANOTHER VIEW
+			//I was planning to have an activity level touch listner, which would check with a gesture recognizer registered
+			// with GroupRecognizers, before posting to view
+			// but I ran out of time.
 //			if (Recognizer.View is Xamarin.Forms.Layout<Xamarin.Forms.View>) {
 //				GroupRecognizers.Add (Recognizer);
 //			}
@@ -88,16 +91,19 @@ namespace TwinTechs.Gestures
 				throw new InvalidOperationException ("attempted to initialize a native gesture recognizers for a view before it had created it's renderer");
 			}
 			//check if we already have a multi-cast listener
+			//note - not actually using the multi cast listener right now -it'd be trivial to add it back in
+			//but I've been doign a lot of experiments with simultaneous touches on android and wanted to reduce noise
 			Listener = GetMultiCastListener ();
 			if (Listener == null) {
 				Listener = new MultiCastOnTouchListener ();
 //				NativeView.SetOnTouchListener (Listener);
 				NativeView.Touch += (sender, e) => {
-					Console.WriteLine ("Touch " + e);
+					OnTouch (NativeView, e.Event);
+//					Console.WriteLine ("Touch " + e.Event);
 					
 				};
 				NativeView.GenericMotion += (object sender, View.GenericMotionEventArgs e) => {
-					Console.WriteLine ("motion " + e);
+					Console.WriteLine ("++motion " + e);
 				};
 			}
 			Listener.AddListener (this);
@@ -213,12 +219,10 @@ namespace TwinTechs.Gestures
 
 		/**
 		 * We have an issue with Android that makes it pretty much impossible to compose gestures. 
-		 * For now, this is all parked on android till I come up with a solution that works.
+		 * Below is my stab at picking up gestures from the activity - the idea is that the main activity woudl pass all touches to this method
+		 * the system will work; but I don't have time to pursue it..
+		 * For now, this is parked.
 		 */
-		/**
-		 * Because we are composing, we have to do a bit of hackery to get touches from the main activity
-		 */
-		#endregion
 		public bool ConsumesActivityTouch (MotionEvent ev)
 		{
 			//TODO work out if it's our view in here, then update the coordinates
@@ -267,6 +271,10 @@ namespace TwinTechs.Gestures
 			} 
 			return offset;
 		}
+
+		#endregion
+
 	}
 }
+
 

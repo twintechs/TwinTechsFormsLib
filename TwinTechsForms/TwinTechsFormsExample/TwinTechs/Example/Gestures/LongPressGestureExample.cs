@@ -8,9 +8,9 @@ using System.Text;
 
 namespace TwinTechs.Example.Gestures
 {
-	public partial class TapGestureExample : ContentPage
+	public partial class LongPressGestureExample : ContentPage
 	{
-		public TapGestureExample ()
+		public LongPressGestureExample ()
 		{
 			InitializeComponent ();
 
@@ -37,14 +37,13 @@ namespace TwinTechs.Example.Gestures
 			//   removeGestureRecognizer
 			// comment on https://bugzilla.xamarin.com/show_bug.cgi?id=30467 to get Xamarin to expand
 			// IGestureRecognizer with some add/remove hooks
-			var tapRecognizer = new TwinTechs.Gestures.TapGestureRecognizer ();
+			var tapRecognizer = new TwinTechs.Gestures.LongPressGestureRecognizer ();
 			tapRecognizer.OnAction += OnAction;
-			tapRecognizer.NumberOfTapsRequired = 5;
 			Box2.AddGestureRecognizer (tapRecognizer);
 
-			var tapRecognizerWith2Tocuhes = new TwinTechs.Gestures.TapGestureRecognizer ();
+			var tapRecognizerWith2Tocuhes = new TwinTechs.Gestures.LongPressGestureRecognizer ();
 			tapRecognizerWith2Tocuhes.OnAction += OnAction;
-			tapRecognizerWith2Tocuhes.NumberOfTouchesRequired = 2;
+//			tapRecognizerWith2Tocuhes.NumberOfTouchesRequired = 2;
 			Label2.GestureRecognizers.Add (tapRecognizerWith2Tocuhes);
 			Label2.ProcessGestureRecognizers ();
 
@@ -59,13 +58,13 @@ namespace TwinTechs.Example.Gestures
 
 		void OnAction (BaseGestureRecognizer recognizer, GestureRecognizerState state)
 		{
-			var tapRecognizer = recognizer as TwinTechs.Gestures.TapGestureRecognizer;
+			var tapRecognizer = recognizer as TwinTechs.Gestures.LongPressGestureRecognizer;
 			var view = recognizer.View;
 			var message = "Tap";
 			message += "TAP " + recognizer + "\n";
 			message += "POS: " + recognizer.LocationInView (view);
 			message += "PARENT POS: " + recognizer.LocationInView (view.ParentView);
-			message += "touches: " + recognizer.NumberOfTouches + ", taps required: " + tapRecognizer.NumberOfTapsRequired;
+			message += "touches: " + recognizer.NumberOfTouches;// + ", taps required: " + tapRecognizer.NumberOfTapsRequired;
 			OutputLabel.Text = message;
 		}
 	}

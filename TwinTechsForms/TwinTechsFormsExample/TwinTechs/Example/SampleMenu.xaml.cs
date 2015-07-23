@@ -92,7 +92,7 @@ namespace TwinTechs.Example
 
 		void OnLongPressGesture (object sender, object args)
 		{
-			Navigation.PushAsync (new GridViewOptions ());
+			Navigation.PushAsync (new LongPressGestureExample ());
 
 		}
 
