@@ -57,6 +57,7 @@ namespace TwinTechs.Example.Gestures
 			var gesture2 = new PanGestureRecognizer ();
 			gesture2.OnAction += Gesture_OnAction;
 			gesture2.IsConsumingTouchesInParallel = true;
+			gesture2.CancelsTouchesInView = true;
 			this.AddGestureRecognizer (gesture2);
 			IsClippedToBounds = true;
 			Pages.CollectionChanged += Pages_CollectionChanged;
