@@ -93,7 +93,7 @@
 					Text="LongPress"
 					Tapped="OnLongPressGesture" />
 
-					<TextCell
+				<TextCell
 					Text="Component Example"
 					Detail="Example of making a page scroller using gestures"
 					Tapped="OnPageScrollerExample" />
@@ -105,6 +105,11 @@
 				<TextCell
 					Text="Pan"
 					Tapped="OnPanGesture" />
+
+				<TextCell
+					Text="Pan2"
+					Detail="Example dragging a control around"
+					Tapped="OnPan2Gesture" />
 
 				<TextCell
 					Text="Pinch"

@@ -12,20 +12,11 @@
 		x:Name="MainLayout"
 		BackgroundColor="Gray">
 
-		<local:SimpleLayout.GestureRecognizers>
-
-			<gestures:PanGestureRecognizer
-				x:Name="BoxXamlGesture"
-				MinimumNumberOfTouches="2"
-				OnAction="OnAction" />
-
-		</local:SimpleLayout.GestureRecognizers>
-
 		<Label
 			x:Name="OutputLabel"
 			TextColor="White"
 			BackgroundColor="Black"
-			FontSize="Large"
+			FontSize="Small"
 			AbsoluteLayout.LayoutBounds="0, 0, 1, 0.2"
 			AbsoluteLayout.LayoutFlags="All" />
 
@@ -37,9 +28,9 @@
 		</BoxView>
 
 		<Button
-			Text="Move "
-			Clicked="OnMoveClicked"
-			AbsoluteLayout.LayoutBounds="0, 300, 100, 80"
+			Text="TOGGLE CANCEL TOUCH "
+			Clicked="OnToggleCancelTouch"
+			AbsoluteLayout.LayoutBounds="0, 50, 50, 80"
 			AbsoluteLayout.LayoutFlags="None" />
 
 		<BoxView
@@ -77,8 +68,8 @@
 
 				<gestures:PanGestureRecognizer
 					x:Name="StackGesture"
+					IsConsumingTouchesInParallel="true"
 					OnAction="OnAction" />
-<!--					IsConsumingTouchesInParallel="true"-->
 
 			</StackLayout.GestureRecognizers>
 
@@ -103,6 +94,7 @@
 			<StackLayout.GestureRecognizers>
 
 				<gestures:PanGestureRecognizer
+					x:Name="ListGesture"
 					IsConsumingTouchesInParallel="true"
 					OnAction="OnAction" />
 

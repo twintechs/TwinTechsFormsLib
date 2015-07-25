@@ -3,7 +3,7 @@ using Android.Views;
 
 namespace TwinTechs.Gestures
 {
-	public class NativeSwipeGestureRecognizer :  BaseNativeGestureRecognizer ,GestureDetector.IOnGestureListener
+	public class NativeSwipeGestureRecognizer :  BaseNativeGestureRecognizer
 	{
 		//TODO introuduce minimum distance
 
@@ -11,23 +11,21 @@ namespace TwinTechs.Gestures
 		{
 		}
 
-		#region gesture stuff
+		#region implemented abstract members of BaseNativeGestureRecognizer
 
-		public void OnLongPress (MotionEvent e)
-		{
+		protected override bool IsMotionEventCancelled {
+			get {
+				return Recognizer.CancelsTouchesInView && (State == GestureRecognizerState.Began || State == GestureRecognizerState.Recognized);
+			}
 		}
 
-		protected override GestureDetector CreateGestureDetector ()
+		protected override bool ProcessMotionEvent (MotionEvent e)
 		{
-			return new GestureDetector (this);
+			//NOT IMPLEMENTED YET
+			return false;
 		}
 
 		#endregion
-
-		public bool OnDown (MotionEvent e)
-		{
-			return false;
-		}
 
 		public bool OnFling (MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
 		{
@@ -36,27 +34,11 @@ namespace TwinTechs.Gestures
 			var expectedDirection = (Recognizer as SwipeGestureRecognizer).Direction;
 			if (direction == expectedDirection) {
 				State = GestureRecognizerState.Recognized;
-				OnGesture ();
+				SendGestureEvent ();
 			} else {
 				State = GestureRecognizerState.Failed;
 				Console.WriteLine ("failed gesture was expecting {0} got {1}", expectedDirection, direction);
 			}
-			return false;
-		}
-
-		public bool OnScroll (MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
-		{
-			return false;
-		}
-
-		public void OnShowPress (MotionEvent e)
-		{
-
-		}
-
-		public bool OnSingleTapUp (MotionEvent e)
-		{
-			
 			return false;
 		}
 

@@ -12,15 +12,18 @@ namespace TwinTechs.Gestures
 		float _scale = 1.0f;
 		float _velocity = 0.0f;
 
+		#region implemented abstract members of BaseNativeGestureRecognizer
 
-		#region gesture stuff
+		protected override bool IsMotionEventCancelled {
+			get {
+				return Recognizer.CancelsTouchesInView && (State == GestureRecognizerState.Began || State == GestureRecognizerState.Recognized);
+			}
+		}
 
-		public bool OnScroll (MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
+		protected override bool ProcessMotionEvent (MotionEvent e)
 		{
-			Console.WriteLine ("Pinch");
-			OnGesture ();
-			//TODO set the scale
-			return true;
+			//NOT IMPLEMENTED
+			return false;
 		}
 
 		#endregion
@@ -33,11 +36,6 @@ namespace TwinTechs.Gestures
 		public float Velocity ()
 		{
 			return _velocity;
-		}
-
-		protected override GestureDetector CreateGestureDetector ()
-		{
-			throw new NotImplementedException ();
 		}
 	}
 }

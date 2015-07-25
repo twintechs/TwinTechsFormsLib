@@ -26,7 +26,7 @@
 			AbsoluteLayout.LayoutFlags="None">
 
 			<Label
-				Text="Long press me"
+				Text="Long press me for 2.5 seconds"
 				x:Name="Label1"
 				BackgroundColor="Olive"
 				HeightRequest="90"
@@ -37,6 +37,7 @@
 
 					<gestures:LongPressGestureRecognizer
 						x:Name="LabelXamlGesture"
+						MinimumPressDuration="2.5"
 						OnAction="OnAction" />
 
 				</Label.GestureRecognizers>

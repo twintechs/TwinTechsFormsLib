@@ -36,6 +36,7 @@
 				<Label.GestureRecognizers>
 
 					<gestures:TapGestureRecognizer
+						IsConsumingTouchesInParallel="true"
 						x:Name="LabelXamlGesture"
 						NumberOfTapsRequired="2"
 						OnAction="OnAction" />
@@ -64,7 +65,9 @@
 
 				<gestures:TapGestureRecognizer
 					x:Name="BoxXamlGesture"
+					IsConsumingTouchesInParallel="true"
 					OnAction="OnAction" />
+
 
 			</BoxView.GestureRecognizers>
 

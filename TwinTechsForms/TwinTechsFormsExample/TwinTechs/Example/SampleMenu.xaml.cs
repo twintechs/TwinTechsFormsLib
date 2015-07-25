@@ -102,6 +102,12 @@ namespace TwinTechs.Example
 
 		}
 
+		void OnPan2Gesture (object sender, object args)
+		{
+			Navigation.PushAsync (new PanGestureExample2 ());
+
+		}
+
 		void OnPinchGesture (object sender, object args)
 		{
 			Navigation.PushAsync (new GridViewOptions ());

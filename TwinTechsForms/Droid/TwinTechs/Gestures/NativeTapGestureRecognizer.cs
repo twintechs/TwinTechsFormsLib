@@ -2,82 +2,96 @@
 using Android.Views;
 using Android.Graphics;
 using TwinTechs.Droid.Extensions;
+using Xamarin.Forms;
 
 namespace TwinTechs.Gestures
 {
-	public class NativeTapGestureRecognizer : BaseNativeGestureRecognizer,GestureDetector.IOnGestureListener
+	public class NativeTapGestureRecognizer : BaseNativeGestureRecognizer
 	{
 		public NativeTapGestureRecognizer ()
 		{
 		}
 
-		#region gesture stuff
-
 		System.Timers.Timer _multiTapTimer;
 
 		int _currentTapCount;
 
-		public void OnLongPress (MotionEvent e)
-		{
+		TapGestureRecognizer TapGestureRecognizer { get { return Recognizer as TapGestureRecognizer; } }
+
+		#region implemented abstract members of BaseNativeGestureRecognizer
+
+		protected override bool IsMotionEventCancelled {
+			get {
+				return Recognizer.CancelsTouchesInView && (State == GestureRecognizerState.Began || State == GestureRecognizerState.Recognized);
+			}
 		}
 
-
-		protected override GestureDetector CreateGestureDetector ()
+		protected override bool ProcessMotionEvent (MotionEvent e)
 		{
-			return new GestureDetector (this);
+			if (e.Action == MotionEventActions.Down && PointerId == -1) {
+				OnDown (e);
+				return true;
+			}
+
+			if (State == GestureRecognizerState.Cancelled || State == GestureRecognizerState.Ended || State == GestureRecognizerState.Failed) {
+				return State == GestureRecognizerState.Began;
+			}
+			if (e.ActionMasked == MotionEventActions.Cancel) {
+				State = GestureRecognizerState.Cancelled;
+				Console.WriteLine ("GESTURE CANCELLED");
+				PointerId = -1;
+				SendGestureUpdate ();
+			} else if (e.ActionMasked == MotionEventActions.Up) {
+				OnUp (e);
+				return true;
+			}
+			return false;
 		}
 
 		#endregion
 
-		public bool OnDown (MotionEvent e)
+		void OnDown (MotionEvent e)
 		{
-			return false;
+			//TODO - should really be possible until all taps/fingers are satisfied.
+			State = (e.PointerCount == TapGestureRecognizer.NumberOfTouchesRequired) ? GestureRecognizerState.Began : GestureRecognizerState.Failed;
+			_currentTapCount = 0;
+			//TODO track all pointers that are down.
+			PointerId = e.GetPointerId (0);
+			FirstTouchPoint = new Xamarin.Forms.Point (e.GetX (0), e.GetY (0));
 		}
 
-		public bool OnFling (MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
-		{
-			return false;
-		}
 
-		public bool OnScroll (MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
-		{
-			return false;
-		}
-
-		public void OnShowPress (MotionEvent e)
-		{
-			
-		}
-
-		public bool OnSingleTapUp (MotionEvent e)
+		void OnUp (MotionEvent e)
 		{
 			NumberOfTouches = e.PointerCount;
 			if (NumberOfTouches < (this.Recognizer as TapGestureRecognizer).NumberOfTouchesRequired) {
-				return false;
+				return;
 			}
-			FirstTouchPoint = new Xamarin.Forms.Point (e.GetX (0), e.GetY (0));
 			_currentTapCount++;
 			Console.WriteLine ("Tapped current tap count " + _currentTapCount);
 
 			var requiredTaps = (this.Recognizer as TapGestureRecognizer).NumberOfTapsRequired;
 			if (requiredTaps == 1) {
 				State = GestureRecognizerState.Recognized;
-				OnGesture ();
+				SendGestureEvent ();
+				PointerId = -1;
 			} else {
 				
 				if (_currentTapCount == requiredTaps) {
 					Console.WriteLine ("did multi tap, required " + requiredTaps);
 					NumberOfTouches = 1;
 					State = GestureRecognizerState.Recognized;
-					OnGesture ();
+					ResetMultiTapTimer (false);
+					SendGestureEvent ();
 					_currentTapCount = 0;
+					PointerId = -1;
 				} else {
 					ResetMultiTapTimer (true);
 					Console.WriteLine ("incomplete multi tap, " + _currentTapCount + "/" + requiredTaps);
 				}
 			}
 			
-			return false;
+			return;
 		}
 
 		void _multiTapTimer_Elapsed (object sender, System.Timers.ElapsedEventArgs e)
@@ -101,7 +115,14 @@ namespace TwinTechs.Gestures
 				_multiTapTimer.Start ();
 			} else {
 				_currentTapCount = 0;
-				State = GestureRecognizerState.Failed;
+				if (State == GestureRecognizerState.Possible) {
+					
+					State = GestureRecognizerState.Failed;
+					PointerId = -1;
+					Device.BeginInvokeOnMainThread (() => {
+						SendGestureUpdate ();
+					});
+				}
 			}
 			
 		}

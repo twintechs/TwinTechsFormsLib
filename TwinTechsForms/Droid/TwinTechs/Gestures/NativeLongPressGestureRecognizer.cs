@@ -2,60 +2,111 @@
 using Android.Views;
 using Android.Graphics;
 using TwinTechs.Droid.Extensions;
+using Xamarin.Forms;
 
 namespace TwinTechs.Gestures
 {
-	public class NativeLongPressGestureRecognizer : BaseNativeGestureRecognizer,GestureDetector.IOnGestureListener
+	public class NativeLongPressGestureRecognizer : BaseNativeGestureRecognizer
 	{
 		public NativeLongPressGestureRecognizer ()
 		{
 		}
 
-		#region gesture stuff
+		LongPressGestureRecognizer LongPressGestureRecognizer { get { return Recognizer as LongPressGestureRecognizer; } }
 
-		public void OnLongPress (MotionEvent e)
-		{
-			NumberOfTouches = e.PointerCount;
-			if (NumberOfTouches < (this.Recognizer as LongPressGestureRecognizer).NumberOfTouchesRequired) {
-				return;
+		System.Timers.Timer _longPressTimer;
+
+		#region implemented abstract members of BaseNativeGestureRecognizer
+
+		protected override bool IsMotionEventCancelled {
+			get {
+				return Recognizer.CancelsTouchesInView && (State == GestureRecognizerState.Began || State == GestureRecognizerState.Recognized);
 			}
-			FirstTouchPoint = new Xamarin.Forms.Point (e.GetX (0), e.GetY (0));
-
-			Console.WriteLine ("OnLongPress");
-			State = GestureRecognizerState.Recognized;
-			OnGesture ();
 		}
 
-
-		protected override GestureDetector CreateGestureDetector ()
+		protected override bool ProcessMotionEvent (MotionEvent e)
 		{
-			return new GestureDetector (this);
+			if (e.ActionMasked == MotionEventActions.Down && PointerId == -1) {
+				OnDown (e);
+				return true;
+			}
+
+			if (State == GestureRecognizerState.Cancelled || State == GestureRecognizerState.Ended || State == GestureRecognizerState.Failed) {
+				return false;
+			}
+			var xMovement = Math.Abs (e.GetX (0) - FirstTouchPoint.X);
+			var yMovement = Math.Abs (e.GetY (0) - FirstTouchPoint.Y);
+			var isMovedBeyondMaxDistance = xMovement > LongPressGestureRecognizer.MaxDistanceTolerance || yMovement > LongPressGestureRecognizer.MaxDistanceTolerance;
+			Console.WriteLine ("isMovedBeyondMaxDistance {0} xd {1} yd{2}", isMovedBeyondMaxDistance, xMovement, yMovement);
+			if (e.ActionMasked == MotionEventActions.Cancel || isMovedBeyondMaxDistance) {
+				State = GestureRecognizerState.Cancelled;
+				Console.WriteLine ("LONG PRESS CANCELLED");
+				PointerId = -1;
+				SendGestureUpdate ();
+			} else if (e.ActionMasked == MotionEventActions.Up) {
+				OnUp (e);
+				return true;
+			}
+			return false;
+
 		}
 
 		#endregion
 
-		public bool OnDown (MotionEvent e)
+
+		void OnDown (MotionEvent e)
 		{
-			return false;
+			//TODO - should really be possible until all taps/fingers are satisfied.
+			if (e.PointerCount == LongPressGestureRecognizer.NumberOfTouchesRequired) {
+				State = GestureRecognizerState.Began;
+				PointerId = e.GetPointerId (0);
+				FirstTouchPoint = new Xamarin.Forms.Point (e.GetX (0), e.GetY (0));
+				ResetLongPressTimer (true);
+			} else {
+				State = GestureRecognizerState.Failed;
+				PointerId = -1;
+				SendGestureUpdate ();
+				
+			}
 		}
 
-		public bool OnFling (MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+		void OnUp (MotionEvent e)
 		{
-			return false;
+			ResetLongPressTimer (false);
+			//TODO track the correct fingers
+			if (State == GestureRecognizerState.Began) {
+				PointerId = -1;
+				State = GestureRecognizerState.Failed;
+				SendGestureUpdate ();
+				Console.WriteLine ("LONG PRESS CANCELLED");
+			}
 		}
 
-		public bool OnScroll (MotionEvent e1, MotionEvent e2, float distanceX, float distanceY)
+		void _longPressTapTimer_Elapsed (object sender, System.Timers.ElapsedEventArgs e)
 		{
-			return false;
+			Console.WriteLine ("LONG PRESS RECOGNIZED");
+			ResetLongPressTimer (false);
+			State = GestureRecognizerState.Recognized;
+			Device.BeginInvokeOnMainThread (() => SendGestureEvent ());
+
+			PointerId = -1;
+			//TODO better improve the trackign of touches
 		}
 
-		public void OnShowPress (MotionEvent e)
+		void ResetLongPressTimer (bool isActive)
 		{
-		}
+			if (_longPressTimer != null) {
+				_longPressTimer.Elapsed -= _longPressTapTimer_Elapsed;
+				_longPressTimer.Stop ();
+			}
+			if (isActive) {
+				State = GestureRecognizerState.Possible;
+				_longPressTimer = new System.Timers.Timer ();
+				_longPressTimer.Interval = LongPressGestureRecognizer.MinimumPressDuration * 1000;
+				_longPressTimer.Elapsed += _longPressTapTimer_Elapsed;
+				_longPressTimer.Start ();
+			}
 
-		public bool OnSingleTapUp (MotionEvent e)
-		{
-			return false;
 		}
 	}
 }

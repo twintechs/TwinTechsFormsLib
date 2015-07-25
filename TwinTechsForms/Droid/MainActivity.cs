@@ -44,15 +44,21 @@ namespace TwinTechsFormsExample.Droid
 
 		public override bool DispatchTouchEvent (MotionEvent ev)
 		{
-			var handle = base.DispatchTouchEvent (ev);
+			var didConsumeTouch = false;
+			var didCancelTouch = false;
 			//find if there's a view container with a gesture, which is currently on the screen.
 			foreach (var recognizer in BaseNativeGestureRecognizer.GroupRecognizers) {
 				var nativeRecognizer = recognizer.NativeGestureRecognizer as BaseNativeGestureRecognizer;
 //				Console.WriteLine ("checkign gesture touch");
 				if (nativeRecognizer.ConsumesActivityTouch (ev)) {
-//					return true;
+					didConsumeTouch |= true;
+					didCancelTouch = didCancelTouch || nativeRecognizer.CancelsActivityTouch (ev);
 				}
 			}
+			if (didCancelTouch) {
+				ev.Action = MotionEventActions.Cancel;
+			}
+			var handle = base.DispatchTouchEvent (ev);
 			return handle;
 		}
 	}

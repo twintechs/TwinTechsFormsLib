@@ -99,6 +99,12 @@ namespace TwinTechs.Gestures
 			OnAction?.Invoke (this, State);
 		}
 
+		//FIXME - make internal
+		public void SendUpdate ()
+		{
+			//TODO
+		}
+
 		/// <summary>
 		/// Sets the underlying gesture recognzier - used by the factory for adding/removal
 		/// </summary>

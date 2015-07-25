@@ -10,7 +10,8 @@ namespace TwinTechs.Example.Gestures
 	{
 		public event LayoutChildrenDelegate OnLayoutChildren;
 
-		public bool IsHandlingLayoutManually = false;
+		public bool IsHandlingLayoutManually { get; set; }= false;
+
 		Rectangle oldSize;
 
 		public SimpleLayout ()

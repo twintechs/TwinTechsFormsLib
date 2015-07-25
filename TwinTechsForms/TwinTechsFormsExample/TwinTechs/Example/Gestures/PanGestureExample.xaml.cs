@@ -69,14 +69,15 @@ namespace TwinTechs.Example.Gestures
 			if (state == GestureRecognizerState.Began) {
 				_startBounds = recognizer.View.Bounds;
 //				Debug.WriteLine ("START " + _startBounds); 
-			}
-			if (state == GestureRecognizerState.Changed) {
+			} else if (state == GestureRecognizerState.Changed) {
 				var message = "PAN " + recognizer + "\n";
-				message += "POS: " + recognizer.LocationInView (view.ParentView);
+				message += "ParentPOS: " + recognizer.LocationInView (view.ParentView);
+				message += "POS: " + recognizer.LocationInView (view);
 				var translation = panRecognizer.GetTranslationInView (view.ParentView);
+				var velocity = panRecognizer.GetVelocityInView (view.ParentView);
 //			message += "touches: " + recognizer.NumberOfTouches + ", velocity: " + velocity;
 				message += ", translation: " + translation;
-				var bounds = new Rectangle (view.X + translation.X, view.Y + translation.Y, view.Width, view.Height);
+				var bounds = new Rectangle (view.X + velocity.X, view.Y + velocity.Y, view.Width, view.Height);
 				message += ", vb: " + bounds;
 				_startBounds.X += translation.X;
 				_startBounds.Y += translation.Y;
@@ -88,9 +89,10 @@ namespace TwinTechs.Example.Gestures
 			}
 		}
 
-		void OnMoveClicked (object s, EventArgs e)
+		void OnToggleCancelTouch (object s, EventArgs e)
 		{
-			Box2.Layout (new Rectangle (Box2.X + 50, 100, 50, 50));
+			ListGesture.CancelsTouchesInView = !ListGesture.CancelsTouchesInView;
+			StackGesture.CancelsTouchesInView = !StackGesture.CancelsTouchesInView;
 		}
 
 		int _clickedCount = 0;
