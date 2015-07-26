@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="TwinTechs.Example.Gestures.MultiGestureExample"
+	xmlns:gestures="clr-namespace:TwinTechs.Gestures;assembly=TwinTechsForms"
+	Title="LongPress Gesture Example">
+
+	<AbsoluteLayout
+		BackgroundColor="Gray">
+
+		<Label
+			x:Name="OutputLabel"
+			AbsoluteLayout.LayoutBounds="0, 0, 1, 120"
+			AbsoluteLayout.LayoutFlags="WidthProportional"
+			TextColor="White"
+			BackgroundColor="Black"
+			FontSize="14" />
+
+			<Label
+				Text="Long press me for 2.5 seconds or tap me"
+				x:Name="Label1"
+				AbsoluteLayout.LayoutBounds="0, 130, 320, 110"
+				AbsoluteLayout.LayoutFlags="None"
+				BackgroundColor="Red"
+				TextColor="White"
+				FontSize="20">
+
+				<Label.GestureRecognizers>
+
+					<gestures:LongPressGestureRecognizer
+						MinimumPressDuration="2.5"
+						OnAction="OnAction" />
+
+					<gestures:TapGestureRecognizer
+						OnAction="OnAction" />
+
+				</Label.GestureRecognizers>
+
+			</Label>
+
+			<Label
+				HeightRequest="90"
+				AbsoluteLayout.LayoutBounds="0, 250, 320, 110"
+				AbsoluteLayout.LayoutFlags="None"
+				Text="SWIPE ME IN ALL 4 DIRECITONS"
+				x:Name="Label2"
+				BackgroundColor="Fuchsia"
+				TextColor="White"
+				FontSize="20" />
+
+	</AbsoluteLayout>
+
+</ContentPage>

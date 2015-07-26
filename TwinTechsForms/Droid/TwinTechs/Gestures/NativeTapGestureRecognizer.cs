@@ -15,6 +15,7 @@ namespace TwinTechs.Gestures
 		System.Timers.Timer _multiTapTimer;
 
 		int _currentTapCount;
+		DateTime _startTime;
 
 		TapGestureRecognizer TapGestureRecognizer { get { return Recognizer as TapGestureRecognizer; } }
 
@@ -26,7 +27,7 @@ namespace TwinTechs.Gestures
 			}
 		}
 
-		protected override bool ProcessMotionEvent (MotionEvent e)
+		internal override bool ProcessMotionEvent (MotionEvent e)
 		{
 			if (e.Action == MotionEventActions.Down && PointerId == -1) {
 				OnDown (e);
@@ -43,7 +44,7 @@ namespace TwinTechs.Gestures
 				SendGestureUpdate ();
 			} else if (e.ActionMasked == MotionEventActions.Up) {
 				OnUp (e);
-				return true;
+				return State != GestureRecognizerState.Failed;
 			}
 			return false;
 		}
@@ -58,12 +59,18 @@ namespace TwinTechs.Gestures
 			//TODO track all pointers that are down.
 			PointerId = e.GetPointerId (0);
 			FirstTouchPoint = new Xamarin.Forms.Point (e.GetX (0), e.GetY (0));
+			_startTime = DateTime.Now;
 		}
 
 
 		void OnUp (MotionEvent e)
 		{
 			NumberOfTouches = e.PointerCount;
+			if ((DateTime.Now - _startTime).Milliseconds > 400) {
+				State = GestureRecognizerState.Failed;
+				SendGestureEvent ();
+				return;
+			}
 			if (NumberOfTouches < (this.Recognizer as TapGestureRecognizer).NumberOfTouchesRequired) {
 				return;
 			}

@@ -19,7 +19,7 @@ namespace TwinTechs.Gestures
 			}
 		}
 
-		protected override bool ProcessMotionEvent (MotionEvent e)
+		internal override bool ProcessMotionEvent (MotionEvent e)
 		{
 			//NOT IMPLEMENTED YET
 			return false;

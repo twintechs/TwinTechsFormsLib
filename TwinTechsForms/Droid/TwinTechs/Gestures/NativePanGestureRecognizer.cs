@@ -61,7 +61,7 @@ namespace TwinTechs.Gestures
 		}
 
 
-		protected override bool ProcessMotionEvent (MotionEvent e)
+		internal override bool ProcessMotionEvent (MotionEvent e)
 		{
 			Console.WriteLine ("pan gesture state - {0} e.action {1}", State, e.Action);
 			if (e.Action == MotionEventActions.Down && PointerId == -1) {

@@ -116,7 +116,7 @@ namespace TwinTechs.Example
 
 		void OnMixedGestures (object sender, object args)
 		{
-			Navigation.PushAsync (new GridViewOptions ());
+			Navigation.PushAsync (new MultiGestureExample ());
 
 		}
 

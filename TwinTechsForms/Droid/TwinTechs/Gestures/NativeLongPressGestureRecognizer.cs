@@ -24,7 +24,7 @@ namespace TwinTechs.Gestures
 			}
 		}
 
-		protected override bool ProcessMotionEvent (MotionEvent e)
+		internal override bool ProcessMotionEvent (MotionEvent e)
 		{
 			if (e.ActionMasked == MotionEventActions.Down && PointerId == -1) {
 				OnDown (e);
