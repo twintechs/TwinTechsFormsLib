@@ -39,7 +39,12 @@ namespace TwinTechs.Ios.Controls
 		{
 			if (page != null) {
 				var pageRenderer = page.GetRenderer ();
-				var viewController = pageRenderer?.ViewController != null ? pageRenderer?.ViewController : page.CreateViewController ();
+				UIViewController viewController = null;
+				if (pageRenderer != null && pageRenderer.ViewController != null) {
+					viewController = pageRenderer.ViewController;
+				} else {
+					viewController = page.CreateViewController ();
+				}
 				var parentPage = Element.GetParentPage ();
 				var renderer = parentPage.GetRenderer ();
 				Control.ParentViewController = renderer.ViewController;
@@ -55,7 +60,7 @@ namespace TwinTechs.Ios.Controls
 		public override void LayoutSubviews ()
 		{
 			base.LayoutSubviews ();
-			var page = Element?.Content;
+			var page = Element != null ? Element.Content : null;
 			if (page != null) {
 				page.Layout (new Rectangle (0, 0, Bounds.Width, Bounds.Height));
 			}
@@ -65,7 +70,7 @@ namespace TwinTechs.Ios.Controls
 		{
 			base.OnElementPropertyChanged (sender, e);
 			if (e.PropertyName == "Content" || e.PropertyName == "Renderer") {
-				Device.BeginInvokeOnMainThread (() => ChangePage (Element?.Content));
+				Device.BeginInvokeOnMainThread (() => ChangePage (Element != null ? Element.Content : null));
 			}
 		}
 

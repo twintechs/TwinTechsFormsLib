@@ -63,7 +63,7 @@ namespace TwinTechs.Ios.Controls
 		{
 			base.LayoutSubviews ();
 			//hack to fix sizing of children when changing orientation
-			if (ViewController?.View.Subviews.Length > 0) {
+			if (ViewController != null && ViewController.View.Subviews.Length > 0) {
 				foreach (UIView view in ViewController.View.Subviews) {
 					view.Frame = Bounds;
 				}

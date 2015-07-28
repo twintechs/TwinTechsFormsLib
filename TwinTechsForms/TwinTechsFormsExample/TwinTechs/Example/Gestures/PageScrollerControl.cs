@@ -19,7 +19,7 @@ namespace TwinTechs.Example.Gestures
 		//			get{ return _contentView.Children; }
 		//		}
 
-		public ObservableCollection<VisualElement> Pages { get; } = new ObservableCollection<VisualElement>();
+		public ObservableCollection<VisualElement> Pages { get; private set; }
 
 		int _currentPageIndex = 0;
 
@@ -50,6 +50,7 @@ namespace TwinTechs.Example.Gestures
 
 		public PageScrollerControl () : base ()
 		{
+			Pages = new ObservableCollection<VisualElement> ();
 			_contentView = new StackLayout () {Orientation = StackOrientation.Horizontal,
 				Spacing = 0
 			};

@@ -22,12 +22,13 @@ namespace TwinTechs.Gestures
 	public class SwipeGestureRecognizer : BaseGestureRecognizer
 	{
 
-		public int NumberOfTouchesRequired { get; set; } = 1;
+		public int NumberOfTouchesRequired { get; set; }
 
 		public SwipeGestureRecognizerDirection Direction { get; set; }
 
 		public SwipeGestureRecognizer ()
 		{
+			NumberOfTouchesRequired = 1;
 		}
 
 	}

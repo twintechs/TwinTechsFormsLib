@@ -14,9 +14,9 @@ namespace TwinTechs.Gestures
 
 	public class PanGestureRecognizer : BaseGestureRecognizer
 	{
-		public int MinimumNumberOfTouches { get; set; } = 1;
+		public int MinimumNumberOfTouches { get; set; }
 
-		public int MaximumNumberOfTouches { get; set; } = 1;
+		public int MaximumNumberOfTouches { get; set; }
 
 
 		public Point GetVelocityInView (VisualElement view)
@@ -36,6 +36,8 @@ namespace TwinTechs.Gestures
 
 		public PanGestureRecognizer ()
 		{
+			MinimumNumberOfTouches = 1;
+			MaximumNumberOfTouches = 1;
 		}
 	}
 }

@@ -371,17 +371,23 @@ namespace XLabs.Forms.Controls
 		public void RaiseOnScroll (float delta, float currentY)
 		{
 			var args = new ControlScrollEventArgs (delta, currentY);
-			OnScroll?.Invoke (this, args);
+			if (OnScroll != null) {
+				OnScroll (this, args);
+			}
 		}
 
 		public void RaiseOnStartScroll ()
 		{
-			OnStartScroll?.Invoke (this, new EventArgs ());
+			if (OnStartScroll != null) {
+				OnStartScroll (this, new EventArgs ());
+			}
 		}
 
 		public void RaiseOnStopScroll ()
 		{
-			OnStopScroll?.Invoke (this, new EventArgs ());
+			if (OnStopScroll != null) {
+				OnStopScroll (this, new EventArgs ());
+			}
 		}
 
 		#endregion

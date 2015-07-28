@@ -11,11 +11,11 @@ namespace TwinTechs.Gestures
 		#region INativeGestureRecognizerFactory implementation
 
 		Dictionary<Type,Type> TypeDictionary = new Dictionary<Type, Type> () {
-			[typeof(SwipeGestureRecognizer) ] = typeof(NativeSwipeGestureRecognizer),
-			[typeof(PanGestureRecognizer) ] = typeof(NativePanGestureRecognizer),
-			[typeof(PinchGestureRecognizer) ] = typeof(NativePinchGestureRecognizer),
-			[typeof(LongPressGestureRecognizer) ] = typeof(NativeLongPressGestureRecgonizer),
-			[typeof(TwinTechs.Gestures.TapGestureRecognizer) ] = typeof(NativeTapPressGestureRecgonizer),
+			{ typeof(SwipeGestureRecognizer) , typeof(NativeSwipeGestureRecognizer) },
+			{ typeof(PanGestureRecognizer) , typeof(NativePanGestureRecognizer) },
+			{ typeof(PinchGestureRecognizer) , typeof(NativePinchGestureRecognizer) },
+			{ typeof(LongPressGestureRecognizer) , typeof(NativeLongPressGestureRecgonizer) },
+			{ typeof(TwinTechs.Gestures.TapGestureRecognizer) , typeof(NativeTapPressGestureRecgonizer) },
 		};
 
 		public void AddNativeGestureRecognizerToRecgonizer<T> (T recognizer) where T : BaseGestureRecognizer

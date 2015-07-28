@@ -207,7 +207,7 @@ namespace XLabs.Forms.Controls
 		private void ElementPropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 			if (e.PropertyName == "ItemsSource") {
-				var itemsSource = Element?.ItemsSource as INotifyCollectionChanged;
+				var itemsSource = Element != null ? Element.ItemsSource as INotifyCollectionChanged : null;
 				if (itemsSource != null) {
 					itemsSource.CollectionChanged -= DataCollectionChanged;
 				}
@@ -222,7 +222,7 @@ namespace XLabs.Forms.Controls
 		private void ElementPropertyChanging (object sender, PropertyChangingEventArgs e)
 		{
 			if (e.PropertyName == "ItemsSource") {
-				var itemsSource = Element?.ItemsSource as INotifyCollectionChanged;
+				var itemsSource = Element != null ? Element.ItemsSource as INotifyCollectionChanged : null;
 				if (itemsSource != null) {
 					itemsSource.CollectionChanged += DataCollectionChanged;
 				}
@@ -271,7 +271,7 @@ namespace XLabs.Forms.Controls
 
 		void ScrollToInitialIndex ()
 		{
-			if (_initialIndex.HasValue && _gridCollectionView?.DataSource != null) {
+			if (_initialIndex.HasValue && _gridCollectionView != null && _gridCollectionView.DataSource != null) {
 				ScrollToItemWithIndex (_initialIndex.Value, false);
 				_initialIndex = null;
 			}
@@ -365,9 +365,9 @@ namespace XLabs.Forms.Controls
 				return;
 			}
 			var numberOfItems = ((ICollection)Element.ItemsSource).Count;
-			UICollectionViewFlowLayout flowLayout = (UICollectionViewFlowLayout)_gridCollectionView?.CollectionViewLayout;
+			UICollectionViewFlowLayout flowLayout = _gridCollectionView != null ? (UICollectionViewFlowLayout)_gridCollectionView.CollectionViewLayout : null;
 			if (flowLayout != null) {
-				if (Element.IsContentCentered && numberOfItems > 0 && _gridCollectionView?.Frame.Width > 0) {
+				if (Element.IsContentCentered && numberOfItems > 0 && _gridCollectionView.Frame.Width > 0) {
 					flowLayout.InvalidateLayout ();
 					float width = (float)_gridCollectionView.Frame.Width - 2;
 					int numberOfItemsThatFit = (int)Math.Floor (width / (_gridCollectionView.ItemSize.Width));
@@ -378,14 +378,14 @@ namespace XLabs.Forms.Controls
 					var remainingWidth = width - (numberOfItemsToUse * (_gridCollectionView.ItemSize.Width));
 					var padding = remainingWidth / (numberOfItemsToUse + 1);
 
-					Console.WriteLine (" width {0} items using {1} padding {2} iwdith {3} ", _gridCollectionView?.Frame.Width, numberOfItemsToUse, padding, _gridCollectionView.ItemSize.Width);
+					Console.WriteLine (" width {0} items using {1} padding {2} iwdith {3} ", _gridCollectionView.Frame.Width, numberOfItemsToUse, padding, _gridCollectionView.ItemSize.Width);
 					_gridCollectionView.ColumnSpacing = padding;
 					_edgeInsets = new UIEdgeInsets ((float)Element.ContentPaddingTop, (float)padding, (float)Element.ContentPaddingBottom, (float)padding);
 					Console.WriteLine ("final insets " + _edgeInsets);
 					_gridCollectionView.ContentInset = _edgeInsets;
 				}
 				flowLayout.SectionInset = new UIEdgeInsets ((float)Element.SectionPaddingTop, 0, (float)Element.SectionPaddingBottom, 0);
-				if (_gridCollectionView?.Frame.Width > 0 && _gridCollectionView?.Frame.Height > 0) {
+				if (_gridCollectionView.Frame.Width > 0 && _gridCollectionView.Frame.Height > 0) {
 					IsPaddingInvalid = false;
 				}
 			}
