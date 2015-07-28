@@ -21,37 +21,30 @@ namespace TwinTechs.Gestures
 
 		#region implemented abstract members of BaseNativeGestureRecognizer
 
-		protected override bool IsMotionEventCancelled {
-			get {
-				return Recognizer.CancelsTouchesInView && (State == GestureRecognizerState.Began || State == GestureRecognizerState.Recognized);
-			}
-		}
-
-		internal override bool ProcessMotionEvent (MotionEvent e)
+		internal override void ProcessMotionEvent (GestureMotionEvent e)
 		{
 			if (e.Action == MotionEventActions.Down && PointerId == -1) {
 				OnDown (e);
-				return true;
-			}
-
-			if (State == GestureRecognizerState.Cancelled || State == GestureRecognizerState.Ended || State == GestureRecognizerState.Failed) {
-				return State == GestureRecognizerState.Began;
-			}
-			if (e.ActionMasked == MotionEventActions.Cancel) {
+				if (State == GestureRecognizerState.Began) {
+					e.IsConsumed = true;
+					e.IsCancelled = true;
+				}
+			} else if (State == GestureRecognizerState.Cancelled || State == GestureRecognizerState.Ended || State == GestureRecognizerState.Failed) {
+				return;
+			} else if (e.ActionMasked == MotionEventActions.Cancel) {
 				State = GestureRecognizerState.Cancelled;
 				Console.WriteLine ("GESTURE CANCELLED");
 				PointerId = -1;
 				SendGestureUpdate ();
 			} else if (e.ActionMasked == MotionEventActions.Up) {
 				OnUp (e);
-				return State != GestureRecognizerState.Failed;
+				e.IsConsumed = State != GestureRecognizerState.Failed;
 			}
-			return false;
 		}
 
 		#endregion
 
-		void OnDown (MotionEvent e)
+		void OnDown (GestureMotionEvent e)
 		{
 			//TODO - should really be possible until all taps/fingers are satisfied.
 			State = (e.PointerCount == TapGestureRecognizer.NumberOfTouchesRequired) ? GestureRecognizerState.Began : GestureRecognizerState.Failed;
@@ -63,7 +56,7 @@ namespace TwinTechs.Gestures
 		}
 
 
-		void OnUp (MotionEvent e)
+		void OnUp (GestureMotionEvent e)
 		{
 			NumberOfTouches = e.PointerCount;
 			if ((DateTime.Now - _startTime).Milliseconds > 400) {

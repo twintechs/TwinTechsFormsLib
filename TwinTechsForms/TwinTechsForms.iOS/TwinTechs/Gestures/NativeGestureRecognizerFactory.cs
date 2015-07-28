@@ -18,13 +18,28 @@ namespace TwinTechs.Gestures
 			[typeof(TwinTechs.Gestures.TapGestureRecognizer) ] = typeof(NativeTapPressGestureRecgonizer),
 		};
 
-		public INativeGestureRecognizer CreateNativeGestureRecognizer<T> (T recognizer)
+		public void AddNativeGestureRecognizerToRecgonizer<T> (T recognizer) where T : BaseGestureRecognizer
 		{
 			if (!TypeDictionary.ContainsKey (recognizer.GetType ())) {
 				throw new ArgumentException ("no native gesture recognizer for this forms recognizer " + recognizer.GetType ());
 			}
 			var targetType = TypeDictionary [recognizer.GetType ()];
-			return (INativeGestureRecognizer)Activator.CreateInstance (targetType);
+			var nativeRecongizer = (IBaseNativeGestureRecognizerImpl)Activator.CreateInstance (targetType);
+			nativeRecongizer.AddRecognizer (recognizer);
+			recognizer.NativeGestureRecognizer = nativeRecongizer;
+		}
+
+
+		public INativeGestureRecognizerCoordinator CreateNativeGestureCoordinator ()
+		{
+			throw new InvalidOperationException ("iOS does not use the native gesture coordinator.");
+		}
+
+
+		public void RemoveRecognizer (BaseGestureRecognizer recognizer)
+		{
+			var nativeRecognizer = recognizer.NativeGestureRecognizer as IBaseNativeGestureRecognizerImpl;
+			nativeRecognizer.RemoveRecognizer (recognizer);
 		}
 
 		#endregion

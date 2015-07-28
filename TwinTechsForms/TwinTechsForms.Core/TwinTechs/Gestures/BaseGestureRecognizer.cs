@@ -27,11 +27,11 @@ namespace TwinTechs.Gestures
 	/// <summary>
 	/// Base gesture recognizer.
 	/// </summary>
-	public class BaseGestureRecognizer : IGestureRecognizer
+	public class BaseGestureRecognizer : BindableObject, IGestureRecognizer
 	{
 		#region IGestureRecognizer impl
 
-		public event PropertyChangedEventHandler PropertyChanged;
+		//		public event PropertyChangedEventHandler PropertyChanged;
 
 		#endregion
 
@@ -68,9 +68,7 @@ namespace TwinTechs.Gestures
 		/// <value>The tapped callback.</value>
 		public event Action<BaseGestureRecognizer, GestureRecognizerState> OnAction;
 
-		public bool DelaysTouchesEnded { get; set; } = false;
-
-		public bool DelaysTouchesBegan { get; set; } = false;
+		public bool DelaysTouches { get; set; } = false;
 
 		public bool CancelsTouchesInView { get; set; } = false;
 
@@ -92,15 +90,13 @@ namespace TwinTechs.Gestures
 
 		#region internal impl
 
-		//FIXME - make internal
-		public void SendAction ()
+		internal void SendAction ()
 		{
 			Command?.Execute (CommandParameter);
 			OnAction?.Invoke (this, State);
 		}
 
-		//FIXME - make internal
-		public void SendUpdate ()
+		internal void SendUpdate ()
 		{
 			//TODO
 		}
@@ -109,8 +105,13 @@ namespace TwinTechs.Gestures
 		/// Sets the underlying gesture recognzier - used by the factory for adding/removal
 		/// </summary>
 		/// <value>The native gesture recognizer.</value>
-		public INativeGestureRecognizer NativeGestureRecognizer { get; set; }
+		internal INativeGestureRecognizer NativeGestureRecognizer { get; set; }
 
+		/// <summary>
+		/// Gets or sets the native gesture coordinator. - ONLY USED BY ANDROID
+		/// </summary>
+		/// <value>The native gesture coordinator.</value>
+		internal INativeGestureRecognizerCoordinator NativeGestureCoordinator { get; set; }
 
 		#endregion
 

@@ -4,8 +4,8 @@
 	xmlns:cells="clr-namespace:TwinTechs.Example.FastCells.Cells;assembly=TwinTechsFormsExample"
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	x:Class="TwinTechs.Example.FastCells.FastSimpleCellLots"
-	Title="FastCell UNEVEN ROW HEIGHT">
+	x:Class="TwinTechs.Example.FastCells.FastSimpleCellUnevenHeight"
+	Title="FastCell Lots of Cells">
 
 	<ContentPage.Content>
 
@@ -13,8 +13,10 @@
 			x:Name="MediaItemsListView"
 			BackgroundColor="Transparent"
 			ItemSelected="OnItemSelected"
-			SeparatorVisibility="None"
+			SeparatorVisibility="Default"
+			SeparatorColor="Black"
 			HasUnevenRows="true"
+			RowHeight="60"
 			>
 
 			<ListView.ItemTemplate>

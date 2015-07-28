@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using TwinTechs.Gestures.Converters;
 
 
 [assembly: 
@@ -25,10 +26,8 @@ namespace TwinTechs.Gestures
 
 		public SwipeGestureRecognizerDirection Direction { get; set; }
 
-
 		public SwipeGestureRecognizer ()
 		{
-			
 		}
 
 	}

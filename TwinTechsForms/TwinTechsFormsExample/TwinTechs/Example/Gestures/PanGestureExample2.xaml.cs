@@ -76,6 +76,7 @@ namespace TwinTechs.Example.Gestures
 				message += "CHANGED ";
 				message += ", translation: " + translation;
 				message += ", velocity: " + velocity;
+				message += "PARENT POS: " + recgonizer.LocationInView (MainLayout);
 				if (recgonizer.View == Box) {
 					message += ", MOVING VIEW";
 					_boxBounds.X += translation.X;
@@ -93,6 +94,14 @@ namespace TwinTechs.Example.Gestures
 				break;
 			}
 			OutputLabel.Text = message;
+		}
+
+		protected override void OnDisappearing ()
+		{
+			base.OnDisappearing ();
+
+			Box.RemoveAllGestureRecognizers ();
+			Box2.RemoveAllGestureRecognizers ();
 		}
 	}
 }

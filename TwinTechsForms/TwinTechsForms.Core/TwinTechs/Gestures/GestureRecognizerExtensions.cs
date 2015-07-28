@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace TwinTechs.Gestures
 {
@@ -25,9 +26,7 @@ namespace TwinTechs.Gestures
 
 				recognizer.View = view;
 
-				var nativeRecongizer = Factory.CreateNativeGestureRecognizer (recognizer);
-				nativeRecongizer.AddRecognizer (recognizer);
-				recognizer.NativeGestureRecognizer = nativeRecongizer;
+				Factory.AddNativeGestureRecognizerToRecgonizer (recognizer);
 			}
 		}
 
@@ -46,9 +45,16 @@ namespace TwinTechs.Gestures
 		/// </summary>
 		/// <param name="view">View.</param>
 		/// <param name="recognizer">Recognizer.</param>
-		public static void RemoveGestureRecognizer (this View view, BaseGestureRecognizer recognizer)
+		public static void RemoveAllGestureRecognizers (this View view)
 		{
-//			recognizer.NativeGestureRecognizer?.RemoveRecognizer (recognizer);
+			var recognizersToRemove = view.GestureRecognizers.ToArray ();
+			foreach (var recognizer in recognizersToRemove) {
+				var baseGesture = recognizer as BaseGestureRecognizer;
+				if (baseGesture != null) {
+					Factory.RemoveRecognizer (baseGesture);
+					view.GestureRecognizers.Remove (recognizer);
+				}
+			}
 		}
 	}
 }

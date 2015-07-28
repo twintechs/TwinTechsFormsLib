@@ -4,6 +4,8 @@ namespace TwinTechs.Example
 {
 	public class MediaItem
 	{
+		public int Index { get; set; }
+
 		public string Name { get; set; }
 
 		public string ImageName { get; set; }
@@ -25,6 +27,7 @@ namespace TwinTechs.Example
 			this.ImagePath = imagePath;
 			this.ThumbnailImagePath = thumbnailImagePath;
 			this.Name = counter.ToString ();
+			this.Index = counter;
 		}
 
 		public override string ToString ()

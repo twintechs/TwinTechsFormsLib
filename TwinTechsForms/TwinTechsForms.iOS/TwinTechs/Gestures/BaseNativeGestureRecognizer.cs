@@ -6,7 +6,15 @@ using TwinTechs.Ios.Extensions;
 
 namespace TwinTechs.Gestures
 {
-	public abstract class BaseNativeGestureRecognizer<NativeGestureType,T> : INativeGestureRecognizer
+	public interface IBaseNativeGestureRecognizerImpl : INativeGestureRecognizer
+	{
+		void AddRecognizer (BaseGestureRecognizer recognizer);
+
+		void RemoveRecognizer (BaseGestureRecognizer recognizer);
+	}
+
+
+	public abstract class BaseNativeGestureRecognizer<NativeGestureType,T> : INativeGestureRecognizer,IBaseNativeGestureRecognizerImpl
 		where NativeGestureType : UIGestureRecognizer 
 		where T : BaseGestureRecognizer
 	{
@@ -20,11 +28,11 @@ namespace TwinTechs.Gestures
 		protected virtual void ConfigureNativeGestureRecognizer ()
 		{
 			NativeRecognizer.CancelsTouchesInView = Recognizer.CancelsTouchesInView;
-			NativeRecognizer.DelaysTouchesBegan = Recognizer.DelaysTouchesBegan;
-			NativeRecognizer.DelaysTouchesEnded = Recognizer.DelaysTouchesEnded;
+			NativeRecognizer.DelaysTouchesBegan = Recognizer.DelaysTouches;
+//			NativeRecognizer.DelaysTouchesEnded = Recognizer.DelaysTouchesEnded;
 		}
 
-		#region INativeGestureRecognizer impl
+		#region IBaseNativeGestureRecognizerImpl impl
 
 		public void AddRecognizer (BaseGestureRecognizer recognizer)
 		{
@@ -72,12 +80,18 @@ namespace TwinTechs.Gestures
 			NativeView.AddGestureRecognizer (NativeRecognizer);
 		}
 
+
 		public void RemoveRecognizer (BaseGestureRecognizer recognizer)
 		{
 			NativeView.RemoveGestureRecognizer (NativeRecognizer);
 			NativeRecognizer = null;
 			recognizer.NativeGestureRecognizer = null;
 		}
+
+		#endregion
+
+		#region IBaseNativeGestureRecognizer impl
+
 
 		public GestureRecognizerState State {
 			get { 

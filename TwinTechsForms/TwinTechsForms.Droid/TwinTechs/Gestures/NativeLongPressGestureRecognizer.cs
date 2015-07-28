@@ -18,43 +18,36 @@ namespace TwinTechs.Gestures
 
 		#region implemented abstract members of BaseNativeGestureRecognizer
 
-		protected override bool IsMotionEventCancelled {
-			get {
-				return Recognizer.CancelsTouchesInView && (State == GestureRecognizerState.Began || State == GestureRecognizerState.Recognized);
-			}
-		}
-
-		internal override bool ProcessMotionEvent (MotionEvent e)
+		internal override void ProcessMotionEvent (GestureMotionEvent e)
 		{
 			if (e.ActionMasked == MotionEventActions.Down && PointerId == -1) {
 				OnDown (e);
-				return true;
+				e.IsConsumed = true;
+				e.IsCancelled = Recognizer.CancelsTouchesInView;
+			} else if (State == GestureRecognizerState.Cancelled || State == GestureRecognizerState.Ended || State == GestureRecognizerState.Failed) {
+				return;
+			} else {
+				
+				var xMovement = Math.Abs (e.GetX (0) - FirstTouchPoint.X);
+				var yMovement = Math.Abs (e.GetY (0) - FirstTouchPoint.Y);
+				var isMovedBeyondMaxDistance = xMovement > LongPressGestureRecognizer.MaxDistanceTolerance || yMovement > LongPressGestureRecognizer.MaxDistanceTolerance;
+				Console.WriteLine ("isMovedBeyondMaxDistance {0} xd {1} yd{2}", isMovedBeyondMaxDistance, xMovement, yMovement);
+				if (e.ActionMasked == MotionEventActions.Cancel || isMovedBeyondMaxDistance) {
+					State = GestureRecognizerState.Cancelled;
+					Console.WriteLine ("LONG PRESS CANCELLED");
+					PointerId = -1;
+					SendGestureUpdate ();
+				} else if (e.ActionMasked == MotionEventActions.Up) {
+					OnUp (e);
+					e.IsConsumed = true;
+				}
 			}
-
-			if (State == GestureRecognizerState.Cancelled || State == GestureRecognizerState.Ended || State == GestureRecognizerState.Failed) {
-				return false;
-			}
-			var xMovement = Math.Abs (e.GetX (0) - FirstTouchPoint.X);
-			var yMovement = Math.Abs (e.GetY (0) - FirstTouchPoint.Y);
-			var isMovedBeyondMaxDistance = xMovement > LongPressGestureRecognizer.MaxDistanceTolerance || yMovement > LongPressGestureRecognizer.MaxDistanceTolerance;
-			Console.WriteLine ("isMovedBeyondMaxDistance {0} xd {1} yd{2}", isMovedBeyondMaxDistance, xMovement, yMovement);
-			if (e.ActionMasked == MotionEventActions.Cancel || isMovedBeyondMaxDistance) {
-				State = GestureRecognizerState.Cancelled;
-				Console.WriteLine ("LONG PRESS CANCELLED");
-				PointerId = -1;
-				SendGestureUpdate ();
-			} else if (e.ActionMasked == MotionEventActions.Up) {
-				OnUp (e);
-				return true;
-			}
-			return false;
-
 		}
 
 		#endregion
 
 
-		void OnDown (MotionEvent e)
+		void OnDown (GestureMotionEvent e)
 		{
 			//TODO - should really be possible until all taps/fingers are satisfied.
 			if (e.PointerCount == LongPressGestureRecognizer.NumberOfTouchesRequired) {
@@ -70,7 +63,7 @@ namespace TwinTechs.Gestures
 			}
 		}
 
-		void OnUp (MotionEvent e)
+		void OnUp (GestureMotionEvent e)
 		{
 			ResetLongPressTimer (false);
 			//TODO track the correct fingers

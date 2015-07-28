@@ -36,6 +36,11 @@
 					Tapped="OnFastSimpleCell" />
 
 				<TextCell
+					Text="Verifying FastCell Uneven Heights"
+					Detail="Shows how fastcells work with different heights"
+					Tapped="OnFastCellUnevenHeights" />
+
+				<TextCell
 					Text="Verifying FastCell Order"
 					Detail="There was a bug with recylcing, this proves it's fixed"
 					Tapped="OnFastSimpleCellLots" />

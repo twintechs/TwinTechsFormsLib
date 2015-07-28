@@ -14,6 +14,8 @@ using Android.Util;
 using System.Runtime.InteropServices;
 using Xamarin.Forms.Platform.Android;
 using TwinTechs.Gestures;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace TwinTechsFormsExample.Droid
 {
@@ -21,10 +23,12 @@ namespace TwinTechsFormsExample.Droid
 	public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity
 	{
 		DummyIncludes _dummyIncludes;
+		GestureTouchDispatcher _gestureTouchDispatcher;
 
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
+			_gestureTouchDispatcher = new GestureTouchDispatcher (this);
 			AppHelper.FastCellCache = FastCellCache.Instance;
 
 			var metrics = Resources.DisplayMetrics;
@@ -44,22 +48,10 @@ namespace TwinTechsFormsExample.Droid
 
 		public override bool DispatchTouchEvent (MotionEvent ev)
 		{
-			var didConsumeTouch = false;
-			var didCancelTouch = false;
-			//find if there's a view container with a gesture, which is currently on the screen.
-			foreach (var recognizer in BaseNativeGestureRecognizer.GroupRecognizers) {
-				var nativeRecognizer = recognizer.NativeGestureRecognizer as BaseNativeGestureRecognizer;
-//				Console.WriteLine ("checkign gesture touch");
-				if (nativeRecognizer.ConsumesActivityTouch (ev)) {
-					didConsumeTouch |= true;
-					didCancelTouch = didCancelTouch || nativeRecognizer.CancelsActivityTouch (ev);
-				}
-			}
-			if (didCancelTouch) {
-				ev.Action = MotionEventActions.Cancel;
-			}
-			var handle = base.DispatchTouchEvent (ev);
-			return handle;
+			var didConsumeTouch = _gestureTouchDispatcher.DispatchTouchEvent (ev);
+			//TODO - consider not passing this along?
+			var isHandledByNormalRouting = base.DispatchTouchEvent (ev);
+			return isHandledByNormalRouting;
 		}
 	}
 }

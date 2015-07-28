@@ -50,7 +50,7 @@ namespace TwinTechs.Example.Gestures
 
 			MainLayout.Children.Add (Box3);
 			Box3.Layout (new Rectangle (100, 400, 100, 100));
-//			Box3.AddGestureRecognizer (panRecognizer);
+			Box3.AddGestureRecognizer (panRecognizer);
 		}
 
 		void FixGesturesUsingXaml ()
@@ -102,6 +102,16 @@ namespace TwinTechs.Example.Gestures
 			_clickedCount++;
 			OutputLabel.Text = "Clicked button " + _clickedCount;
 		}
+
+		protected override void OnDisappearing ()
+		{
+			base.OnDisappearing ();
+
+			Box.RemoveAllGestureRecognizers ();
+			MyStack.RemoveAllGestureRecognizers ();
+			MyStack2.RemoveAllGestureRecognizers ();
+		}
+
 	}
 }
 

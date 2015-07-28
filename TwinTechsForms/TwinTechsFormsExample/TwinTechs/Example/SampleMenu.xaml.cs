@@ -33,6 +33,11 @@ namespace TwinTechs.Example
 			Navigation.PushAsync (new FastSimpleCellLots ());
 		}
 
+		void OnFastCellUnevenHeights (object sender, object args)
+		{
+			Navigation.PushAsync (new FastSimpleCellUnevenHeight ());
+		}
+
 		void OnDefaultComplexCell (object sender, object args)
 		{
 			Navigation.PushAsync (new ViewCellComplexSamplePage ());
