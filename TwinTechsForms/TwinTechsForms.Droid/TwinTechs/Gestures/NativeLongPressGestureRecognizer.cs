@@ -95,6 +95,7 @@ namespace TwinTechs.Gestures
 			if (isActive) {
 				State = GestureRecognizerState.Possible;
 				_longPressTimer = new System.Timers.Timer ();
+				_longPressTimer.AutoReset = false;
 				_longPressTimer.Interval = LongPressGestureRecognizer.MinimumPressDuration * 1000;
 				_longPressTimer.Elapsed += _longPressTapTimer_Elapsed;
 				_longPressTimer.Start ();

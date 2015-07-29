@@ -3,6 +3,7 @@ using Android.Views;
 using Android.Graphics;
 using TwinTechs.Droid.Extensions;
 using Xamarin.Forms;
+using System.Runtime.InteropServices;
 
 namespace TwinTechs.Gestures
 {
@@ -23,6 +24,7 @@ namespace TwinTechs.Gestures
 
 		internal override void ProcessMotionEvent (GestureMotionEvent e)
 		{
+			_startTime = DateTime.Now;
 			if (e.Action == MotionEventActions.Down && PointerId == -1) {
 				OnDown (e);
 				if (State == GestureRecognizerState.Began) {
@@ -38,7 +40,9 @@ namespace TwinTechs.Gestures
 				SendGestureUpdate ();
 			} else if (e.ActionMasked == MotionEventActions.Up) {
 				OnUp (e);
-				e.IsConsumed = State != GestureRecognizerState.Failed;
+				if (PointerId == e.GetPointerId (0)) {
+					e.IsConsumed = State != GestureRecognizerState.Failed;
+				}
 			}
 		}
 
@@ -52,19 +56,21 @@ namespace TwinTechs.Gestures
 			//TODO track all pointers that are down.
 			PointerId = e.GetPointerId (0);
 			FirstTouchPoint = new Xamarin.Forms.Point (e.GetX (0), e.GetY (0));
-			_startTime = DateTime.Now;
+			if (TapGestureRecognizer.NumberOfTapsRequired > 1 && State == GestureRecognizerState.Began) {
+				ResetMultiTapTimer (true);
+			}
 		}
 
 
 		void OnUp (GestureMotionEvent e)
 		{
 			NumberOfTouches = e.PointerCount;
-			if ((DateTime.Now - _startTime).Milliseconds > 400) {
+			var tooLongBetweenTouches = (DateTime.Now - _startTime).Milliseconds > 400;
+			var wrongNumberOfTouches = NumberOfTouches < (this.Recognizer as TapGestureRecognizer).NumberOfTouchesRequired;
+			if (tooLongBetweenTouches || wrongNumberOfTouches) {
 				State = GestureRecognizerState.Failed;
 				SendGestureEvent ();
-				return;
-			}
-			if (NumberOfTouches < (this.Recognizer as TapGestureRecognizer).NumberOfTouchesRequired) {
+				PointerId = -1;
 				return;
 			}
 			_currentTapCount++;
@@ -86,7 +92,6 @@ namespace TwinTechs.Gestures
 					_currentTapCount = 0;
 					PointerId = -1;
 				} else {
-					ResetMultiTapTimer (true);
 					Console.WriteLine ("incomplete multi tap, " + _currentTapCount + "/" + requiredTaps);
 				}
 			}
@@ -105,12 +110,15 @@ namespace TwinTechs.Gestures
 		{
 			if (_multiTapTimer != null) {
 				_multiTapTimer.Elapsed -= _multiTapTimer_Elapsed;
+				_multiTapTimer.AutoReset = true;
 				_multiTapTimer.Stop ();
+				_multiTapTimer.Close ();
 			}
 			if (isActive) {
 				State = GestureRecognizerState.Possible;
 				_multiTapTimer = new System.Timers.Timer ();
-				_multiTapTimer.Interval = 300;
+				_multiTapTimer.Interval = 300 * (TapGestureRecognizer.NumberOfTapsRequired - 1);
+				_multiTapTimer.AutoReset = false;
 				_multiTapTimer.Elapsed += _multiTapTimer_Elapsed;
 				_multiTapTimer.Start ();
 			} else {

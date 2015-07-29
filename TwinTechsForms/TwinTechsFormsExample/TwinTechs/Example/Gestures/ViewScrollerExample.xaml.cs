@@ -16,6 +16,12 @@ namespace TwinTechs.Example.Gestures
 		{
 			PagerView.CurrentPageIndex++;
 		}
+
+		protected override void OnDisappearing ()
+		{
+			base.OnDisappearing ();
+			PagerView.Cleanup ();
+		}
 	}
 }
 

@@ -90,7 +90,8 @@
 		</StackLayout>
 
 		<Button
-			Text="TOGGLE CANCEL TOUCH "
+			x:Name="ToggleCancelTouchButton"
+			Text="Cancel touches : false"
 			BackgroundColor="Black"
 			TextColor="White"
 			Clicked="OnToggleCancelTouch"

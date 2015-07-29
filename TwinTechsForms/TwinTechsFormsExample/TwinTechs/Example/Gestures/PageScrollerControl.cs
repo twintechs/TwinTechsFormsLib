@@ -136,6 +136,11 @@ namespace TwinTechs.Example.Gestures
 		{
 			return new Rectangle (origin, 0, _contentWidth, Height);
 		}
+
+		public void Cleanup ()
+		{
+			this.RemoveAllGestureRecognizers ();
+		}
 	}
 
 }

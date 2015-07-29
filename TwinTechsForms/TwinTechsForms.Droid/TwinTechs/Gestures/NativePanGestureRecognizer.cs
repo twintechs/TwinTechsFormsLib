@@ -61,13 +61,15 @@ namespace TwinTechs.Gestures
 			} else if (State == GestureRecognizerState.Cancelled || State == GestureRecognizerState.Ended || State == GestureRecognizerState.Failed) {
 				return;
 			} else {
-				if (e.Action == MotionEventActions.Up && PointerId == e.GetPointerId (0)) {
-					OnUp (e);
-					e.IsConsumed = true;
-				} else if (e.Action == MotionEventActions.Move && PointerId == e.GetPointerId (0)) {
-					OnMove (e);
-					e.IsConsumed = State != GestureRecognizerState.Cancelled && State != GestureRecognizerState.Ended && State != GestureRecognizerState.Failed;
-				}
+				if (PointerId == e.GetPointerId (0)) {
+					if (e.ActionMasked == MotionEventActions.Cancel || e.ActionMasked == MotionEventActions.Up) {
+						OnUp (e);
+						e.IsConsumed = true;
+					} else if (e.Action == MotionEventActions.Move) {
+						OnMove (e);
+						e.IsConsumed = State != GestureRecognizerState.Cancelled && State != GestureRecognizerState.Ended && State != GestureRecognizerState.Failed;
+					}
+				} 
 			}
 		}
 
@@ -77,21 +79,15 @@ namespace TwinTechs.Gestures
 
 		void OnUp (GestureMotionEvent e)
 		{
-			
-			var notifyGestureEnded = false;
-			if (e.ActionMasked == MotionEventActions.Cancel) {
+			if (State == GestureRecognizerState.Possible) {
+				State = GestureRecognizerState.Failed;
+			} else if (e.ActionMasked == MotionEventActions.Cancel) {
 				State = GestureRecognizerState.Cancelled;
-				Console.WriteLine ("GESTURE CANCELLED");
-				notifyGestureEnded = true;
 			} else if (e.ActionMasked == MotionEventActions.Up) {
 				State = GestureRecognizerState.Ended;
-				Console.WriteLine ("GESTURE ENDED");
-				notifyGestureEnded = true;
 			}
-			if (notifyGestureEnded) {
-				PointerId = -1;
-				SendGestureEvent ();
-			}
+			PointerId = -1;
+			SendGestureEvent ();
 			//TODO think about if we're going to capture this
 			return;
 		}

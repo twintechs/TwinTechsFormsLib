@@ -59,35 +59,26 @@ namespace TwinTechs.Example.Gestures
 			MyStack2.ProcessGestureRecognizers ();
 		}
 
-		Rectangle _startBounds;
-
 		void OnAction (BaseGestureRecognizer recognizer, GestureRecognizerState state)
 		{
 			var panRecognizer = recognizer as PanGestureRecognizer;
 			var view = recognizer.View;
-			if (state == GestureRecognizerState.Began) {
-				_startBounds = recognizer.View.Bounds;
-//				Debug.WriteLine ("START " + _startBounds); 
-			} else if (state == GestureRecognizerState.Changed) {
-				var message = "PAN " + recognizer + "\n";
-				message += "ParentPOS: " + recognizer.LocationInView (view.ParentView);
-				message += "POS: " + recognizer.LocationInView (view);
-				var translation = panRecognizer.GetTranslationInView (view.ParentView);
-				var velocity = panRecognizer.GetVelocityInView (view.ParentView);
-//			message += "touches: " + recognizer.NumberOfTouches + ", velocity: " + velocity;
-				message += ", translation: " + translation;
-				var bounds = new Rectangle (view.X + velocity.X, view.Y + velocity.Y, view.Width, view.Height);
-				message += ", vb: " + bounds;
-				_startBounds.X += translation.X;
-				_startBounds.Y += translation.Y;
-				OutputLabel.Text = message;
-			}
+			var message = "PAN " + recognizer + "\n";
+			message += "ParentPOS: " + recognizer.LocationInView (view.ParentView);
+			message += "POS: " + recognizer.LocationInView (view);
+			var translation = panRecognizer.GetTranslationInView (view.ParentView);
+			var velocity = panRecognizer.GetVelocityInView (view.ParentView);
+			message += ", translation: " + translation;
+			var bounds = new Rectangle (view.X + velocity.X, view.Y + velocity.Y, view.Width, view.Height);
+			message += ", vb: " + bounds;
+			OutputLabel.Text = message;
 		}
 
 		void OnToggleCancelTouch (object s, EventArgs e)
 		{
 			ListGesture.CancelsTouchesInView = !ListGesture.CancelsTouchesInView;
 			StackGesture.CancelsTouchesInView = !StackGesture.CancelsTouchesInView;
+			ToggleCancelTouchButton.Text = StackGesture.CancelsTouchesInView ? "Cancel touches : true" : "Cancel touches : false";
 		}
 
 		int _clickedCount = 0;
