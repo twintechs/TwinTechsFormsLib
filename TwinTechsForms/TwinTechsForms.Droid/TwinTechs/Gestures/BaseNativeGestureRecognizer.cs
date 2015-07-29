@@ -40,21 +40,21 @@ namespace TwinTechs.Gestures
 		/// </summary>
 		/// <param name="e">E.</param>
 		internal abstract void ProcessMotionEvent (GestureMotionEvent e);
-		//
-		//		Dictionary<MotionEventActions, GestureRecognizerState> _stateMap = new Dictionary<MotionEventActions, GestureRecognizerState> () {
-		//			[ MotionEventActions.Cancel ]	= GestureRecognizerState.Cancelled,
-		//			[ MotionEventActions.Move ]	= GestureRecognizerState.Changed,
-		//		};
-		//
-		//
-		//		protected virtual void UpdateState (MotionEvent e)
-		//		{
-		//			if (_stateMap.ContainsKey (e.Action)) {
-		//				State = _stateMap [e.Action];
-		//			}
-		//		}
 
-		//TODO work out how to do this..
+		#region INativeGestureRecognizer impl
+
+
+		public void UpdateCancelsTouchesInView (bool _cancelsTouchesInView)
+		{
+			//does nothign on android
+		}
+
+		public void UpdateDelaysTouches (bool _delaysTouches)
+		{
+			//does nothign on android
+		}
+
+
 		public virtual Xamarin.Forms.Point LocationInView (Xamarin.Forms.VisualElement view)
 		{
 			return GetLocationInAncestorView (FirstTouchPoint, view);
@@ -102,20 +102,8 @@ namespace TwinTechs.Gestures
 			return returnPoint;
 		}
 
-		//
-		//		protected Xamarin.Forms.Point GetLocationInAncestorView (Xamarin.Forms.Point location, Xamarin.Forms.VisualElement view)
-		//		{
-		//			var targetViewRenderer = view.GetRenderer ();
-		//			var targetView = targetViewRenderer.ViewGroup;
-		//			var parent = NativeView;
-		//			var returnPoint = location;
-		//			while (parent != null && parent != targetView) {
-		//				returnPoint.X += parent.Left;
-		//				returnPoint.Y += parent.Top;
-		//				parent = NativeView.Parent as View;
-		//			}
-		//			return returnPoint;
-		//		}
+		#endregion
+
 
 		#region handling gestures at a group level
 
@@ -168,6 +156,7 @@ namespace TwinTechs.Gestures
 			}
 //			Console.WriteLine ("location " + ev.GetX () + ", " + ev.GetY () + " offset " + offset);
 		}
+
 
 		#endregion
 

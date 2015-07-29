@@ -12,6 +12,10 @@ namespace TwinTechs.Gestures
 		Point LocationOfTouch (int touchIndex, VisualElement view);
 
 		GestureRecognizerState State { get; }
+
+		void UpdateCancelsTouchesInView (bool _cancelsTouchesInView);
+
+		void UpdateDelaysTouches (bool _delaysTouches);
 	}
 }
 

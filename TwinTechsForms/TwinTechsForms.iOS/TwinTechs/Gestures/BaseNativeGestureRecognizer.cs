@@ -18,7 +18,7 @@ namespace TwinTechs.Gestures
 		where NativeGestureType : UIGestureRecognizer 
 		where T : BaseGestureRecognizer
 	{
-
+		
 		protected T Recognizer { get; set; }
 
 		protected UIView NativeView { get; set; }
@@ -91,6 +91,17 @@ namespace TwinTechs.Gestures
 		#endregion
 
 		#region IBaseNativeGestureRecognizer impl
+
+
+		public void UpdateCancelsTouchesInView (bool _cancelsTouchesInView)
+		{
+			NativeRecognizer.CancelsTouchesInView = _cancelsTouchesInView;
+		}
+
+		public void UpdateDelaysTouches (bool _delaysTouches)
+		{
+			NativeRecognizer.DelaysTouchesBegan = _delaysTouches;
+		}
 
 
 		public GestureRecognizerState State {

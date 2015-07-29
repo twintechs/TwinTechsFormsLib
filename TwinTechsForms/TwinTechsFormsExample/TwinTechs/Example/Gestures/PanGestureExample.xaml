@@ -21,19 +21,6 @@
 			AbsoluteLayout.LayoutFlags="All" />
 
 		<BoxView
-			x:Name="Box"
-			Color="Blue"
-			AbsoluteLayout.LayoutBounds="200, 200, 120, 120"
-			AbsoluteLayout.LayoutFlags="None">
-		</BoxView>
-
-		<Button
-			Text="TOGGLE CANCEL TOUCH "
-			Clicked="OnToggleCancelTouch"
-			AbsoluteLayout.LayoutBounds="0, 50, 50, 80"
-			AbsoluteLayout.LayoutFlags="None" />
-
-		<BoxView
 			Color="Green"
 			x:Name="Box2"
 			AbsoluteLayout.LayoutBounds="50, 400, 200, 80"
@@ -50,13 +37,13 @@
 				Text="PAN INSIDE THE RED BOX"
 				x:Name="Label1"
 				TextColor="White"
-				FontSize="20">
+				FontSize="18">
 			</Label>
 
 			<Button
 				Text="CHECKING IF BUTTON STILL WORKS INSIDE PANNED BOX"
 				TextColor="White"
-				FontSize="20"
+				FontSize="18"
 				Clicked="OnClickedButtonInPanStack" />
 
 			<BoxView
@@ -84,7 +71,7 @@
 			<Label
 				Text="LIST TEST"
 				TextColor="White"
-				FontSize="20">
+				FontSize="18">
 			</Label>
 
 			<ListView
@@ -101,6 +88,14 @@
 			</StackLayout.GestureRecognizers>
 
 		</StackLayout>
+
+		<Button
+			Text="TOGGLE CANCEL TOUCH "
+			BackgroundColor="Black"
+			TextColor="White"
+			Clicked="OnToggleCancelTouch"
+			AbsoluteLayout.LayoutBounds="0, 1, 1, 0.1"
+			AbsoluteLayout.LayoutFlags="All" />
 
 	</AbsoluteLayout>
 

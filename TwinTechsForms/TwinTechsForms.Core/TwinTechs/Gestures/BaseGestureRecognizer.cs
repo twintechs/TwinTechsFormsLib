@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 	InternalsVisibleTo ("TwinTechsLib.Droid")]
 namespace TwinTechs.Gestures
 {
+	//	public delegate GestureShouldRecognize
 	public enum GestureRecognizerState
 	{
 		Possible,
@@ -69,10 +70,29 @@ namespace TwinTechs.Gestures
 		public event Action<BaseGestureRecognizer, GestureRecognizerState> OnAction;
 
 
-		public bool DelaysTouches { get; set; }
+		bool _delaysTouches;
 
-		public bool CancelsTouchesInView { get; set; }
+		public bool DelaysTouches {
+			get{ return _delaysTouches; }
+			set {
+				_delaysTouches = value;
+				if (NativeGestureRecognizer != null) {
+					NativeGestureRecognizer.UpdateDelaysTouches (_delaysTouches);
+				}
+			}
+		}
 
+		bool _cancelsTouchesInView;
+
+		public bool CancelsTouchesInView {
+			get{ return _cancelsTouchesInView; }
+			set {
+				_cancelsTouchesInView = value;
+				if (NativeGestureRecognizer != null) {
+					NativeGestureRecognizer.UpdateCancelsTouchesInView (_cancelsTouchesInView);
+				}
+			}
+		}
 
 		public GestureRecognizerState State { get { return NativeGestureRecognizer == null ? GestureRecognizerState.Failed : NativeGestureRecognizer.State; } }
 

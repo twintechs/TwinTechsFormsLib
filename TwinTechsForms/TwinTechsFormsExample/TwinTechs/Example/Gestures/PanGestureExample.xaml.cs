@@ -55,7 +55,6 @@ namespace TwinTechs.Example.Gestures
 
 		void FixGesturesUsingXaml ()
 		{
-			Box.ProcessGestureRecognizers ();
 			MyStack.ProcessGestureRecognizers ();
 			MyStack2.ProcessGestureRecognizers ();
 		}
@@ -81,10 +80,6 @@ namespace TwinTechs.Example.Gestures
 				message += ", vb: " + bounds;
 				_startBounds.X += translation.X;
 				_startBounds.Y += translation.Y;
-//				Debug.WriteLine ("MOVE " + bounds);
-				Device.BeginInvokeOnMainThread (() => {
-					MyStack.Layout (bounds);
-				});
 				OutputLabel.Text = message;
 			}
 		}
@@ -107,7 +102,6 @@ namespace TwinTechs.Example.Gestures
 		{
 			base.OnDisappearing ();
 
-			Box.RemoveAllGestureRecognizers ();
 			MyStack.RemoveAllGestureRecognizers ();
 			MyStack2.RemoveAllGestureRecognizers ();
 		}
