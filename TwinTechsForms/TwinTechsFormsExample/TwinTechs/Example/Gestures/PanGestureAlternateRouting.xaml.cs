@@ -7,15 +7,11 @@ using System.Diagnostics;
 
 namespace TwinTechs.Example.Gestures
 {
-	public partial class PanGestureExample : ContentPage
+	public partial class PanGestureAlternateRouting : ContentPage
 	{
-		PanGestureRecognizer _stackPanRecognizer;
-
-		public PanGestureExample ()
+		public PanGestureAlternateRouting ()
 		{
 			InitializeComponent ();
-
-			AddSomeGesturesUsingCode ();
 
 			//the following is only necessary until Xamarin give us a hook into this I've filed a bugzilla about it
 			//https://bugzilla.xamarin.com/show_bug.cgi?id=30467
@@ -28,25 +24,6 @@ namespace TwinTechs.Example.Gestures
 				items.Add ("a test item " + i);
 			}
 			MockList.ItemsSource = items;
-
-		}
-
-		void AddSomeGesturesUsingCode ()
-		{
-			//2 options: 
-			//1. use the standard xamarin api. e.g. view.GestureRecgonizers.Add(yourgesturerecognizer)
-			//    and then call view.ProcessGestures();
-			//    this has the benefit that when Xamarin add an api hook we can remove the view.ProcessGestures call and
-			//    it will all be good.
-			//2. use the extension method view.AddGestureRecognizer(yourgesturerecognizer)
-			//    this is easier to use; and does everything under the hood; but it's a bit more obtrusive.
-			//   in all cases, until Xamarin do more to open up the api, you must use the view extension method 
-			//   removeGestureRecognizer
-			// comment on https://bugzilla.xamarin.com/show_bug.cgi?id=30467 to get Xamarin to expand
-			// IGestureRecognizer with some add/remove hooks
-			_stackPanRecognizer = new PanGestureRecognizer ();
-			_stackPanRecognizer.OnAction += OnAction;
-			MyStack.AddGestureRecognizer (_stackPanRecognizer);
 		}
 
 		void FixGesturesUsingXaml ()
@@ -73,8 +50,8 @@ namespace TwinTechs.Example.Gestures
 		void OnToggleCancelTouch (object s, EventArgs e)
 		{
 			ListGesture.CancelsTouchesInView = !ListGesture.CancelsTouchesInView;
-			_stackPanRecognizer.CancelsTouchesInView = !_stackPanRecognizer.CancelsTouchesInView;
-			ToggleCancelTouchButton.Text = _stackPanRecognizer.CancelsTouchesInView ? "Cancel touches : true" : "Cancel touches : false";
+			StackGesture.CancelsTouchesInView = !StackGesture.CancelsTouchesInView;
+			ToggleCancelTouchButton.Text = StackGesture.CancelsTouchesInView ? "Cancel touches : true" : "Cancel touches : false";
 		}
 
 		int _clickedCount = 0;

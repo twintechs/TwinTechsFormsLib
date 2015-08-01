@@ -20,14 +20,22 @@ namespace TwinTechs.Gestures
 
 		Xamarin.Forms.Point _currentPoint;
 		Xamarin.Forms.Point _rawTranslation;
-		Xamarin.Forms.Point _startPoint;
+		Xamarin.Forms.Point _viewStartLocation;
 
-		#region implemented abstract members of BaseNativeGestureRecognizer
+		//TODO gesture property?
+		const double _minimumMoveDistance = 5;
+
+		#region implemented abstract members of BaseNativeGestureRecognizer and overrides
+
+		protected override bool IsGestureCotinuous {
+			get {
+				return true;
+			}
+		}
 
 		public Xamarin.Forms.Point GetVelocityInView (Xamarin.Forms.VisualElement view)
 		{
 			return _velocity;
-//			throw new NotImplementedException ("need to write velocity");
 		}
 
 		public Xamarin.Forms.Point GetTranslationInView (Xamarin.Forms.VisualElement view)
@@ -43,12 +51,8 @@ namespace TwinTechs.Gestures
 
 		public void SetTranslationInView (Xamarin.Forms.Point translation, Xamarin.Forms.VisualElement view)
 		{
-			//NOT really supported in Android
-			//TODO take account of view
+			//Experimental android support
 			_rawTranslation = translation;
-//			_currentPoint = translation;
-//			_previousPoint = translation;
-//			_startPoint = translation;
 		}
 
 
@@ -57,17 +61,17 @@ namespace TwinTechs.Gestures
 //			Console.WriteLine ("pan gesture state - {0} e.action {1}", State, e.Action);
 			if (e.Action == MotionEventActions.Down && PointerId == -1) {
 				OnDown (e);
-				e.IsConsumed = State == GestureRecognizerState.Possible;
+//				e.IsConsumed = State == GestureRecognizerState.Possible;
 			} else if (State == GestureRecognizerState.Cancelled || State == GestureRecognizerState.Ended || State == GestureRecognizerState.Failed) {
 				return;
 			} else {
 				if (PointerId == e.GetPointerId (0)) {
 					if (e.ActionMasked == MotionEventActions.Cancel || e.ActionMasked == MotionEventActions.Up) {
 						OnUp (e);
-						e.IsConsumed = true;
+//						e.IsConsumed = true;
 					} else if (e.Action == MotionEventActions.Move) {
 						OnMove (e);
-						e.IsConsumed = State != GestureRecognizerState.Cancelled && State != GestureRecognizerState.Ended && State != GestureRecognizerState.Failed;
+//						e.IsConsumed = State != GestureRecognizerState.Cancelled && State != GestureRecognizerState.Ended && State != GestureRecognizerState.Failed;
 					}
 				} 
 			}
@@ -86,10 +90,6 @@ namespace TwinTechs.Gestures
 			} else if (e.ActionMasked == MotionEventActions.Up) {
 				State = GestureRecognizerState.Ended;
 			}
-			PointerId = -1;
-			SendGestureEvent ();
-			//TODO think about if we're going to capture this
-			return;
 		}
 
 
@@ -100,46 +100,53 @@ namespace TwinTechs.Gestures
 			PointerId = e.GetPointerId (0);
 			Console.WriteLine ("PAN POSSIBLE");
 			_rawTranslation = new Xamarin.Forms.Point (0, 0);
-			_currentPoint = new Xamarin.Forms.Point (e.GetX (), e.GetY ());
-			_currentScreenPoint = new Xamarin.Forms.Point (e.GetX (), e.GetY ());
-			_previousPoint = new Xamarin.Forms.Point (e.GetX (), e.GetY ());
-			_startPoint = new Xamarin.Forms.Point (NativeView.GetX (), NativeView.GetY ());
-			SendGestureEvent ();
+			FirstTouchPoint = new Xamarin.Forms.Point (e.GetX (), e.GetY ()); 
+			_currentPoint = FirstTouchPoint;
+			_currentScreenPoint = FirstTouchPoint;
+			_previousPoint = FirstTouchPoint;
+			_viewStartLocation = new Xamarin.Forms.Point (NativeView.GetX (), NativeView.GetY ());
 		}
 
-		bool OnMove (GestureMotionEvent e)
+		void OnMove (GestureMotionEvent e)
 		{
 			_currentScreenPoint = new Xamarin.Forms.Point (e.GetX (), e.GetY ());
 			var currentViewPosition = new Xamarin.Forms.Point (NativeView.GetX (), NativeView.GetY ());
-			var currentViewOffset = new Xamarin.Forms.Point (currentViewPosition.X - _startPoint.X, currentViewPosition.Y - _startPoint.Y);
+			var currentViewOffset = new Xamarin.Forms.Point (currentViewPosition.X - _viewStartLocation.X, currentViewPosition.Y - _viewStartLocation.Y);
 			var eventPoint = new Xamarin.Forms.Point (e.GetX () + currentViewOffset.X, e.GetY () + currentViewOffset.Y);
 			var coords = new MotionEvent.PointerCoords ();
 			e.GetPointerCoords (0, coords);
 //			Console.WriteLine ("CHANGED e2{0} coords {1},{2}", eventPoint, coords.X, coords.Y);
-			if (State != GestureRecognizerState.Possible && State != GestureRecognizerState.Began && State != GestureRecognizerState.Changed) {
-				return false;
-			} 
-			if (e.GetX () < 0 || e.GetX () > NativeView.Width || e.GetY () < 0 || e.GetY () > NativeView.Height) {
-				Console.WriteLine ("Gesture exited from view - it's over");
-				State = GestureRecognizerState.Ended;
-				PointerId = -1;
-				SendGestureEvent ();
-				return false;
-			}
+			if (State == GestureRecognizerState.Possible || State == GestureRecognizerState.Began || State == GestureRecognizerState.Changed) {
 
-			if (e.ActionMasked == MotionEventActions.Move || e.ActionMasked == MotionEventActions.Scroll) {
-				_previousPoint = _currentPoint;
-				_currentPoint = eventPoint;
-				_velocity = new Xamarin.Forms.Point (_currentPoint.X - _previousPoint.X, _currentPoint.Y - _previousPoint.Y);
-				//TODO proper conversion
-				_rawTranslation.X += _velocity.X / 2;
-				_rawTranslation.Y += _velocity.Y / 2;
-				State = State == GestureRecognizerState.Possible ? GestureRecognizerState.Began : GestureRecognizerState.Changed;
-				e.IsCancelled = Recognizer.CancelsTouchesInView;
-			}
+				if (e.GetX () < 0 || e.GetX () > NativeView.Width || e.GetY () < 0 || e.GetY () > NativeView.Height) {
+					Console.WriteLine ("Gesture exited from view - it's over");
+					State = GestureRecognizerState.Ended;
+				} else if (e.ActionMasked == MotionEventActions.Move || e.ActionMasked == MotionEventActions.Scroll) {
+					_previousPoint = _currentPoint;
+					_currentPoint = eventPoint;
+					_velocity = new Xamarin.Forms.Point (_currentPoint.X - _previousPoint.X, _currentPoint.Y - _previousPoint.Y);
+
+					if (State == GestureRecognizerState.Possible && !IsMoveSufficientToBegin (_currentScreenPoint)) {
+						Console.WriteLine ("not moved enough - not starting");
+						return;
+					}
+					//TODO proper conversion
+					_rawTranslation.X += _velocity.X / 2;
+					_rawTranslation.Y += _velocity.Y / 2;
+					State = State == GestureRecognizerState.Possible ? GestureRecognizerState.Began : GestureRecognizerState.Changed;
+					e.IsCancelled = Recognizer.CancelsTouchesInView;
+				}
 //			Console.WriteLine ("State " + State + "_previousPoint " + _previousPoint + " _currentPoint" + _currentPoint);
-			SendGestureEvent ();
-			return false;
+			}
+		}
+
+		bool IsMoveSufficientToBegin (Xamarin.Forms.Point newLocation)
+		{
+			var absoluteDistance = new Xamarin.Forms.Point (FirstTouchPoint.X - newLocation.X, FirstTouchPoint.Y - newLocation.Y);
+			var absX = Math.Abs (absoluteDistance.X);
+			var absY = Math.Abs (absoluteDistance.Y);
+			var biggestValue = Math.Max (absX, absY);
+			return biggestValue >= _minimumMoveDistance;
 		}
 
 	}

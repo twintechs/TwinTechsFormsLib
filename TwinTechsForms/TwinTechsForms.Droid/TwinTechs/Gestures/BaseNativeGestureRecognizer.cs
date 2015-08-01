@@ -2,11 +2,8 @@
 using Android.Views;
 using Android.Graphics;
 using TwinTechs.Droid.Extensions;
-using Java.Lang;
-using System.Collections.Generic;
-using System.Threading;
-using Android.Text.Method;
-using Android.Gestures;
+using System.Linq;
+using Xamarin.Forms;
 
 namespace TwinTechs.Gestures
 {
@@ -19,7 +16,7 @@ namespace TwinTechs.Gestures
 
 		internal BaseGestureRecognizer Recognizer { get; set; }
 
-		internal View NativeView { get; set; }
+		internal Android.Views.View NativeView { get; set; }
 
 		/// <summary>
 		/// Gets or sets the first touch point - for convenience
@@ -33,6 +30,15 @@ namespace TwinTechs.Gestures
 		/// </summary>
 		/// <value>The second touch point.</value>
 		protected Xamarin.Forms.Point SecondTouchPoint { get; set; }
+
+
+		/// <summary>
+		/// Gets or sets a value indicating whether this gesture is continuous or a one off.
+		/// If it's not continuous, then only recognized events get dispatched
+		/// override if your gesture does things like pinch/pan/zoom/rotate, which have discrete active phases.
+		/// </summary>
+		/// <value><c>true</c> if this instance is a continuous gesture; otherwise, <c>false</c>.</value>
+		protected virtual bool IsGestureCotinuous { get { return false; } }
 
 		/// <summary>
 		/// Processes the motion event.
@@ -67,16 +73,55 @@ namespace TwinTechs.Gestures
 
 		public int NumberOfTouches { get; protected set; }
 
-		public GestureRecognizerState State { get; protected set; }
+		bool _gestureDidBegin;
 
-		protected void SendGestureEvent ()
-		{
-			Recognizer.SendAction ();
+		GestureRecognizerState _state;
+
+		public GestureRecognizerState State {
+			get {
+				return _state;
+			}
+			protected set {
+				var oldState = _state;
+				_state = value; 
+				if (oldState == GestureRecognizerState.Possible && value == GestureRecognizerState.Began) {
+					if (Recognizer.OnGestureShouldBeginDelegate != null && !Recognizer.OnGestureShouldBeginDelegate (Recognizer)) {
+						_state = GestureRecognizerState.Failed;
+					}	
+				}
+
+				if (_state == GestureRecognizerState.Cancelled || _state == GestureRecognizerState.Ended || _state == GestureRecognizerState.Failed) {
+					PointerId = -1;
+				}
+
+				//we track if the gesture had begun at some point in processing this gesture, so we can elect which continuous events to send
+				if (_state == GestureRecognizerState.Began) {
+					_gestureDidBegin = true;
+				}
+
+				if (_state == GestureRecognizerState.Recognized || (IsGestureCotinuous && _gestureDidBegin)) {
+					SendGestureEvent ();
+				}
+
+				if (GetIsFinishedState (_state)) {
+					_gestureDidBegin = false;
+				}
+			}
 		}
 
-		protected void SendGestureUpdate ()
+		bool GetIsFinishedState (GestureRecognizerState state)
 		{
-			Recognizer.SendUpdate ();
+			return state == GestureRecognizerState.Ended || state == GestureRecognizerState.Cancelled || state == GestureRecognizerState.Recognized ||
+			state == GestureRecognizerState.Failed;
+		}
+
+		private void SendGestureEvent ()
+		{
+			if (Recognizer != null) {
+				Device.BeginInvokeOnMainThread (() => {
+					Recognizer.SendAction ();
+				});
+			}
 		}
 
 		protected Xamarin.Forms.Point GetLocationInAncestorView (Xamarin.Forms.Point location, Xamarin.Forms.VisualElement view)

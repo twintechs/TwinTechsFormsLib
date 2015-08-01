@@ -28,7 +28,7 @@ namespace TwinTechs.Gestures
 				if (State == GestureRecognizerState.Began) {
 					//TODO track all pointers that are down.
 					PointerId = e.GetPointerId (0);
-					e.IsConsumed = true;
+//					e.IsConsumed = true;
 					e.IsCancelled = Recognizer.CancelsTouchesInView;
 				}
 			} else if (State == GestureRecognizerState.Cancelled || State == GestureRecognizerState.Ended || State == GestureRecognizerState.Failed) {
@@ -36,11 +36,9 @@ namespace TwinTechs.Gestures
 			} else if (e.ActionMasked == MotionEventActions.Cancel) {
 				State = GestureRecognizerState.Cancelled;
 				Console.WriteLine ("GESTURE CANCELLED");
-				PointerId = -1;
-				SendGestureUpdate ();
 			} else if (e.ActionMasked == MotionEventActions.Up) {
 				OnUp (e);
-				e.IsConsumed = State != GestureRecognizerState.Failed;
+//				e.IsConsumed = State != GestureRecognizerState.Failed;
 			}
 		}
 
@@ -64,8 +62,6 @@ namespace TwinTechs.Gestures
 			var wrongAmountOfTouches = NumberOfTouches < SwipeGestureRecognizer.NumberOfTouchesRequired;
 			if (tookTooLong || wrongAmountOfTouches) {
 				State = GestureRecognizerState.Failed;
-				SendGestureEvent ();
-				PointerId = -1;
 				return;
 			}
 			var endTouchPoint = new Xamarin.Forms.Point (e.GetX (0), e.GetY (0));
@@ -75,12 +71,10 @@ namespace TwinTechs.Gestures
 			var expectedDirection = (Recognizer as SwipeGestureRecognizer).Direction;
 			if (direction == expectedDirection) {
 				State = GestureRecognizerState.Recognized;
-				SendGestureEvent ();
 			} else {
 				State = GestureRecognizerState.Failed;
 				Console.WriteLine ("failed gesture was expecting {0} got {1}", expectedDirection, direction);
 			}
-			PointerId = -1;
 		}
 
 		SwipeGestureRecognizerDirection GetSwipeDirection (double velocityX, double velocityY)

@@ -68,6 +68,19 @@ namespace TwinTechs.Example.Gestures
 			message += "touches: " + recognizer.NumberOfTouches + ", taps required: " + tapRecognizer.NumberOfTapsRequired;
 			OutputLabel.Text = message;
 		}
+
+
+		protected override void OnDisappearing ()
+		{
+			base.OnDisappearing ();
+
+			MyStack.RemoveAllGestureRecognizers ();
+			Box.RemoveAllGestureRecognizers ();
+			Box2.RemoveAllGestureRecognizers ();
+			Label1.RemoveAllGestureRecognizers ();
+			Label2.RemoveAllGestureRecognizers ();
+		}
+
 	}
 }
 

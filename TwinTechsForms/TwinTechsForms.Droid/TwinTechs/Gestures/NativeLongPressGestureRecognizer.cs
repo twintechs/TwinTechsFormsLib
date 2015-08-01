@@ -22,7 +22,7 @@ namespace TwinTechs.Gestures
 		{
 			if (e.ActionMasked == MotionEventActions.Down && PointerId == -1) {
 				OnDown (e);
-				e.IsConsumed = true;
+//				e.IsConsumed = true;
 				e.IsCancelled = Recognizer.CancelsTouchesInView;
 			} else if (State == GestureRecognizerState.Cancelled || State == GestureRecognizerState.Ended || State == GestureRecognizerState.Failed) {
 				return;
@@ -35,11 +35,9 @@ namespace TwinTechs.Gestures
 				if (e.ActionMasked == MotionEventActions.Cancel || isMovedBeyondMaxDistance) {
 					State = GestureRecognizerState.Cancelled;
 					Console.WriteLine ("LONG PRESS CANCELLED");
-					PointerId = -1;
-					SendGestureUpdate ();
 				} else if (e.ActionMasked == MotionEventActions.Up) {
 					OnUp (e);
-					e.IsConsumed = true;
+//					e.IsConsumed = true;
 				}
 			}
 		}
@@ -57,8 +55,6 @@ namespace TwinTechs.Gestures
 				ResetLongPressTimer (true);
 			} else {
 				State = GestureRecognizerState.Failed;
-				PointerId = -1;
-				SendGestureUpdate ();
 				
 			}
 		}
@@ -68,9 +64,7 @@ namespace TwinTechs.Gestures
 			ResetLongPressTimer (false);
 			//TODO track the correct fingers
 			if (State == GestureRecognizerState.Began) {
-				PointerId = -1;
 				State = GestureRecognizerState.Failed;
-				SendGestureUpdate ();
 				Console.WriteLine ("LONG PRESS CANCELLED");
 			}
 		}
@@ -80,10 +74,6 @@ namespace TwinTechs.Gestures
 			Console.WriteLine ("LONG PRESS RECOGNIZED");
 			ResetLongPressTimer (false);
 			State = GestureRecognizerState.Recognized;
-			Device.BeginInvokeOnMainThread (() => SendGestureEvent ());
-
-			PointerId = -1;
-			//TODO better improve the trackign of touches
 		}
 
 		void ResetLongPressTimer (bool isActive)

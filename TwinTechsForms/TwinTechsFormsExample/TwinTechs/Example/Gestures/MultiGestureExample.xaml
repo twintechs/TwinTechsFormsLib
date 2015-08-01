@@ -18,37 +18,59 @@
 			BackgroundColor="Black"
 			FontSize="14" />
 
-			<Label
-				Text="Long press me for 2.5 seconds or tap me"
-				x:Name="Label1"
-				AbsoluteLayout.LayoutBounds="0, 130, 320, 110"
-				AbsoluteLayout.LayoutFlags="None"
-				BackgroundColor="Red"
-				TextColor="White"
-				FontSize="20">
+		<Label
+			Text="Long press me for 2.5 seconds or tap me"
+			x:Name="Label1"
+			AbsoluteLayout.LayoutBounds="0, 130, 320, 110"
+			AbsoluteLayout.LayoutFlags="None"
+			BackgroundColor="Red"
+			TextColor="White"
+			FontSize="20">
 
-				<Label.GestureRecognizers>
+			<Label.GestureRecognizers>
 
-					<gestures:LongPressGestureRecognizer
-						MinimumPressDuration="2.5"
-						OnAction="OnAction" />
+				<gestures:LongPressGestureRecognizer
+					MinimumPressDuration="2.5"
+					OnAction="OnAction" />
 
-					<gestures:TapGestureRecognizer
-						OnAction="OnAction" />
+				<gestures:TapGestureRecognizer
+					OnAction="OnAction" />
 
-				</Label.GestureRecognizers>
+			</Label.GestureRecognizers>
 
-			</Label>
+		</Label>
 
-			<Label
-				HeightRequest="90"
-				AbsoluteLayout.LayoutBounds="0, 250, 320, 110"
-				AbsoluteLayout.LayoutFlags="None"
-				Text="SWIPE ME IN ALL 4 DIRECITONS"
-				x:Name="Label2"
-				BackgroundColor="Fuchsia"
-				TextColor="White"
-				FontSize="20" />
+		<Label
+			x:Name="Label2"
+			HeightRequest="90"
+			AbsoluteLayout.LayoutBounds="0, 250, 320, 110"
+			AbsoluteLayout.LayoutFlags="None"
+			Text="SWIPE ME IN ALL 4 DIRECITONS"
+			BackgroundColor="Fuchsia"
+			TextColor="White"
+			FontSize="20">
+
+			<Label.GestureRecognizers>
+
+				<gestures:SwipeGestureRecognizer
+					Direction="Left"
+					OnAction="OnAction" />
+
+				<gestures:SwipeGestureRecognizer
+					Direction="Down"
+					OnAction="OnAction" />
+
+				<gestures:SwipeGestureRecognizer
+					Direction="Right"
+					OnAction="OnAction" />
+
+				<gestures:SwipeGestureRecognizer
+					Direction="Up"
+					OnAction="OnAction" />
+
+			</Label.GestureRecognizers>
+
+		</Label>
 
 	</AbsoluteLayout>
 

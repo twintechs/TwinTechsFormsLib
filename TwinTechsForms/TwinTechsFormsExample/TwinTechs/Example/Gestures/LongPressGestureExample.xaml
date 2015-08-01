@@ -36,7 +36,6 @@
 				<Label.GestureRecognizers>
 
 					<gestures:LongPressGestureRecognizer
-						x:Name="LabelXamlGesture"
 						MinimumPressDuration="2.5"
 						OnAction="OnAction" />
 
@@ -63,7 +62,6 @@
 			<BoxView.GestureRecognizers>
 
 				<gestures:LongPressGestureRecognizer
-					x:Name="BoxXamlGesture"
 					OnAction="OnAction" />
 
 			</BoxView.GestureRecognizers>

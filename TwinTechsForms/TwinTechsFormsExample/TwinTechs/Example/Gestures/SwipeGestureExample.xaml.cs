@@ -38,6 +38,20 @@ namespace TwinTechs.Example.Gestures
 			message += "touches: " + recognizer.NumberOfTouches + ", direction: " + swipeRecognizer.Direction;
 			OutputLabel.Text = message;
 		}
+
+
+		protected override void OnDisappearing ()
+		{
+			base.OnDisappearing ();
+
+			Label1.RemoveAllGestureRecognizers ();
+			Label2.RemoveAllGestureRecognizers ();
+			Label3.RemoveAllGestureRecognizers ();
+			Label4.RemoveAllGestureRecognizers ();
+			Label5.RemoveAllGestureRecognizers ();
+			Label6.RemoveAllGestureRecognizers ();
+		}
+
 	}
 }
 

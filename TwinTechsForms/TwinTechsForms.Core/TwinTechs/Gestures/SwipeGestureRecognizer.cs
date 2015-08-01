@@ -31,6 +31,12 @@ namespace TwinTechs.Gestures
 			NumberOfTouchesRequired = 1;
 		}
 
+		public override string ToString ()
+		{
+			return string.Format ("[SwipeGestureRecognizer: NumberOfTouchesRequired={0}, Direction={1} State={2}]", NumberOfTouchesRequired, Direction, State);
+		}
+		
+
 	}
 }
 

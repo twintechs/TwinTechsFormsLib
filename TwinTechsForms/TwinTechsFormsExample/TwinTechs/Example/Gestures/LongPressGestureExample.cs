@@ -60,12 +60,19 @@ namespace TwinTechs.Example.Gestures
 		{
 			var tapRecognizer = recognizer as TwinTechs.Gestures.LongPressGestureRecognizer;
 			var view = recognizer.View;
-			var message = "Tap";
-			message += "TAP " + recognizer + "\n";
+			var message = recognizer + "\n";
 			message += "POS: " + recognizer.LocationInView (view);
 			message += "PARENT POS: " + recognizer.LocationInView (view.ParentView);
 			message += "touches: " + recognizer.NumberOfTouches;// + ", taps required: " + tapRecognizer.NumberOfTapsRequired;
 			OutputLabel.Text = message;
+		}
+
+
+		protected override void OnDisappearing ()
+		{
+			base.OnDisappearing ();
+			Label1.RemoveAllGestureRecognizers ();
+			Label2.RemoveAllGestureRecognizers ();
 		}
 	}
 }

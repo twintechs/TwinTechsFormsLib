@@ -29,6 +29,12 @@ namespace TwinTechs.Gestures
 			NumberOfTouchesRequired = 1;
 			MaxDistanceTolerance = 5;
 		}
+
+		public override string ToString ()
+		{
+			return string.Format ("[LongPressGestureRecognizer: MinimumPressDuration={0}, NumberOfTouchesRequired={1}, MaxDistanceTolerance={2}, State={2}]", MinimumPressDuration, NumberOfTouchesRequired, MaxDistanceTolerance, State);
+		}
+		
 	}
 }
 

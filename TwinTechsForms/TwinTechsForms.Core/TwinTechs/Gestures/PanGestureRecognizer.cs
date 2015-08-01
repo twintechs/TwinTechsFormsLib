@@ -39,6 +39,12 @@ namespace TwinTechs.Gestures
 			MinimumNumberOfTouches = 1;
 			MaximumNumberOfTouches = 1;
 		}
+
+		public override string ToString ()
+		{
+			return string.Format ("[PanGestureRecognizer: MinimumNumberOfTouches={0}, MaximumNumberOfTouches={1}, State={2}]", MinimumNumberOfTouches, MaximumNumberOfTouches, State);
+		}
+		
 	}
 }
 

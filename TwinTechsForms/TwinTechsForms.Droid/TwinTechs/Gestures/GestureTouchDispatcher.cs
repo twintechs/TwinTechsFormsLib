@@ -42,9 +42,10 @@ namespace TwinTechs.Gestures
 				var nativeRecognizer = recognizer.NativeGestureRecognizer as BaseNativeGestureRecognizer;
 				//				Console.WriteLine ("checkign gesture touch");
 				nativeRecognizer.ProcessGestureMotionEvent (gestureMotionEvent);
+				gestureMotionEvent.IsConsumed = GetIsConsumedState (nativeRecognizer.State);
 			}
-			var isHandled = false;
-			if (gestureMotionEvent.IsCancelled) {
+
+			if (gestureMotionEvent.IsConsumed && gestureMotionEvent.IsCancelled) {
 				ev.Action = MotionEventActions.Cancel;
 			}
 			if (gestureMotionEvent.IsMarkedForDelay) {
@@ -53,6 +54,12 @@ namespace TwinTechs.Gestures
 			return gestureMotionEvent.IsConsumed;
 		}
 
+
+		bool GetIsConsumedState (GestureRecognizerState state)
+		{
+			return state == GestureRecognizerState.Ended || state == GestureRecognizerState.Began ||
+			state == GestureRecognizerState.Recognized || state == GestureRecognizerState.Changed;
+		}
 	}
 }
 

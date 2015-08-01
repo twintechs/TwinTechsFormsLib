@@ -112,6 +112,15 @@
 					Tapped="OnPanGesture" />
 
 				<TextCell
+					Text="Pan - alternate (global) routing"
+					Tapped="OnPanGestureAlternate" />
+
+				<TextCell
+					Text="Pan - alternate (global) routing DELAYED TOUCHES and delegate"
+					Detail="Demontstrates support for delgate callback and delaying touche :D"
+					Tapped="OnPanGestureAlternateDelegate" />
+
+				<TextCell
 					Text="Pan2"
 					Detail="Example dragging a control around"
 					Tapped="OnPan2Gesture" />

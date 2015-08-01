@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 	InternalsVisibleTo ("TwinTechsLib.Droid")]
 namespace TwinTechs.Gestures
 {
-	//	public delegate GestureShouldRecognize
 	public enum GestureRecognizerState
 	{
 		Possible,
@@ -30,11 +29,16 @@ namespace TwinTechs.Gestures
 	/// </summary>
 	public class BaseGestureRecognizer : BindableObject, IGestureRecognizer
 	{
-		#region IGestureRecognizer impl
+		/// <summary>
+		/// Delegate callback to check if this recognizer should proceed to begin state.
+		/// If false is returned, then the gesture will cancel.
+		/// If delayed touches is true, and false is returned, then the gesture will replay it's delayed touches
+		/// (implementaiton is slightly different on android/iOS; but the result should be more or less equal).
+		/// </summary>
+		/// <value>The view.</value>
+		public delegate bool GestureShouldBeginDelegate (BaseGestureRecognizer gestureRecognizer);
 
-		//		public event PropertyChangedEventHandler PropertyChanged;
-
-		#endregion
+		public GestureShouldBeginDelegate OnGestureShouldBeginDelegate;
 
 		public View View { get; set; }
 
@@ -119,11 +123,6 @@ namespace TwinTechs.Gestures
 			if (OnAction != null) {
 				OnAction.Invoke (this, State);
 			}
-		}
-
-		internal void SendUpdate ()
-		{
-			//TODO
 		}
 
 		/// <summary>

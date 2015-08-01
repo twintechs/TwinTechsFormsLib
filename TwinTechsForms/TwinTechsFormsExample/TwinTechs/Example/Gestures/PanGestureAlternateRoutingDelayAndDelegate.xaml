@@ -3,7 +3,7 @@
 <ContentPage
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	x:Class="TwinTechs.Example.Gestures.PanGestureExample"
+	x:Class="TwinTechs.Example.Gestures.PanGestureAlternateRoutingDelayAndDelegate"
 	xmlns:gestures="clr-namespace:TwinTechs.Gestures;assembly=TwinTechsForms"
 	xmlns:local="clr-namespace:TwinTechs.Example.Gestures;assembly=TwinTechsFormsExample"
 	Title="SwipeExample">
@@ -51,7 +51,16 @@
 				WidthRequest="300"
 				HeightRequest="150" />
 
-				</StackLayout>
+			<StackLayout.GestureRecognizers>
+
+				<gestures:PanGestureRecognizer
+					x:Name="StackGesture"
+					IsConsumingTouchesInParallel="true"
+					OnAction="OnAction" />
+
+			</StackLayout.GestureRecognizers>
+
+		</StackLayout>
 
 		<StackLayout
 			x:Name="MyStack2"
@@ -73,11 +82,33 @@
 
 				<gestures:PanGestureRecognizer
 					x:Name="ListGesture"
+					IsConsumingTouchesInParallel="true"
 					OnAction="OnAction" />
 
 			</StackLayout.GestureRecognizers>
 
 		</StackLayout>
+
+
+		<Button
+			x:Name="DelegateCancelsGestureButton"
+			Text="Only horizontal pan : true"
+			BackgroundColor="Black"
+			TextColor="White"
+			Clicked="OnToggleOnlyHorizontal"
+			AbsoluteLayout.LayoutBounds="0, 0.9, 1, 0.1"
+			AbsoluteLayout.LayoutFlags="All" />
+
+
+		<Button
+			x:Name="ToggleDelaysTouchButton"
+			Text="Delays touches : false"
+			BackgroundColor="Black"
+			TextColor="White"
+			Clicked="OnToggleDelaysTouch"
+			AbsoluteLayout.LayoutBounds="0, 1, 1, 0.1"
+			AbsoluteLayout.LayoutFlags="All" />
+
 
 		<Button
 			x:Name="ToggleCancelTouchButton"
@@ -85,7 +116,7 @@
 			BackgroundColor="Black"
 			TextColor="White"
 			Clicked="OnToggleCancelTouch"
-			AbsoluteLayout.LayoutBounds="0, 1, 1, 0.1"
+			AbsoluteLayout.LayoutBounds="0, 0.8, 1, 0.1"
 			AbsoluteLayout.LayoutFlags="All" />
 
 	</AbsoluteLayout>

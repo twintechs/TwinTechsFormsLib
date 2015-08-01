@@ -107,6 +107,18 @@ namespace TwinTechs.Example
 
 		}
 
+		void OnPanGestureAlternate (object sender, object args)
+		{
+			Navigation.PushAsync (new PanGestureAlternateRouting ());
+
+		}
+
+		void OnPanGestureAlternateDelegate (object sender, object args)
+		{
+			Navigation.PushAsync (new PanGestureAlternateRoutingDelayAndDelegate ());
+
+		}
+
 		void OnPan2Gesture (object sender, object args)
 		{
 			Navigation.PushAsync (new PanGestureExample2 ());

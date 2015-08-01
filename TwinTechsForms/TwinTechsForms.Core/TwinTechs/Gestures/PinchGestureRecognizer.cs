@@ -27,6 +27,8 @@ namespace TwinTechs.Gestures
 		public PinchGestureRecognizer ()
 		{
 		}
+
+
 	}
 }
 

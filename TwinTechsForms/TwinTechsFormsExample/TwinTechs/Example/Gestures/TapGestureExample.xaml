@@ -36,8 +36,6 @@
 				<Label.GestureRecognizers>
 
 					<gestures:TapGestureRecognizer
-						IsConsumingTouchesInParallel="true"
-						x:Name="LabelXamlGesture"
 						NumberOfTapsRequired="2"
 						OnAction="OnAction" />
 
@@ -64,13 +62,19 @@
 			<BoxView.GestureRecognizers>
 
 				<gestures:TapGestureRecognizer
-					x:Name="BoxXamlGesture"
-					IsConsumingTouchesInParallel="true"
 					OnAction="OnAction" />
 
 
 			</BoxView.GestureRecognizers>
 
+		</BoxView>
+
+
+		<BoxView
+			Color="Green"
+			x:Name="Box2"
+			AbsoluteLayout.LayoutBounds="20, 125, 300, 90"
+			AbsoluteLayout.LayoutFlags="None">
 		</BoxView>
 
 		<Label
@@ -80,13 +84,6 @@
 			FontSize="20"
 			AbsoluteLayout.LayoutBounds="50, 130, 200, 80"
 			AbsoluteLayout.LayoutFlags="None" />
-
-		<BoxView
-			Color="Green"
-			x:Name="Box2"
-			AbsoluteLayout.LayoutBounds="50, 130, 200, 80"
-			AbsoluteLayout.LayoutFlags="None">
-		</BoxView>
 
 	</AbsoluteLayout>
 

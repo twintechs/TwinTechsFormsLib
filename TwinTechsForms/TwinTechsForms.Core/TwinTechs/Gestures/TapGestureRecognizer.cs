@@ -19,6 +19,12 @@ namespace TwinTechs.Gestures
 		public int NumberOfTapsRequired { get; set; }
 
 		public int NumberOfTouchesRequired { get; set; }
+
+		public override string ToString ()
+		{
+			return string.Format ("[TapGestureRecognizer: NumberOfTapsRequired={0}, NumberOfTouchesRequired={1}, State={2}]", NumberOfTapsRequired, NumberOfTouchesRequired, State);
+		}
+		
 	}
 }
 

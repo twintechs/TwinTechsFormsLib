@@ -28,7 +28,7 @@ namespace TwinTechs.Gestures
 			if (e.Action == MotionEventActions.Down && PointerId == -1) {
 				OnDown (e);
 				if (State == GestureRecognizerState.Began) {
-					e.IsConsumed = true;
+//					e.IsConsumed = true;
 					e.IsCancelled = true;
 				}
 			} else if (State == GestureRecognizerState.Cancelled || State == GestureRecognizerState.Ended || State == GestureRecognizerState.Failed) {
@@ -36,12 +36,10 @@ namespace TwinTechs.Gestures
 			} else if (e.ActionMasked == MotionEventActions.Cancel) {
 				State = GestureRecognizerState.Cancelled;
 				Console.WriteLine ("GESTURE CANCELLED");
-				PointerId = -1;
-				SendGestureUpdate ();
 			} else if (e.ActionMasked == MotionEventActions.Up) {
 				OnUp (e);
 				if (PointerId == e.GetPointerId (0)) {
-					e.IsConsumed = State != GestureRecognizerState.Failed;
+//					e.IsConsumed = State != GestureRecognizerState.Failed;
 				}
 			}
 		}
@@ -69,8 +67,6 @@ namespace TwinTechs.Gestures
 			var wrongNumberOfTouches = NumberOfTouches < (this.Recognizer as TapGestureRecognizer).NumberOfTouchesRequired;
 			if (tooLongBetweenTouches || wrongNumberOfTouches) {
 				State = GestureRecognizerState.Failed;
-				SendGestureEvent ();
-				PointerId = -1;
 				return;
 			}
 			_currentTapCount++;
@@ -79,8 +75,6 @@ namespace TwinTechs.Gestures
 			var requiredTaps = (this.Recognizer as TapGestureRecognizer).NumberOfTapsRequired;
 			if (requiredTaps == 1) {
 				State = GestureRecognizerState.Recognized;
-				SendGestureEvent ();
-				PointerId = -1;
 			} else {
 				
 				if (_currentTapCount == requiredTaps) {
@@ -88,9 +82,7 @@ namespace TwinTechs.Gestures
 					NumberOfTouches = 1;
 					State = GestureRecognizerState.Recognized;
 					ResetMultiTapTimer (false);
-					SendGestureEvent ();
 					_currentTapCount = 0;
-					PointerId = -1;
 				} else {
 					Console.WriteLine ("incomplete multi tap, " + _currentTapCount + "/" + requiredTaps);
 				}
@@ -124,12 +116,7 @@ namespace TwinTechs.Gestures
 			} else {
 				_currentTapCount = 0;
 				if (State == GestureRecognizerState.Possible) {
-					
 					State = GestureRecognizerState.Failed;
-					PointerId = -1;
-					Device.BeginInvokeOnMainThread (() => {
-						SendGestureUpdate ();
-					});
 				}
 			}
 			
