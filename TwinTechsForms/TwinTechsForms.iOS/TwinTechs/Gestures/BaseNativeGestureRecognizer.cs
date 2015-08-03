@@ -30,6 +30,22 @@ namespace TwinTechs.Gestures
 			NativeRecognizer.CancelsTouchesInView = Recognizer.CancelsTouchesInView;
 			NativeRecognizer.DelaysTouchesBegan = Recognizer.DelaysTouches;
 //			NativeRecognizer.DelaysTouchesEnded = Recognizer.DelaysTouchesEnded;
+			NativeRecognizer.ShouldRecognizeSimultaneously += _NativeRecognizer_ShouldRecognizeSimultaneously;
+			NativeRecognizer.ShouldBegin += _NativeRecognizer_ShouldBegin;
+		}
+
+		bool _NativeRecognizer_ShouldRecognizeSimultaneously (UIGestureRecognizer gestureRecognizer, UIGestureRecognizer otherGestureRecognizer)
+		{
+			return Recognizer.IsConsumingTouchesInParallel;
+		}
+
+		bool _NativeRecognizer_ShouldBegin (UIGestureRecognizer recognizer)
+		{
+			if (Recognizer.OnGestureShouldBeginDelegate != null) {
+				return Recognizer.OnGestureShouldBeginDelegate (Recognizer);
+			} else {
+				return true;
+			}
 		}
 
 		#region IBaseNativeGestureRecognizerImpl impl
@@ -84,6 +100,8 @@ namespace TwinTechs.Gestures
 		public void RemoveRecognizer (BaseGestureRecognizer recognizer)
 		{
 			NativeView.RemoveGestureRecognizer (NativeRecognizer);
+			NativeRecognizer.ShouldRecognizeSimultaneously -= _NativeRecognizer_ShouldRecognizeSimultaneously;
+			NativeRecognizer.ShouldBegin -= _NativeRecognizer_ShouldBegin;
 			NativeRecognizer = null;
 			recognizer.NativeGestureRecognizer = null;
 		}
@@ -166,6 +184,7 @@ namespace TwinTechs.Gestures
 		}
 
 		#endregion
+
 	}
 }
 
