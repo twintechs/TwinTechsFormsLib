@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="TwinTechs.Example.Gestures.SwipeyListExample"
+	xmlns:gestures="clr-namespace:TwinTechs.Gestures;assembly=TwinTechsForms"
+	xmlns:local="clr-namespace:TwinTechs.Example.Gestures;assembly=TwinTechsFormsExample"
+	xmlns:cells="clr-namespace:TwinTechs.Example.Gestures.Cells;assembly=TwinTechsFormsExample"
+	Title="SwipeExample">
+
+	<ListView
+		x:Name="MediaItemsListView"
+		BackgroundColor="Transparent"
+		SeparatorVisibility="None"
+		RowHeight="70">
+
+		<ListView.ItemTemplate>
+
+			<DataTemplate>
+
+				<cells:SwipeListCell />
+
+			</DataTemplate>
+
+		</ListView.ItemTemplate>
+
+	</ListView>
+
+</ContentPage>

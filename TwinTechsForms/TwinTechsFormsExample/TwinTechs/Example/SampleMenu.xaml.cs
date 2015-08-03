@@ -137,6 +137,12 @@ namespace TwinTechs.Example
 
 		}
 
+		void OnCellGestures (object sender, object args)
+		{
+			Navigation.PushAsync (new SwipeyListExample ());
+
+		}
+
 		#endregion
 
 		#region Page in page

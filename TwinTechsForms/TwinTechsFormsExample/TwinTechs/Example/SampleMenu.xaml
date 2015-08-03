@@ -134,6 +134,12 @@
 					Detail="Example showing how to mix gestures together"
 					Tapped="OnMixedGestures" />
 
+
+				<TextCell
+					Text="ListGestures"
+					Detail="Example showing gestures in listcells"
+					Tapped="OnCellGestures" />
+
 			</TableSection>
 
 		</TableView>

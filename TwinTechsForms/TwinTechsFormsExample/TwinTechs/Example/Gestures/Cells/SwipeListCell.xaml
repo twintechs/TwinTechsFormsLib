@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<controls:FastCell
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="TwinTechs.Example.Gestures.Cells.SwipeListCell"
+	xmlns:gestures="clr-namespace:TwinTechs.Gestures;assembly=TwinTechsForms"
+	xmlns:controls="clr-namespace:TwinTechs.Controls;assembly=TwinTechsForms"
+	xmlns:gestureSamples="clr-namespace:TwinTechs.Example.Gestures;assembly=TwinTechsFormsExample">
+
+	<gestureSamples:SimpleLayout
+		x:Name="MainLayout"
+		IsHandlingLayoutManually="true"
+		BackgroundColor="Gray">
+
+		<StackLayout
+			x:Name="BackgroundContent"
+			Orientation="Horizontal"
+			BackgroundColor="Gray"
+			HorizontalOptions="FillAndExpand">
+
+			<BoxView
+				BackgroundColor="Gray"
+				WidthRequest="200" />
+			<Button
+				BackgroundColor="Yellow"
+				Text="Forward"
+				TextColor="Black" />
+
+			<Button
+				BackgroundColor="Red"
+				Text="Delete"
+				TextColor="White" />
+
+
+		</StackLayout>
+
+		<StackLayout
+			x:Name="ForegroundContent"
+			Orientation="Horizontal"
+			BackgroundColor="White"
+			HorizontalOptions="FillAndExpand"
+			VerticalOptions="Center">
+
+			<controls:FastImage
+				x:Name="UserThumbnailView"
+				HeightRequest="50"
+				WidthRequest="50" />
+
+			<Label
+				x:Name="NameLabel"
+				Text="Someone"
+				TextColor="Black"
+				FontSize="Small"
+				YAlign="Center" />
+
+			<StackLayout.GestureRecognizers>
+
+				<gestures:PanGestureRecognizer
+					x:Name="ContentGesture"
+					IsConsumingTouchesInParallel="true"
+					OnAction="Gesture_OnAction" />
+
+			</StackLayout.GestureRecognizers>
+
+			<!--					CancelsTouchesInView="true"-->
+		</StackLayout>
+
+	</gestureSamples:SimpleLayout>
+
+</controls:FastCell>

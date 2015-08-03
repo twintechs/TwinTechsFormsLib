@@ -171,7 +171,7 @@ namespace TwinTechs.Gestures
 			var touchPoint = new Xamarin.Forms.Point (ev.GetX (), ev.GetY ());
 			var mainPointerId = ev.GetPointerId (0);
 			//1. is it inside the view? 
-			Console.WriteLine ("touch point {0} view bounds {1} size {2},{3}", touchPoint, nativeViewScreenLocation, NativeView.Width, NativeView.Height);
+//			Console.WriteLine ("touch point {0} view bounds {1} size {2},{3}", touchPoint, nativeViewScreenLocation, NativeView.Width, NativeView.Height);
 			var isInsideOfView = touchPoint.X >= nativeViewScreenLocation.X && touchPoint.Y >= nativeViewScreenLocation.Y &&
 			                     touchPoint.X <= (NativeView.Width + nativeViewScreenLocation.X) && touchPoint.Y <= (NativeView.Height + nativeViewScreenLocation.Y);
 

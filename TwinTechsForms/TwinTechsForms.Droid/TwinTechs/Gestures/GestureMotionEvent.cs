@@ -31,22 +31,22 @@ namespace TwinTechs.Gestures
 		/// NOTE - once set to true, this flag remains true;
 		/// </summary>
 		/// <value><c>true</c> if this instance is cached; otherwise, <c>false</c>.</value>
-		public bool IsMarkedForDelay { get; set; }
+		public bool IsMarkedForDelay { get { return _delayCount > 0; } }
 
-		bool _isDelayed;
+		int _delayCount;
 
-		/// <summary>
-		/// Gets or sets a value indicating whether this instance is delayed.
-		/// NOTE - once set to true, this flag remains true;
-		/// </summary>
-		/// <value><c>true</c> if this instance is delayed; otherwise, <c>false</c>.</value>
-		public bool IsDelayed {
-			get { return _isDelayed; }
-			set {
-				if (!_isDelayed) {
-					_isDelayed = value;
-				}
+		public int DelayCount { get ; }
+
+		public void ReleaseDelay ()
+		{
+			if (_delayCount >= 1) {
+				_delayCount--;
 			}
+		}
+
+		public void MarkDelay ()
+		{
+			_delayCount++;
 		}
 
 		bool _isCancelled;

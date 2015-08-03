@@ -133,6 +133,12 @@
     <Compile Include="TwinTechs\Example\Gestures\PanGestureAlternateRoutingDelayAndDelegate.xaml.cs">
       <DependentUpon>PanGestureAlternateRoutingDelayAndDelegate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TwinTechs\Example\Gestures\SwipeyListExample.xaml.cs">
+      <DependentUpon>SwipeyListExample.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TwinTechs\Example\Gestures\Cells\SwipeListCell.xaml.cs">
+      <DependentUpon>SwipeListCell.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.4.4.6392\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.4.6392\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -227,11 +233,18 @@
     <EmbeddedResource Include="TwinTechs\Example\Gestures\PanGestureAlternateRoutingDelayAndDelegate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\Gestures\SwipeyListExample.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\Gestures\Cells\SwipeListCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TwinTechs\" />
     <Folder Include="TwinTechs\Example\Gestures\" />
     <Folder Include="TwinTechs\Example\PageInPage\" />
+    <Folder Include="TwinTechs\Example\Gestures\Cells\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TwinTechsForms.Core\TwinTechsForms.Core.csproj">

@@ -27,7 +27,8 @@ namespace TwinTechs.Gestures
 
 		public bool DispatchTouchEvent (MotionEvent ev)
 		{
-			if (_delayedMotionEvents.ContainsKey (ev)) {
+			bool wasDelayed = _delayedMotionEvents.ContainsKey (ev);
+			if (wasDelayed) {
 				Console.WriteLine ("was delayed event - processing now " + ev);
 				var gestureEvent = _delayedMotionEvents [ev];
 				_delayedMotionEvents.Remove (ev);
@@ -43,6 +44,7 @@ namespace TwinTechs.Gestures
 				//				Console.WriteLine ("checkign gesture touch");
 				nativeRecognizer.ProcessGestureMotionEvent (gestureMotionEvent);
 				gestureMotionEvent.IsConsumed = GetIsConsumedState (nativeRecognizer.State);
+				wasDelayed = wasDelayed || gestureMotionEvent.IsMarkedForDelay;
 			}
 
 			if (gestureMotionEvent.IsConsumed && gestureMotionEvent.IsCancelled) {
@@ -50,6 +52,9 @@ namespace TwinTechs.Gestures
 			}
 			if (gestureMotionEvent.IsMarkedForDelay) {
 				_delayedMotionEvents [ev] = gestureMotionEvent;
+			} else if (wasDelayed) {
+				//it's been released from being delayed
+				_activity.DispatchTouchEvent (ev);
 			}
 			return gestureMotionEvent.IsConsumed;
 		}

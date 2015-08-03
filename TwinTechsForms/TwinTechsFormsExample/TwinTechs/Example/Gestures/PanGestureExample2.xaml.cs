@@ -42,8 +42,8 @@ namespace TwinTechs.Example.Gestures
 		void MainLayout_OnLayoutChildren (double x, double y, double width, double height)
 		{
 			OutputLabel.Layout (new Rectangle (0, 0, width, 200));
-			Box.Layout (_boxBounds);
-			Box2.Layout (_box2Bounds);
+//			Box.Layout (_boxBounds);
+//			Box2.Layout (_box2Bounds);
 		}
 
 		async void DoBoxAnimation ()
