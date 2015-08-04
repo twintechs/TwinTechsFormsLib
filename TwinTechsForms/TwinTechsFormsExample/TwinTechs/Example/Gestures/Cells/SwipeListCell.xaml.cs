@@ -26,6 +26,8 @@ namespace TwinTechs.Example.Gestures.Cells
 		{
 			var mediaItem = BindingContext as MediaItem;
 			if (mediaItem != null) {
+				_contentBounds.X = 0;
+				ForegroundContent.Layout (_contentBounds);
 				UserThumbnailView.ImageUrl = mediaItem.ImagePath ?? "";
 				NameLabel.Text = mediaItem.Name + " An item with a pannable content overlay";
 			}
@@ -40,7 +42,7 @@ namespace TwinTechs.Example.Gestures.Cells
 				_contentBounds.Width = width;
 				_contentBounds.Height = height;
 			}
-			BackgroundContent.Layout (new Rectangle (0, 0, width, height));
+			BackgroundContent.Layout (new Rectangle (width / 2, 0, width / 2, height));
 			ForegroundContent.Layout (_contentBounds);
 		}
 

@@ -14,14 +14,12 @@
 		BackgroundColor="Gray">
 
 		<StackLayout
+			Padding="20,0"
+			Spacing="20"
 			x:Name="BackgroundContent"
 			Orientation="Horizontal"
-			BackgroundColor="Gray"
 			HorizontalOptions="FillAndExpand">
 
-			<BoxView
-				BackgroundColor="Gray"
-				WidthRequest="200" />
 			<Button
 				BackgroundColor="Yellow"
 				Text="Forward"
@@ -44,9 +42,9 @@
 
 			<controls:FastImage
 				x:Name="UserThumbnailView"
-				HeightRequest="50"
-				WidthRequest="50" />
-
+				Aspect="AspectFill"
+				HeightRequest="100"
+				WidthRequest="120" />
 			<Label
 				x:Name="NameLabel"
 				Text="Someone"

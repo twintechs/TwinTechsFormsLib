@@ -30,6 +30,8 @@ namespace TwinTechs.Droid.Extensions
 			var renderer = bindableObject.GetRenderer ();
 			var viewGroup = renderer.ViewGroup;
 			var rootView = viewGroup.RootView;
+
+			//TODO - look at why I returned the root view not the viewgoup - I think this is amistake I checked in but now has implications for many things
 			return rootView;
 		}
 	}

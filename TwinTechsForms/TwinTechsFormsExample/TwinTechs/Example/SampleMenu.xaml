@@ -139,6 +139,10 @@
 					Text="ListGestures"
 					Detail="Example showing gestures in listcells"
 					Tapped="OnCellGestures" />
+				<TextCell
+					Text="UX example"
+					Detail="Example showing gestures youtube styled UX"
+					Tapped="OnYoutubeStyleGestures" />
 
 			</TableSection>
 

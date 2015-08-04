@@ -143,6 +143,14 @@ namespace TwinTechs.Example
 
 		}
 
+
+		void OnYoutubeStyleGestures (object sender, object args)
+		{
+			Navigation.PushAsync (new GestureYoutubeLikeExample ());
+
+		}
+
+
 		#endregion
 
 		#region Page in page

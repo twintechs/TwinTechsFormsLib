@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<controls:FastCell
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="TwinTechs.Example.Gestures.Cells.VideoCell"
+	xmlns:gestures="clr-namespace:TwinTechs.Gestures;assembly=TwinTechsForms"
+	xmlns:controls="clr-namespace:TwinTechs.Controls;assembly=TwinTechsForms"
+	xmlns:gestureSamples="clr-namespace:TwinTechs.Example.Gestures;assembly=TwinTechsFormsExample">
+
+	<StackLayout
+		x:Name="ForegroundContent"
+		Orientation="Horizontal"
+		BackgroundColor="White"
+		HorizontalOptions="FillAndExpand"
+		VerticalOptions="Center"
+		Padding="0,0">
+
+		<controls:FastImage
+			x:Name="UserThumbnailView"
+			Aspect="AspectFill"
+			HeightRequest="100"
+			WidthRequest="120" />
+
+		<Label
+			x:Name="NameLabel"
+			Text="Someone"
+			TextColor="Black"
+			FontSize="Small"
+			YAlign="Center" />
+
+	</StackLayout>
+
+</controls:FastCell>

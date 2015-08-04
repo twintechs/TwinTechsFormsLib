@@ -38,6 +38,7 @@ namespace TwinTechs.Ios.Controls
 		void ChangePage (Page page)
 		{
 			if (page != null) {
+				page.Parent = Element.GetParentPage ();
 				var pageRenderer = page.GetRenderer ();
 				UIViewController viewController = null;
 				if (pageRenderer != null && pageRenderer.ViewController != null) {

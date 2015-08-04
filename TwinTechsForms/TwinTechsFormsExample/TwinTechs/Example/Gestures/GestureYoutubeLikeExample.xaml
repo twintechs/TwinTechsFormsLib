@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="TwinTechs.Example.Gestures.GestureYoutubeLikeExample"
+	xmlns:gestures="clr-namespace:TwinTechs.Gestures;assembly=TwinTechsForms"
+	xmlns:cells="clr-namespace:TwinTechs.Example.Gestures.Cells;assembly=TwinTechsFormsExample"
+	xmlns:local="clr-namespace:TwinTechs.Example.Gestures;assembly=TwinTechsFormsExample"
+	xmlns:controls="clr-namespace:TwinTechs.Controls;assembly=TwinTechsForms"
+	Title="SwipeExample">
+
+	<local:SimpleLayout
+		x:Name="MainLayout"
+		IsHandlingLayoutManually="true">
+
+		<ListView
+			x:Name="MediaItemsListView"
+			BackgroundColor="Transparent"
+			SeparatorVisibility="None"
+			ItemSelected="OnItemSelected"
+			RowHeight="100">
+
+			<ListView.ItemTemplate>
+
+				<DataTemplate>
+
+					<cells:VideoCell />
+
+				</DataTemplate>
+
+			</ListView.ItemTemplate>
+
+		</ListView>
+
+		<controls:PageViewContainer
+			BackgroundColor="Transparent"
+			x:Name="PageContainer" />
+
+	</local:SimpleLayout>
+
+</ContentPage>

@@ -24,6 +24,7 @@ namespace TwinTechs.Gestures
 		{
 			NativeRecognizers = new List<BaseNativeGestureRecognizer> ();
 			TargetView = targetView;
+			TargetView.InputTransparent = false;
 			var renderer = TargetView.GetRenderer ();
 			if (renderer == null) {
 				TargetView.PropertyChanged += Recognizer_View_PropertyChanged;
@@ -52,7 +53,7 @@ namespace TwinTechs.Gestures
 			}
 			nativeRecognizer.NativeView = _nativeView;
 			var formsRecognizer = nativeRecognizer.Recognizer;
-			if (formsRecognizer.IsConsumingTouchesInParallel && formsRecognizer.View is Xamarin.Forms.Layout<Xamarin.Forms.View>) {
+			if (formsRecognizer.IsConsumingTouchesInParallel) { // && formsRecognizer.View is Xamarin.Forms.Layout<Xamarin.Forms.View>) {
 				GroupRecognizers.Add (formsRecognizer);
 			}
 		}
@@ -81,7 +82,7 @@ namespace TwinTechs.Gestures
 		void UnInitialize ()
 		{
 			if (_nativeView != null) {
-				_nativeView.Touch += _nativeView_Touch;
+				_nativeView.Touch -= _nativeView_Touch;
 				_nativeView = null;
 			}
 			_isInitialized = false;

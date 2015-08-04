@@ -36,7 +36,8 @@ namespace TwinTechs.Gestures
 
 		bool _NativeRecognizer_ShouldRecognizeSimultaneously (UIGestureRecognizer gestureRecognizer, UIGestureRecognizer otherGestureRecognizer)
 		{
-			return Recognizer.IsConsumingTouchesInParallel;
+			var renderer = Recognizer.View.GetRenderer ();
+			return renderer != null && Recognizer.IsConsumingTouchesInParallel;
 		}
 
 		bool _NativeRecognizer_ShouldBegin (UIGestureRecognizer recognizer)
@@ -89,7 +90,7 @@ namespace TwinTechs.Gestures
 				Action<NativeGestureType> action = OnGesture;
 				NativeRecognizer = (NativeGestureType)Activator.CreateInstance (typeof(NativeGestureType), action);
 			}
-
+		
 			ConfigureNativeGestureRecognizer ();
 
 			NativeView.UserInteractionEnabled = true;

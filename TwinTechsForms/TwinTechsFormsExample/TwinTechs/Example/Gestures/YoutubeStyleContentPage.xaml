@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="TwinTechs.Example.Gestures.YoutubeStyleContentPage"
+	xmlns:gestures="clr-namespace:TwinTechs.Gestures;assembly=TwinTechsForms"
+	xmlns:local="clr-namespace:TwinTechs.Example.Gestures;assembly=TwinTechsFormsExample"
+	xmlns:cells="clr-namespace:TwinTechs.Example.Gestures.Cells;assembly=TwinTechsFormsExample"
+	BackgroundColor="Transparent"
+	Title="Content">
+	<Grid BackgroundColor="Transparent"
+		x:Name="MainLayout"
+		RowSpacing="0">
+
+		<Grid.RowDefinitions>
+
+			<RowDefinition
+				Height="40" />
+
+			<RowDefinition
+				Height="100" />
+
+			<RowDefinition
+				Height="*" />
+
+		</Grid.RowDefinitions>
+
+		<Label
+			XAlign="Center"
+			YAlign="Center"
+			TextColor="Black"
+			BackgroundColor="White"
+			x:Name="TitleLabel"
+			Text="Video Title" />
+
+		<BoxView
+			BackgroundColor="Black"
+			x:Name="VideoPlayer"
+			Grid.Row="1" />
+
+		<ListView
+			x:Name="MediaItemsListView"
+			BackgroundColor="Transparent"
+			SeparatorVisibility="None"
+			Grid.Row="2"
+			RowHeight="100">
+
+			<ListView.ItemTemplate>
+
+				<DataTemplate>
+
+					<cells:VideoCell />
+
+				</DataTemplate>
+
+			</ListView.ItemTemplate>
+
+		</ListView>
+
+	</Grid>
+
+</ContentPage>
