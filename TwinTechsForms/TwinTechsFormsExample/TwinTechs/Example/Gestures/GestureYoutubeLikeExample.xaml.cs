@@ -47,6 +47,9 @@ namespace TwinTechs.Example.Gestures
 
 		void Gesture_OnAction (BaseGestureRecognizer recgonizer, GestureRecognizerState state)
 		{
+			if (recgonizer.View != _contentPage.VideoPlayerView) {
+				return;
+			}
 			var panGesture = recgonizer as PanGestureRecognizer;
 			Point translation = panGesture.GetTranslationInView (MainLayout);
 			Point velocity = panGesture.GetVelocityInView (MainLayout);
@@ -55,14 +58,17 @@ namespace TwinTechs.Example.Gestures
 			case GestureRecognizerState.Began:
 				break;
 			case GestureRecognizerState.Changed:
-				if (recgonizer.View == _contentPage.VideoPlayerView) {
-					_contentBounds.Y += translation.Y;
-					var complete = Math.Min (1, (Height - _contentBounds.Y) / Height);
+				var newY = _contentBounds.Y + translation.Y;
+				if (newY > 0 && newY < Height - _contentPage.MinimumHeightRequest) {
+					var minHeight = _contentPage.MinimumHeightRequest;
+					var minWidth = _contentPage.MinimumWidthRequest;
+					_contentBounds.Y = newY;
+					var complete = Math.Min (1, (Height - (_contentBounds.Y + minHeight)) / Height);
+//					Debug.WriteLine ("complete {0} newY {1} h{2}", complete, newY, Height);
 					var inverseCompletion = 1 - complete;
-					_contentBounds.X = (Width - 160) * inverseCompletion;
-					_contentBounds.Width = (160) + ((Width - 160) * complete);
-					_contentBounds.Height = Math.Max (100, Height * complete);
-					Debug.WriteLine ("bounds {0} comp {1} inComp {2}", _contentBounds, complete, inverseCompletion);
+					_contentBounds.X = (Width - minWidth) * inverseCompletion;
+					_contentBounds.Width = (minWidth) + ((Width - minWidth) * complete);
+					_contentBounds.Height = Math.Max (minHeight, (Height + minHeight) * complete);
 					PageContainer.Layout (_contentBounds);
 				}
 				break;
@@ -80,22 +86,18 @@ namespace TwinTechs.Example.Gestures
 		protected override void OnDisappearing ()
 		{
 			base.OnDisappearing ();
+			if (_contentPage != null) {
+				_contentPage.VideoPlayerView.RemoveAllGestureRecognizers ();
+			}
 		}
 
 		void OnItemSelected (object sender, SelectedItemChangedEventArgs e)
 		{
-			
 			ToggleShowing (true, true);
 		}
 
-
-
 		void ToggleShowing (bool isShowing, bool animated)
 		{
-			_contentBounds.Y = isShowing ? 0 : Height - 100;
-			_contentBounds.X = isShowing ? 0 : Width - 160;
-			_contentBounds.Width = isShowing ? Width : 160;
-			_contentBounds.Height = isShowing ? Height : 100;
 			if (_contentPage == null) {
 				_contentPage = new YoutubeStyleContentPage ();
 				_contentPage.ParentHeight = Height;
@@ -105,6 +107,13 @@ namespace TwinTechs.Example.Gestures
 				_panGesture.IsConsumingTouchesInParallel = true;
 				_contentPage.VideoPlayerView.AddGestureRecognizer (_panGesture);
 			}
+			var minHeight = _contentPage.MinimumHeightRequest;
+			var minWidth = _contentPage.MinimumWidthRequest;
+			_contentBounds.Y = isShowing ? 0 : Height - minHeight;
+			_contentBounds.X = isShowing ? 0 : Width - minWidth;
+			_contentBounds.Width = isShowing ? Width : minWidth;
+			_contentBounds.Height = isShowing ? Height : minHeight;
+
 			if (MediaItemsListView.SelectedItem != null) {
 				_contentPage.Item = MediaItemsListView.SelectedItem as MediaItem;
 
@@ -114,8 +123,6 @@ namespace TwinTechs.Example.Gestures
 			} else {
 				PageContainer.Layout (_contentBounds);
 			}
-
 		}
 	}
 }
-

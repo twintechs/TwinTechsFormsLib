@@ -123,7 +123,12 @@
 				<TextCell
 					Text="Pan2"
 					Detail="Example dragging a control around"
-					Tapped="OnPan2Gesture" />
+					Tapped="OnPan2Gesture" />				
+
+					<TextCell
+					Text="Pan3"
+					Detail="Example dragging a control around, with different parent"
+					Tapped="OnPan3Gesture" />
 
 				<TextCell
 					Text="Pinch"
@@ -142,7 +147,12 @@
 				<TextCell
 					Text="UX example"
 					Detail="Example showing gestures youtube styled UX"
-					Tapped="OnYoutubeStyleGestures" />
+					Tapped="OnYoutubeStyleGestures" />	
+
+											<TextCell
+					Text="Nested children"
+					Detail="Demonstrating gestures inside of other views"
+					Tapped="OnGesturesInChildViews" />
 
 			</TableSection>
 

@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="TwinTechs.Example.Gestures.GesturesInChildViewsExample"
+	xmlns:gestures="clr-namespace:TwinTechs.Gestures;assembly=TwinTechsForms"
+	Title="TapGestureExample">
+
+	<AbsoluteLayout
+		BackgroundColor="Gray">
+
+		<Label
+			x:Name="OutputLabel"
+			AbsoluteLayout.LayoutBounds="0, 0, 1, 120"
+			AbsoluteLayout.LayoutFlags="WidthProportional"
+			TextColor="White"
+			BackgroundColor="Black"
+			FontSize="14" />
+
+		<StackLayout
+			x:Name="MyStack"
+			Padding="20"
+			AbsoluteLayout.LayoutBounds="0, 220, 320, 300"
+			BackgroundColor="Red"
+			AbsoluteLayout.LayoutFlags="None">
+
+			<StackLayout.GestureRecognizers>
+
+				<gestures:TapGestureRecognizer
+					OnAction="OnAction" />
+
+			</StackLayout.GestureRecognizers>
+
+			<BoxView
+				Color="Red"
+				HeightRequest="100" />
+
+			<Label
+				Text="Tap me"
+				x:Name="Label1"
+				BackgroundColor="Olive"
+				HeightRequest="90"
+				TextColor="White"
+				FontSize="20">
+
+				<Label.GestureRecognizers>
+
+					<gestures:TapGestureRecognizer
+						OnAction="OnAction" />
+
+				</Label.GestureRecognizers>
+
+			</Label>
+
+			<StackLayout
+				Padding="20"
+				BackgroundColor="Blue"
+				x:Name="Stack2">
+
+				<StackLayout.GestureRecognizers>
+
+					<gestures:TapGestureRecognizer
+						OnAction="OnAction" />
+
+				</StackLayout.GestureRecognizers>
+
+				<StackLayout
+					x:Name="Stack3"
+					Padding="20"
+					BackgroundColor="Yellow">
+
+					<StackLayout.GestureRecognizers>
+
+						<gestures:TapGestureRecognizer
+							OnAction="OnAction" />
+
+					</StackLayout.GestureRecognizers>
+
+					<Label
+						HeightRequest="90"
+						Text="Touch any box"
+						x:Name="Label2"
+						BackgroundColor="Fuchsia"
+						TextColor="White"
+						FontSize="20" />
+
+				</StackLayout>
+
+			</StackLayout>
+
+		</StackLayout>
+
+		<StackLayout
+			AbsoluteLayout.LayoutBounds="200, 400, 120, 120"
+			AbsoluteLayout.LayoutFlags="None"
+			BackgroundColor="White"
+			Padding="20">
+
+			<BoxView
+				Color="White"
+				HeightRequest="50" />
+
+			<BoxView
+				x:Name="Box"
+				Color="Blue">
+
+				<BoxView.GestureRecognizers>
+
+					<gestures:TapGestureRecognizer
+						OnAction="OnAction" />
+
+				</BoxView.GestureRecognizers>
+
+			</BoxView>
+
+		</StackLayout>
+
+	</AbsoluteLayout>
+
+</ContentPage>

@@ -4,6 +4,7 @@ using Android.Graphics;
 using TwinTechs.Droid.Extensions;
 using Dalvik.SystemInterop;
 using Android.Support.V4.View;
+using TwinTechs.Extensions;
 
 namespace TwinTechs.Gestures
 {
@@ -104,24 +105,27 @@ namespace TwinTechs.Gestures
 			_currentPoint = FirstTouchPoint;
 			_currentScreenPoint = FirstTouchPoint;
 			_previousPoint = FirstTouchPoint;
-			_viewStartLocation = new Xamarin.Forms.Point (NativeView.GetX (), NativeView.GetY ());
+
+			_viewStartLocation = Recognizer.View.GetNativeScreenPosition ();
 		}
 
 		void OnMove (GestureMotionEvent e)
 		{
 			_currentScreenPoint = new Xamarin.Forms.Point (e.GetX (), e.GetY ());
-			var currentViewPosition = new Xamarin.Forms.Point (NativeView.GetX (), NativeView.GetY ());
+			var currentViewPosition = Recognizer.View.GetNativeScreenPosition ();
 			var currentViewOffset = new Xamarin.Forms.Point (currentViewPosition.X - _viewStartLocation.X, currentViewPosition.Y - _viewStartLocation.Y);
 			var eventPoint = new Xamarin.Forms.Point (e.GetX () + currentViewOffset.X, e.GetY () + currentViewOffset.Y);
-			var coords = new MotionEvent.PointerCoords ();
-			e.GetPointerCoords (0, coords);
-//			Console.WriteLine ("CHANGED e2{0} coords {1},{2}", eventPoint, coords.X, coords.Y);
-			if (State == GestureRecognizerState.Possible || State == GestureRecognizerState.Began || State == GestureRecognizerState.Changed) {
 
-				if (e.GetX () < 0 || e.GetX () > NativeView.Width || e.GetY () < 0 || e.GetY () > NativeView.Height) {
-					Console.WriteLine ("Gesture exited from view - it's over");
-					State = GestureRecognizerState.Ended;
-				} else if (e.ActionMasked == MotionEventActions.Move || e.ActionMasked == MotionEventActions.Scroll) {
+
+//			Console.WriteLine ("ePoint {0} cvp {1} voffset {2} csp {3}", eventPoint.PrettyPrint (), currentViewPosition.PrettyPrint (), currentViewOffset.PrettyPrint (), _currentScreenPoint.PrettyPrint ());
+			if (State == GestureRecognizerState.Possible || State == GestureRecognizerState.Began || State == GestureRecognizerState.Changed) {
+//
+//				if (e.GetX () < 0 || e.GetX () > NativeView.Width || e.GetY () < 0 || e.GetY () > NativeView.Height) {
+//					Console.WriteLine ("Gesture exited from view - it's over");
+//					State = GestureRecognizerState.Ended;
+//				} else
+
+				if (e.ActionMasked == MotionEventActions.Move || e.ActionMasked == MotionEventActions.Scroll) {
 					_previousPoint = _currentPoint;
 					_currentPoint = eventPoint;
 					_velocity = new Xamarin.Forms.Point (_currentPoint.X - _previousPoint.X, _currentPoint.Y - _previousPoint.Y);
@@ -136,7 +140,7 @@ namespace TwinTechs.Gestures
 					State = State == GestureRecognizerState.Possible ? GestureRecognizerState.Began : GestureRecognizerState.Changed;
 					e.IsCancelled = Recognizer.CancelsTouchesInView;
 				}
-//			Console.WriteLine ("State " + State + "_previousPoint " + _previousPoint + " _currentPoint" + _currentPoint);
+//				Console.WriteLine ("State " + State + "_previousPoint " + _previousPoint.PrettyPrint () + " _currentPoint" + _currentPoint.PrettyPrint () + "rt " + _rawTranslation.PrettyPrint ());
 			}
 		}
 

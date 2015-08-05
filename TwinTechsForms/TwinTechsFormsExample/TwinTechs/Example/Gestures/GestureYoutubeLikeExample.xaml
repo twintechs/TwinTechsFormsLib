@@ -8,15 +8,17 @@
 	xmlns:cells="clr-namespace:TwinTechs.Example.Gestures.Cells;assembly=TwinTechsFormsExample"
 	xmlns:local="clr-namespace:TwinTechs.Example.Gestures;assembly=TwinTechsFormsExample"
 	xmlns:controls="clr-namespace:TwinTechs.Controls;assembly=TwinTechsForms"
+	BackgroundColor="Silver"
 	Title="SwipeExample">
 
 	<local:SimpleLayout
+		BackgroundColor="Silver"
 		x:Name="MainLayout"
 		IsHandlingLayoutManually="true">
 
 		<ListView
+			BackgroundColor="Silver"
 			x:Name="MediaItemsListView"
-			BackgroundColor="Transparent"
 			SeparatorVisibility="None"
 			ItemSelected="OnItemSelected"
 			RowHeight="100">

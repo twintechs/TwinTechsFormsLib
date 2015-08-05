@@ -8,7 +8,6 @@ using Android.Views;
 using Android.Content;
 using Android.Widget;
 using TwinTechs.Droid.Extensions;
-using TwinTechs.Droid.Helper;
 using Android.OS;
 
 namespace XLabs.Forms.Controls
@@ -31,7 +30,7 @@ namespace XLabs.Forms.Controls
 					_viewCell = fastGridCell;
 					fastGridCell.PrepareCell (initialCellSize);
 //					_viewCell.View.BackgroundColor = Xamarin.Forms.Color.Green;
-					var renderer = RendererHelper.GetOrCreateRenderer (fastGridCell.View);
+					var renderer = fastGridCell.View.GetOrCreateRenderer ();
 					_nativeView = renderer.ViewGroup;
 //					SetBackgroundColor (Android.Graphics.Color.Yellow);
 					AddView (_nativeView);

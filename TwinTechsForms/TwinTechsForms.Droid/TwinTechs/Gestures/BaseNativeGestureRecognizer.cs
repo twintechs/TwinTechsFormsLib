@@ -4,6 +4,7 @@ using Android.Graphics;
 using TwinTechs.Droid.Extensions;
 using System.Linq;
 using Xamarin.Forms;
+using TwinTechs.Extensions;
 
 namespace TwinTechs.Gestures
 {
@@ -142,8 +143,8 @@ namespace TwinTechs.Gestures
 			returnPoint.X -= nativeViewScreenLocation.X;
 			returnPoint.Y -= nativeViewScreenLocation.Y;
 
-			Console.WriteLine ("offsetLocation {0} nativeViewLocationOnScreen {1} returnPoint", offsetLocation, nativeViewLocationOnScreen);
-			Console.WriteLine ("location {0} parentViewLoc {1} returnPoint {2}", location, nativeViewScreenLocation, returnPoint);
+//			Console.WriteLine ("offsetLocation {0} nativeViewLocationOnScreen {1} returnPoint", offsetLocation, nativeViewLocationOnScreen);
+//			Console.WriteLine ("location {0} parentViewLoc {1} returnPoint {2}", location, nativeViewScreenLocation, returnPoint);
 			return returnPoint;
 		}
 
@@ -162,24 +163,13 @@ namespace TwinTechs.Gestures
 		public void ProcessGestureMotionEvent (GestureMotionEvent gestureEvent)
 		{
 			var ev = gestureEvent.MotionEvent;
-
-			//we also want to know the location of our page, in case it's inside another page
-
-
-			//TODO work out if it's our view in here, then update the coordinates
-			int[] location = new int[2];
-			NativeView.GetLocationOnScreen (location);
-			var nativeViewScreenLocation = new Xamarin.Forms.Point (location [0], location [1]);
-
-			int[] windowLocation = new int[2];
-			NativeView.GetLocationInWindow (windowLocation);
-			var nativeViewWindowLocation = new Xamarin.Forms.Point (windowLocation [0], windowLocation [1]);
+			var nativeViewScreenLocation = Recognizer.View.GetNativeScreenPosition ();
 
 			var offset = Xamarin.Forms.Point.Zero;
 			var touchPoint = new Xamarin.Forms.Point (ev.GetX (), ev.GetY ());
 			var mainPointerId = ev.GetPointerId (0);
 			//1. is it inside the view? 
-			Console.WriteLine ("touch point {0} vlocs {1} vlocw {2}", touchPoint, nativeViewScreenLocation, nativeViewWindowLocation);
+//			Console.WriteLine ("touch point {0} vlocs {1} vlocw {2}", touchPoint.PrettyPrint (), nativeViewScreenLocation.PrettyPrint (), nativeViewWindowLocation.PrettyPrint ());
 //			Console.WriteLine ("touch point {0} view bounds {1} size {2},{3}", touchPoint, nativeViewScreenLocation, NativeView.Width, NativeView.Height);
 			var isInsideOfView = touchPoint.X >= nativeViewScreenLocation.X && touchPoint.Y >= nativeViewScreenLocation.Y &&
 			                     touchPoint.X <= (NativeView.Width + nativeViewScreenLocation.X) && touchPoint.Y <= (NativeView.Height + nativeViewScreenLocation.Y);
@@ -193,9 +183,9 @@ namespace TwinTechs.Gestures
 				ev.OffsetLocation ((float)offset.X, (float)offset.Y);
 				var offsetLocation = new Xamarin.Forms.Point (ev.GetX (), ev.GetY ());
 				if (isInsideOfView) {
-					Console.WriteLine ("INSIDE " + ev.Action + " offset " + offset + " results in " + offsetLocation);
+//					Console.WriteLine ("INSIDE " + ev.Action + " offset " + offset.PrettyPrint () + " results in " + offsetLocation.PrettyPrint ());
 				} else {
-					Console.WriteLine ("touch outside view, but was tracked " + offset);
+//					Console.WriteLine ("touch outside view, but was tracked " + offset);
 				}
 
 				//TODO - ask the view if it's happy to process this touch at the same time as another gesture - I see no way to make it work for views.. (without 

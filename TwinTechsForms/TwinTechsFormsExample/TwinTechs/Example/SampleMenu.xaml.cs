@@ -125,6 +125,13 @@ namespace TwinTechs.Example
 
 		}
 
+
+		void OnPan3Gesture (object sender, object args)
+		{
+			Navigation.PushAsync (new PanGestureExample3 ());
+
+		}
+
 		void OnPinchGesture (object sender, object args)
 		{
 			Navigation.PushAsync (new GridViewOptions ());
@@ -134,6 +141,13 @@ namespace TwinTechs.Example
 		void OnMixedGestures (object sender, object args)
 		{
 			Navigation.PushAsync (new MultiGestureExample ());
+
+		}
+
+
+		void OnGesturesInChildViews (object sender, object args)
+		{
+			Navigation.PushAsync (new GesturesInChildViewsExample ());
 
 		}
 

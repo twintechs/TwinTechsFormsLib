@@ -12,9 +12,12 @@ namespace TwinTechs.Example.Gestures
 	{
 		public double ParentHeight { get; set; }
 
+
 		public YoutubeStyleContentPage ()
 		{
 			InitializeComponent ();
+			MinimumHeightRequest = 100;
+			MinimumWidthRequest = 160;
 			MediaItemsListView.ItemsSource = DataProvider.GetMediaItems ();
 		}
 
@@ -26,12 +29,12 @@ namespace TwinTechs.Example.Gestures
 
 		protected override void LayoutChildren (double x, double y, double width, double height)
 		{
-			var complete = Math.Min (1, height / ParentHeight);
+			var complete = Math.Min (1, height / (ParentHeight));
 			MediaItemsListView.Opacity = complete;
 			TitleLabel.Opacity = complete;
 			MainLayout.RowDefinitions [0].Height = 40 * complete;
-			MainLayout.RowDefinitions [1].Height = 100 + (160 * complete);
-
+			MainLayout.RowDefinitions [1].Height = MinimumHeightRequest + (160 * complete);
+//			Debug.WriteLine ("complete {0} height {1} ph{2}", complete, height, ParentHeight);
 			base.LayoutChildren (x, y, width, height);
 			MediaItemsListView.Layout (new Rectangle (0, MediaItemsListView.Bounds.Y, width, MediaItemsListView.Bounds.Height));
 		}

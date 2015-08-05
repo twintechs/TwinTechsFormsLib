@@ -29,10 +29,42 @@ namespace TwinTechs.Droid.Extensions
 		{
 			var renderer = bindableObject.GetRenderer ();
 			var viewGroup = renderer.ViewGroup;
-			var rootView = viewGroup.RootView;
+			//TODO was retrurning .rootView from this - don't remember why!
+			return viewGroup;
+		}
 
-			//TODO - look at why I returned the root view not the viewgoup - I think this is amistake I checked in but now has implications for many things
-			return rootView;
+		public static void SetRenderer (this BindableObject bindableObject, IVisualElementRenderer renderer)
+		{
+			var value = bindableObject.GetValue (RendererProperty);
+			bindableObject.SetValue (RendererProperty, renderer);
+		}
+
+		public static Point GetNativeScreenPosition (this BindableObject bindableObject)
+		{
+			var view = bindableObject.GetNativeView ();
+			var point = Point.Zero;
+			if (view != null) {
+				int[] location = new int[2];
+				view.GetLocationOnScreen (location);
+				point = new Xamarin.Forms.Point (location [0], location [1]);
+			}
+			return point;
+		}
+
+		/// <summary>
+		/// Gets the or create renderer.
+		/// </summary>
+		/// <returns>The or create renderer.</returns>
+		/// <param name="source">Source.</param>
+		public static IVisualElementRenderer GetOrCreateRenderer (this VisualElement source)
+		{
+			var renderer = source.GetRenderer ();
+			if (renderer == null) {
+				renderer = RendererFactory.GetRenderer (source);
+				source.SetRenderer (renderer);
+				renderer = source.GetRenderer ();
+			}
+			return renderer;
 		}
 	}
 }

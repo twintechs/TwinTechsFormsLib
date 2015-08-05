@@ -78,7 +78,6 @@
     <Compile Include="XLabs\Controls\GridView\GridViewAdapter.cs" />
     <Compile Include="XLabs\Controls\GridView\GridViewCellContainer.cs" />
     <Compile Include="XLabs\Controls\GridView\GridViewRenderer.cs" />
-    <Compile Include="TwinTechs\Droid\Helper\RendererHelper.cs" />
     <Compile Include="TwinTechs\Droid\Controls\PageViewContainerRenderer.cs" />
     <Compile Include="TwinTechs\Gestures\BaseNativeGestureRecognizer.cs" />
     <Compile Include="TwinTechs\Gestures\NativeGestureCoordinator.cs" />
@@ -108,7 +107,6 @@
     <Folder Include="XLabs\" />
     <Folder Include="XLabs\Controls\" />
     <Folder Include="XLabs\Controls\GridView\" />
-    <Folder Include="TwinTechs\Droid\Helper\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TwinTechsForms.Core\TwinTechsForms.Core.csproj">

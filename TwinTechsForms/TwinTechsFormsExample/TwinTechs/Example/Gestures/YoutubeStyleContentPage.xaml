@@ -43,6 +43,7 @@
 			x:Name="MediaItemsListView"
 			BackgroundColor="Transparent"
 			SeparatorVisibility="None"
+			MinimumWidthRequest="320"
 			Grid.Row="2"
 			RowHeight="100">
 

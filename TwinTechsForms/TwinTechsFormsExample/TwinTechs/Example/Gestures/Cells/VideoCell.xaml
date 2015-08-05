@@ -11,7 +11,7 @@
 	<StackLayout
 		x:Name="ForegroundContent"
 		Orientation="Horizontal"
-		BackgroundColor="White"
+		BackgroundColor="Silver"
 		HorizontalOptions="FillAndExpand"
 		VerticalOptions="Center"
 		Padding="0,0">
