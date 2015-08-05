@@ -127,3 +127,18 @@ Usage of the GridView is the same as in XLabs, with a few additional properties
   * CenterAsFilledRow - if set to false, then the content will always be "truly" centered, so if you have just one item, it will appear in the middle of your grid, as opposed to padded to fit into where it would if you had sufficient items to fill a row.
   
 The FastGridCell is described fully in our blog post : [http://blog.twintechs.com/advanced-xamarin-forms-techniques-for-flexible-and-performant-cross-platform-apps-part-3](http://blog.twintechs.com/advanced-xamarin-forms-techniques-for-flexible-and-performant-cross-platform-apps-part-3): 
+
+## GESTURES
+We have a suite of cross platform gestures (iOS and Android at time of writing)).
+
+Ive blogged about them [here](http://blog.twintechs.com/cross-platform-compositional-gesture-advanced-xamarin-forms-techniques-for-flexible-and-performant-cross-platform-apps-part-4) and will provide more documentation shortly (probably in the form of a video - tired of tippy tapping). 
+
+In a nut-shell, we've opted to use compositional style gestures that build on Xamarin's own mechanism. This makes for a natural and unobtrusive api.
+
+No subclassing or special views are required, and the only additional step to using them, is on Android, whereby you need to override one method in your main activity. That step is optional, only if you want advanced gesture touch coordination (which you probably will, once you see what it does ;)
+
+If you can't work out how to use them from the samples though, well.. you probably shouldn't be trying to use them anyhow :)
+
+I will add they are WIP and that some of the android features are experimental. You can expect crashes and memory leaks. However, if you are brave enough to give them ago, we are actively supporting and developing them and will get onto your bugs in a speedy fashion. We will also lovingly aceept your pull requests :)
+
+
