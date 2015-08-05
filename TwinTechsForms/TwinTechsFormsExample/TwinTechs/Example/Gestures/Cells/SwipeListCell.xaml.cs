@@ -7,11 +7,13 @@ using System.Diagnostics;
 
 namespace TwinTechs.Example.Gestures.Cells
 {
-	public partial class SwipeListCell : FastCell
+
+	//TODO - fastcell has a bug in it which causes the renderer not to be set on some of the top level view! need to work out why.
+	public partial class SwipeListCell : ViewCell
 	{
 		Rectangle _contentBounds;
 
-		protected override void InitializeCell ()
+		public SwipeListCell ()
 		{
 			InitializeComponent ();
 			MainLayout.OnLayoutChildren += MainLayout_OnLayoutChildren;
@@ -22,8 +24,9 @@ namespace TwinTechs.Example.Gestures.Cells
 			ForegroundContent.ProcessGestureRecognizers ();
 		}
 
-		protected override void SetupCell (bool isRecycled)
+		protected override void OnBindingContextChanged ()
 		{
+			base.OnBindingContextChanged ();
 			var mediaItem = BindingContext as MediaItem;
 			if (mediaItem != null) {
 				_contentBounds.X = 0;
@@ -31,6 +34,12 @@ namespace TwinTechs.Example.Gestures.Cells
 				UserThumbnailView.ImageUrl = mediaItem.ImagePath ?? "";
 				NameLabel.Text = mediaItem.Name + " An item with a pannable content overlay";
 			}
+		}
+
+		protected override void OnAppearing ()
+		{
+			base.OnAppearing ();
+			_contentBounds.X = 0;
 		}
 
 		void MainLayout_OnLayoutChildren (double x, double y, double width, double height)

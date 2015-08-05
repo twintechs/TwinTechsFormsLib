@@ -18,6 +18,11 @@ namespace TwinTechs.Example.Gestures
 		{
 			InitializeComponent ();
 			MediaItemsListView.ItemsSource = DataProvider.GetMediaItems ();
+			MediaItemsListView.ItemSelected += (object sender, SelectedItemChangedEventArgs e) => {
+				if (e.SelectedItem == null)
+					return; // don't do anything if we just de-selected the row
+				((ListView)sender).SelectedItem = null; 
+			};
 		}
 
 

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 
-<controls:FastCell
+<ViewCell
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	x:Class="TwinTechs.Example.Gestures.Cells.SwipeListCell"
@@ -66,4 +66,4 @@
 
 	</gestureSamples:SimpleLayout>
 
-</controls:FastCell>
+</ViewCell>

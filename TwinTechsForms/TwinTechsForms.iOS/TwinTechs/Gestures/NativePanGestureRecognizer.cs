@@ -37,6 +37,10 @@ namespace TwinTechs.Gestures
 		public Xamarin.Forms.Point GetTranslationInView (VisualElement view)
 		{
 			var renderer = view.GetRenderer ();
+			if (renderer == null || renderer.NativeView == null) {
+				//TODO -not sure why this isn't working on iOS. very weird.
+				return new Xamarin.Forms.Point (0, 0);
+			}
 			return NativeRecognizer.TranslationInView (renderer.NativeView).ToPoint ();
 		}
 
