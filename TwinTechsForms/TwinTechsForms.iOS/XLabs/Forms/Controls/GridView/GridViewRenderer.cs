@@ -6,6 +6,7 @@ using CoreGraphics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using TwinTechs.Controls;
+using System.Diagnostics;
 
 [assembly: ExportRenderer (typeof(GridView), typeof(GridViewRenderer))]
 namespace XLabs.Forms.Controls
@@ -122,6 +123,14 @@ namespace XLabs.Forms.Controls
 				}
 			}
 
+			if (e.PropertyName == "IsScrollEnabled") {
+				Device.BeginInvokeOnMainThread (() => {
+					_gridCollectionView.ScrollEnabled = Element.IsScrollEnabled;
+					Debug.WriteLine ("scroll enabled changed to " + _gridCollectionView.ScrollEnabled);
+				}
+				);
+
+			}
 
 			if (e.PropertyName == "ItemSize") {
 				var gridView = sender as GridView;
@@ -267,6 +276,7 @@ namespace XLabs.Forms.Controls
 			foreach (GridViewCell nativeCell in _gridCollectionView.VisibleCells) {
 				nativeCell.ViewCell.OnScroll (contentOffset.ToPoint (), new Xamarin.Forms.Point (nativeCell.Frame.X, nativeCell.Frame.Y));
 			}
+			Element.RaiseOnScroll (0, (float)contentOffset.Y);
 		}
 
 		void ScrollToInitialIndex ()

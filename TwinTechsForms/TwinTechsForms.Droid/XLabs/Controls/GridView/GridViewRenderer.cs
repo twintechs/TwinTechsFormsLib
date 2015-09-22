@@ -58,6 +58,16 @@ namespace XLabs.Forms.Controls
 			if (e.PropertyName == "ItemsSource") {
 				_adapter.Items = Element.ItemsSource;
 			}
+
+			if (e.PropertyName == "IsScrollEnabled") {
+				Device.BeginInvokeOnMainThread (() => {
+					_recyclerView.Enabled = Element.IsScrollEnabled;
+//					Debug.WriteLine ("scroll enabled changed to " + _gridCollectionView.ScrollEnabled);
+				}
+				);
+
+			
+			}
 		}
 
 		#endregion

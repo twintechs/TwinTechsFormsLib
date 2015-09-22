@@ -149,6 +149,11 @@
 					Detail="Example showing gestures youtube styled UX"
 					Tapped="OnYoutubeStyleGestures" />	
 
+				<TextCell
+					Text="drag list example"
+					Detail="Example showing gestures to do cool list stuff"
+					Tapped="OnDragListGestures" />	
+
 											<TextCell
 					Text="Nested children"
 					Detail="Demonstrating gestures inside of other views"

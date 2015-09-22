@@ -43,7 +43,6 @@ namespace TwinTechs.Example.Gestures
 			tapRecognizer.OnAction += OnAction;
 			Label2.GestureRecognizers.Add (tapRecognizer);
 			Label2.ProcessGestureRecognizers ();
-
 		}
 
 		void FixGesturesUsingXaml ()

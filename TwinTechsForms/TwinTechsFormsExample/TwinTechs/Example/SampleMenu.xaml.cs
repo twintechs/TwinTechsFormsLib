@@ -164,6 +164,12 @@ namespace TwinTechs.Example
 
 		}
 
+		void OnDragListGestures (object sender, object args)
+		{
+			Navigation.PushAsync (new GestureScrollListExample ());
+
+		}
+
 
 		#endregion
 

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="TwinTechs.Example.Gestures.GestureScrollListExample"
+	xmlns:gestures="clr-namespace:TwinTechs.Gestures;assembly=TwinTechsForms"
+	xmlns:local="clr-namespace:TwinTechs.Example.Gestures;assembly=TwinTechsFormsExample"
+	xmlns:controls="clr-namespace:TwinTechs.Controls;assembly=TwinTechsForms"
+	xmlns:xlabs="clr-namespace:XLabs.Forms.Controls;assembly=TwinTechsForms"
+	xmlns:cells="clr-namespace:TwinTechs.Example.GridView.Cells;assembly=TwinTechsFormsExample"
+	BackgroundColor="Silver"
+	Title="Drag list example">
+
+	<local:SimpleLayout
+		BackgroundColor="Silver"
+		x:Name="MainLayout"
+		IsHandlingLayoutManually="true">
+
+		<StackLayout
+			x:Name="Details"
+			Padding="30"
+			VerticalOptions="Center"
+			HorizontalOptions="Center">
+
+			<Label
+				Text="Kurt Mansperger" />
+
+			<Label
+				Text="COOL PHOTO" />
+
+			<StackLayout
+			Padding="30"
+				Orientation="Horizontal"
+				VerticalOptions="Center"
+				HorizontalOptions="Center">
+
+				<Label
+					Text="Click me" />
+
+				<Label
+					Text="Views 10002" />
+
+				<Label
+					Text="Stuff : 232" />
+
+			</StackLayout>
+
+		</StackLayout>
+
+		<xlabs:GridView
+			x:Name="MediaItemsListView"
+			RowSpacing="5"
+			ColumnSpacing="5"
+			ContentPaddingBottom="60"
+			ContentPaddingTop="10"
+			ContentPaddingLeft="10"
+			ContentPaddingRight="10"
+			ItemWidth="150"
+			ItemHeight="200"
+			ItemSelected="OnItemSelected"
+			SelectionEnabled="true">
+
+			<xlabs:GridView.ItemTemplate>
+
+				<DataTemplate>
+
+					<cells:GridViewXamlCell />
+
+				</DataTemplate>
+
+			</xlabs:GridView.ItemTemplate>
+
+		</xlabs:GridView>
+
+	</local:SimpleLayout>
+
+</ContentPage>

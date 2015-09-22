@@ -50,6 +50,7 @@ namespace XLabs.Forms.Controls
 		/// The row spacing property
 		/// </summary>
 		public static readonly BindableProperty CenterAsFilledRowProperty = BindableProperty.Create ("CenterAsFilledRow", typeof(bool), typeof(GridView), true, BindingMode.OneWay, null, null, null, null);
+		public static readonly BindableProperty IsScrollEnabledProperty = BindableProperty.Create ("IsScrollEnabled", typeof(bool), typeof(GridView), true, BindingMode.OneWay, null, null, null, null);
 
 
 		/// <summary>
@@ -203,6 +204,19 @@ namespace XLabs.Forms.Controls
 			}
 			set {
 				base.SetValue (GridView.CenterAsFilledRowProperty, value);
+			}
+		}
+
+		/// <summary>
+		/// Gets or sets a value indicating whether this instance is scroll enabled.
+		/// </summary>
+		/// <value><c>true</c> if this instance is scroll enabled; otherwise, <c>false</c>.</value>
+		public bool IsScrollEnabled {
+			get {
+				return (bool)base.GetValue (GridView.IsScrollEnabledProperty);
+			}
+			set {
+				base.SetValue (GridView.IsScrollEnabledProperty, value);
 			}
 		}
 

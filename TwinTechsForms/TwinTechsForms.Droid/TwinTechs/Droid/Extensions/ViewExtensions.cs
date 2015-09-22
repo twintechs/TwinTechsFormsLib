@@ -29,13 +29,12 @@ namespace TwinTechs.Droid.Extensions
 		{
 			var renderer = bindableObject.GetRenderer ();
 			var viewGroup = renderer.ViewGroup;
-			//TODO was retrurning .rootView from this - don't remember why!
 			return viewGroup;
 		}
 
 		public static void SetRenderer (this BindableObject bindableObject, IVisualElementRenderer renderer)
 		{
-			var value = bindableObject.GetValue (RendererProperty);
+//			var value = bindableObject.GetValue (RendererProperty);
 			bindableObject.SetValue (RendererProperty, renderer);
 		}
 
