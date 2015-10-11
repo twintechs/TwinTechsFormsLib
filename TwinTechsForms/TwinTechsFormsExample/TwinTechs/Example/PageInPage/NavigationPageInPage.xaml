@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="TwinTechs.Example.PageInPage.NavigationPageInPage"
+	xmlns:controls="clr-namespace:TwinTechs.Controls;assembly=TwinTechsForms">
+
+	<StackLayout
+		x:Name="Stack"
+		HorizontalOptions="Fill"
+		VerticalOptions="Fill"
+		BackgroundColor="Blue"
+		Spacing="0">
+		<controls:PageViewContainer
+			x:Name="PageContainer"
+			HorizontalOptions="FillAndExpand"
+			WidthRequest="320"
+			HeightRequest="400"
+			VerticalOptions="FillAndExpand" />
+
+	</StackLayout>
+
+</ContentPage>

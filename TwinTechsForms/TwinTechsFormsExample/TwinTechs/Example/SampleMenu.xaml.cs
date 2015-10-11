@@ -6,6 +6,7 @@ using TwinTechs.Example.FastCells;
 using TwinTechs.Example.GridView;
 using TwinTechs.Example.Gestures;
 using TwinTechs.Example.PageInPage;
+using TwinTechs.Example.CircleView;
 
 namespace TwinTechs.Example
 {
@@ -171,6 +172,7 @@ namespace TwinTechs.Example
 		}
 
 
+
 		#endregion
 
 		#region Page in page
@@ -179,6 +181,23 @@ namespace TwinTechs.Example
 		{
 			var pageInPage = new PageInPageSample ();
 			Navigation.PushAsync (pageInPage);
+			
+		}
+
+		void OnEmbeddedNavigationPage (object sender, object args)
+		{
+			var navigationPageInPage = new NavigationPageInPage ();
+			Navigation.PushAsync (navigationPageInPage);
+			
+		}
+
+		#endregion
+
+		#region composition examples
+
+		void OnCircleView (object sender, object args)
+		{
+			Navigation.PushAsync (new CircleViewSamplePage ());
 			
 		}
 

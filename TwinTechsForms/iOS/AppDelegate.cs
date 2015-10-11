@@ -19,7 +19,6 @@ namespace TwinTechsFormsExample.iOS
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init ();
-
 			AppHelper.FastCellCache = FastCellCache.Instance;
 			AppHelper.ScreenSize = new Xamarin.Forms.Size (UIScreen.MainScreen.Bounds.Size.Width, UIScreen.MainScreen.Bounds.Size.Height);
 			GestureRecognizerExtensions.Factory = new NativeGestureRecognizerFactory ();
@@ -28,6 +27,8 @@ namespace TwinTechsFormsExample.iOS
 			#if ENABLE_TEST_CLOUD
 			Xamarin.Calabash.Start ();
 			#endif
+
+			ViewEffectExtensions.ViewExtensionProvider = new ViewMaskExtensionProvider ();
 
 			LoadApplication (new App ());
 

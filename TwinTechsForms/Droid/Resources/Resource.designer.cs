@@ -26,23 +26,6 @@ namespace TwinTechsFormsExample.Droid
 		
 		public static void UpdateIdValues()
 		{
-			global::Xamarin.Forms.Platform.Resource.String.ApplicationName = global::TwinTechsFormsExample.Droid.Resource.String.ApplicationName;
-			global::Xamarin.Forms.Platform.Resource.String.Hello = global::TwinTechsFormsExample.Droid.Resource.String.Hello;
-			global::TwinTechsLib.Droid.Resource.Attribute.layoutManager = global::TwinTechsFormsExample.Droid.Resource.Attribute.layoutManager;
-			global::TwinTechsLib.Droid.Resource.Attribute.reverseLayout = global::TwinTechsFormsExample.Droid.Resource.Attribute.reverseLayout;
-			global::TwinTechsLib.Droid.Resource.Attribute.spanCount = global::TwinTechsFormsExample.Droid.Resource.Attribute.spanCount;
-			global::TwinTechsLib.Droid.Resource.Attribute.stackFromEnd = global::TwinTechsFormsExample.Droid.Resource.Attribute.stackFromEnd;
-			global::TwinTechsLib.Droid.Resource.Dimension.item_touch_helper_max_drag_scroll_per_frame = global::TwinTechsFormsExample.Droid.Resource.Dimension.item_touch_helper_max_drag_scroll_per_frame;
-			global::TwinTechsLib.Droid.Resource.Id.item_touch_helper_previous_elevation = global::TwinTechsFormsExample.Droid.Resource.Id.item_touch_helper_previous_elevation;
-			global::TwinTechsLib.Droid.Resource.String.ApplicationName = global::TwinTechsFormsExample.Droid.Resource.String.ApplicationName;
-			global::TwinTechsLib.Droid.Resource.String.Hello = global::TwinTechsFormsExample.Droid.Resource.String.Hello;
-			global::TwinTechsLib.Droid.Resource.String.library_name = global::TwinTechsFormsExample.Droid.Resource.String.library_name;
-			global::TwinTechsLib.Droid.Resource.Styleable.RecyclerView = global::TwinTechsFormsExample.Droid.Resource.Styleable.RecyclerView;
-			global::TwinTechsLib.Droid.Resource.Styleable.RecyclerView_android_orientation = global::TwinTechsFormsExample.Droid.Resource.Styleable.RecyclerView_android_orientation;
-			global::TwinTechsLib.Droid.Resource.Styleable.RecyclerView_layoutManager = global::TwinTechsFormsExample.Droid.Resource.Styleable.RecyclerView_layoutManager;
-			global::TwinTechsLib.Droid.Resource.Styleable.RecyclerView_reverseLayout = global::TwinTechsFormsExample.Droid.Resource.Styleable.RecyclerView_reverseLayout;
-			global::TwinTechsLib.Droid.Resource.Styleable.RecyclerView_spanCount = global::TwinTechsFormsExample.Droid.Resource.Styleable.RecyclerView_spanCount;
-			global::TwinTechsLib.Droid.Resource.Styleable.RecyclerView_stackFromEnd = global::TwinTechsFormsExample.Droid.Resource.Styleable.RecyclerView_stackFromEnd;
 		}
 		
 		public partial class Attribute
@@ -114,28 +97,6 @@ namespace TwinTechsFormsExample.Droid
 			}
 			
 			private Id()
-			{
-			}
-		}
-		
-		public partial class String
-		{
-			
-			// aapt resource value: 0x7f050002
-			public const int ApplicationName = 2131034114;
-			
-			// aapt resource value: 0x7f050001
-			public const int Hello = 2131034113;
-			
-			// aapt resource value: 0x7f050000
-			public const int library_name = 2131034112;
-			
-			static String()
-			{
-				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
-			}
-			
-			private String()
 			{
 			}
 		}

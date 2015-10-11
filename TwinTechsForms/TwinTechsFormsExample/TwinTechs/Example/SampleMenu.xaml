@@ -20,6 +20,11 @@
 					Text="Simple example"
 					Tapped="OnPageInPageSimple" />
 
+				<TextCell
+					Text="Embedded navigation page"
+					Detail="Demonstrating a bug with embedded a page inside a page"
+					Tapped="OnEmbeddedNavigationPage" />
+
 			</TableSection>
 
 			<TableSection
@@ -83,6 +88,17 @@
 			</TableSection>
 
 			<TableSection
+				Title="Composition examples">
+
+				<TextCell
+					Height="60"
+					Text="CIRCLE VIEW"
+					Detail="Shows how to do circular masking, using composition"
+					Tapped="OnCircleView" />
+
+			</TableSection>
+
+			<TableSection
 				Title="Gestures">
 
 				<TextCell
@@ -123,9 +139,9 @@
 				<TextCell
 					Text="Pan2"
 					Detail="Example dragging a control around"
-					Tapped="OnPan2Gesture" />				
+					Tapped="OnPan2Gesture" />
 
-					<TextCell
+				<TextCell
 					Text="Pan3"
 					Detail="Example dragging a control around, with different parent"
 					Tapped="OnPan3Gesture" />
@@ -139,22 +155,22 @@
 					Detail="Example showing how to mix gestures together"
 					Tapped="OnMixedGestures" />
 
-
 				<TextCell
 					Text="ListGestures"
 					Detail="Example showing gestures in listcells"
 					Tapped="OnCellGestures" />
+
 				<TextCell
 					Text="UX example"
 					Detail="Example showing gestures youtube styled UX"
-					Tapped="OnYoutubeStyleGestures" />	
+					Tapped="OnYoutubeStyleGestures" />
 
 				<TextCell
 					Text="drag list example"
 					Detail="Example showing gestures to do cool list stuff"
-					Tapped="OnDragListGestures" />	
+					Tapped="OnDragListGestures" />
 
-											<TextCell
+				<TextCell
 					Text="Nested children"
 					Detail="Demonstrating gestures inside of other views"
 					Tapped="OnGesturesInChildViews" />

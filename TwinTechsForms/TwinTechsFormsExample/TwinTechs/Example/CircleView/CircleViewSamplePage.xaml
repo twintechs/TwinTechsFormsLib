@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="TwinTechs.Example.CircleView.CircleViewSamplePage"
+	xmlns:controls="clr-namespace:TwinTechs.Controls;assembly=TwinTechsForms">
+
+	<StackLayout
+		x:Name="Stack"
+		HorizontalOptions="Fill"
+		VerticalOptions="Fill"
+		BackgroundColor="White"
+		Spacing="0">
+
+		<StackLayout
+			Orientation="Horizontal">
+
+			<Button
+				x:Name="NoneButton"
+				Text="None"
+				Clicked="OnClickedSelectionButton" />
+
+			<Button
+				x:Name="CircleButton"
+				Text="Circle"
+				Clicked="OnClickedSelectionButton" />
+
+			<Button
+				x:Name="TriangleButton"
+				Text="Triangle"
+				Clicked="OnClickedSelectionButton" />
+
+			<Button
+				x:Name="SquareButton"
+				Text="Square"
+				Clicked="OnClickedSelectionButton" />
+
+
+			<Button
+				x:Name="ShadowButton"
+				Text="Toggle Shadow"
+				Clicked="OnToggleShadow" />
+
+			<Button
+				x:Name="ApplyToLayoutButton"
+				Text="Apply To Children"
+				Clicked="OnClickedToggleButton" />
+
+		</StackLayout>
+
+		<Label
+			LineBreakMode="WordWrap"
+			BackgroundColor="Green"
+			TextColor="White"
+			Text="Example of applying a circular mask using composition."
+			HeightRequest="100" />
+
+		<BoxView
+			x:Name="ExampleBoxView"
+			HeightRequest="200"
+			WidthRequest="100"
+			Color="Red" />
+
+		<Image
+			x:Name="ExampleImageview"
+			HeightRequest="150"
+			WidthRequest="150"
+			Source="http://www.infragistics.com/community/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/brent_5F00_schooley.metablogapi/6521.evolve_2D00_th_5F00_2FC8A2E4.jpg"
+
+			/>
+
+		<StackLayout
+			Orientation="Horizontal">
+
+			<Label
+				x:Name="LabelView"
+				BackgroundColor="Yellow"
+				Text="Some text" />
+
+			<Button
+				x:Name="ButtonView"
+				WidthRequest="100"
+				BackgroundColor="Yellow"
+				HeightRequest="30"
+				Text="Button Text" />
+
+		</StackLayout>
+
+	</StackLayout>
+
+</ContentPage>
