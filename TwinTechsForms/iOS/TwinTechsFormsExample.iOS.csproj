@@ -23,7 +23,6 @@
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchExtraArgs>-gcc_flags "-F/Applications/Reveal.app/Contents/SharedSupport/iOS-Libraries -all_load -ObjC -framework Reveal -framework QuartzCore -framework CFNetwork"</MtouchExtraArgs>
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <MtouchI18n>
     </MtouchI18n>
