@@ -12,10 +12,11 @@ using TwinTechs.Droid.Controls;
 using TwinTechs;
 using Android.Util;
 using System.Runtime.InteropServices;
-using Xamarin.Forms.Platform.Android;
 using TwinTechs.Gestures;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using TwinTechs.Controls;
+using TwinTechs.Droid.Controls;
 
 namespace TwinTechsFormsExample.Droid
 {
@@ -37,6 +38,7 @@ namespace TwinTechsFormsExample.Droid
 
 			global::Xamarin.Forms.Forms.Init (this, bundle);
 
+			ViewEffectExtensions.ViewExtensionProvider = new ViewMaskExtensionProvider ();
 			LoadApplication (new App ());
 		}
 

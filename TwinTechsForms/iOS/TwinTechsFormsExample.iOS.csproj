@@ -63,7 +63,7 @@
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignKey>iOS Development: george Cook (JMQS7C3SK4)</CodesignKey>
+    <CodesignKey>iPhone Distribution: george Cook (R79QB763PJ)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <MtouchI18n>

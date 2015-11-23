@@ -13,6 +13,7 @@
 		x:Name="MediaItemsListView"
 		BackgroundColor="Transparent"
 		SeparatorVisibility="None"
+
 		RowHeight="70">
 
 		<ListView.ItemTemplate>

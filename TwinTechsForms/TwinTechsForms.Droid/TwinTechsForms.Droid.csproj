@@ -13,7 +13,7 @@
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AssemblyName>TwinTechsLib.Droid</AssemblyName>
-    <TargetFrameworkVersion>v5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -89,6 +89,7 @@
     <Compile Include="TwinTechs\Gestures\NativeTapGestureRecognizer.cs" />
     <Compile Include="TwinTechs\Gestures\GestureTouchDispatcher.cs" />
     <Compile Include="TwinTechs\Gestures\GestureMotionEvent.cs" />
+    <Compile Include="TwinTechs\Droid\Controls\ViewMaskExtensionProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

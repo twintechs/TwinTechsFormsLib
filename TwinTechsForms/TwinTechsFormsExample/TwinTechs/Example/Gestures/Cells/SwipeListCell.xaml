@@ -21,9 +21,9 @@
 			HorizontalOptions="FillAndExpand">
 
 			<Button
-				BackgroundColor="Yellow"
+				BackgroundColor="Green"
 				Text="Forward"
-				TextColor="Black" />
+				TextColor="White" />
 
 			<Button
 				BackgroundColor="Red"
@@ -36,7 +36,7 @@
 		<StackLayout
 			x:Name="ForegroundContent"
 			Orientation="Horizontal"
-			BackgroundColor="White"
+			BackgroundColor="Yellow"
 			HorizontalOptions="FillAndExpand"
 			VerticalOptions="Center">
 
