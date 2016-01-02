@@ -30,7 +30,6 @@ namespace MonoDroidToolkit.ImageLoader
 		{
 			string stuff = Android.OS.Environment.ExternalStorageState;
 			if (Android.OS.Environment.ExternalStorageState.Equals (Android.OS.Environment.MediaMounted)) {
-				m_CacheDir = new File (Android.OS.Environment.ExternalStorageDirectory, "Android/data/" + context.ApplicationContext.PackageName);
 				m_CacheDir = context.ExternalCacheDir;
 			} else {
 				m_CacheDir = context.CacheDir;
