@@ -90,6 +90,7 @@
     <Compile Include="TwinTechs\Gestures\GestureTouchDispatcher.cs" />
     <Compile Include="TwinTechs\Gestures\GestureMotionEvent.cs" />
     <Compile Include="TwinTechs\Droid\Controls\ViewMaskExtensionProvider.cs" />
+    <Compile Include="TwinTechs\Droid\Controls\EnhancedWebViewRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

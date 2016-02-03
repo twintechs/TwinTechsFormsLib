@@ -141,4 +141,6 @@ If you can't work out how to use them from the samples though, well.. you probab
 
 I will add they are WIP and that some of the android features are experimental. You can expect crashes and memory leaks. However, if you are brave enough to give them ago, we are actively supporting and developing them and will get onto your bugs in a speedy fashion. We will also lovingly aceept your pull requests :)
 
+## EnhancedWebView
 
+While this WebView subclass could get other features, it is currently just a Xamarin.Forms implementation of a [Stack Overflow fix for when an Android doesn't stop media playback in a WebView](http://stackoverflow.com/a/3529316/48700) after you navigate away.
