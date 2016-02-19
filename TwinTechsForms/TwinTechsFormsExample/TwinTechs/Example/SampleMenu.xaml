@@ -177,6 +177,17 @@
 
 			</TableSection>
 
+			<TableSection
+				Title="SvgImage examples">
+
+				<TextCell
+					Height="60"
+					Text="SvgImage"
+					Detail="Shows how to do 9-slice SVG images"
+					Tapped="OnSvgImage" />
+
+			</TableSection>
+
 		</TableView>
 
 	</ContentPage.Content>

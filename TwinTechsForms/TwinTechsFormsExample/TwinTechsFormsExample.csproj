@@ -20,7 +20,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <LangVersion>5</LangVersion>
+    <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -29,7 +29,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <LangVersion>5</LangVersion>
+    <LangVersion>6</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="TwinTechsFormsExample.cs" />
@@ -163,6 +163,8 @@
     <Compile Include="TwinTechs\Example\CircleView\CircleViewSamplePage.xaml.cs">
       <DependentUpon>CircleViewSamplePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TwinTechs\Example\SvgImageSample\SvgImageSamplePage.cs" />
+    <Compile Include="TwinTechs\Example\SvgImageSample\SvgImageSamplePageViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.5.0.6447\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.5.0.6447\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -287,6 +289,24 @@
     <EmbeddedResource Include="TwinTechs\Example\CircleView\CircleViewSamplePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\ErulisseuiinSpaceshipPack.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\MocastIcon.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\Smile.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\SunAtNight.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\TextVariations.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\repeat.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\sliderThumb.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\test-button.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\twintechs-logo.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\mozilla\BezierCurves1.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\mozilla\BezierCurves2.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\mozilla\Text1.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\mozilla\Text2.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\mozilla\Text3.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\mozilla\Text4.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\mozilla\ellipse.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\mozilla\path.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\mozilla\transform.svg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TwinTechs\" />
@@ -294,6 +314,8 @@
     <Folder Include="TwinTechs\Example\PageInPage\" />
     <Folder Include="TwinTechs\Example\Gestures\Cells\" />
     <Folder Include="TwinTechs\Example\CircleView\" />
+    <Folder Include="TwinTechs\Example\SvgImageSample\" />
+    <Folder Include="TwinTechs\Example\SvgImageSample\Assets\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TwinTechsForms.Core\TwinTechsForms.Core.csproj">

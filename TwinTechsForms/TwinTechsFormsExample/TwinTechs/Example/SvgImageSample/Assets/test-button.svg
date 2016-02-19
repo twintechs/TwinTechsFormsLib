@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="70px" height="70px" viewBox="0 0 70 70" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>test-button</title>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <rect id="Rectangle-1" stroke="#F69E21" stroke-width="4" sketch:type="MSShapeGroup" x="5" y="5" width="60" height="60" rx="20"></rect>
+        <rect id="Rectangle-1-Copy" stroke="#9B9B9B" stroke-width="4" sketch:type="MSShapeGroup" x="11" y="11" width="48" height="48" rx="14"></rect>
+    </g>
+</svg>
