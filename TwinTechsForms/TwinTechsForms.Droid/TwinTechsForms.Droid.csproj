@@ -73,9 +73,6 @@
       <HintPath>..\packages\Xamarin.Forms.2.0.1.6505\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Platform">
-    </Reference>
-    <Reference Include="NGraphics">
-      <HintPath>..\packages\NGraphics.0.4.0\lib\MonoAndroid10\NGraphics.dll</HintPath>
       <HintPath>..\packages\Xamarin.Forms.2.0.1.6505\lib\MonoAndroid10\Xamarin.Forms.Platform.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -105,7 +102,6 @@
     <Compile Include="TwinTechs\Gestures\GestureTouchDispatcher.cs" />
     <Compile Include="TwinTechs\Gestures\GestureMotionEvent.cs" />
     <Compile Include="TwinTechs\Droid\Controls\ViewMaskExtensionProvider.cs" />
-    <Compile Include="TwinTechs\Droid\Controls\SvgImageRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

@@ -322,6 +322,10 @@
       <Project>{7C5D7E33-C77E-475F-BE8B-359CD164A4E5}</Project>
       <Name>TwinTechsForms.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TwinTechsForms.SvgImage\TwinTechsForms.SvgImage.csproj">
+      <Project>{3780F071-D298-4861-84DB-3B990987C58D}</Project>
+      <Name>TwinTechsForms.SvgImage</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

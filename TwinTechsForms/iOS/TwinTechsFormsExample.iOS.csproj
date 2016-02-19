@@ -138,6 +138,14 @@
       <Project>{C0D2B64A-CBFC-42A2-B8A6-B8673976EE14}</Project>
       <Name>TwinTechsForms.iOS</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TwinTechsForms.SvgImage\TwinTechsForms.SvgImage.iOS\TwinTechsForms.SvgImage.iOS.csproj">
+      <Project>{603CCCD7-58D1-48E1-8090-68D2FE459273}</Project>
+      <Name>TwinTechsForms.SvgImage.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwinTechsForms.SvgImage\TwinTechsForms.SvgImage.csproj">
+      <Project>{3780F071-D298-4861-84DB-3B990987C58D}</Project>
+      <Name>TwinTechsForms.SvgImage</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="sdwebimage">
