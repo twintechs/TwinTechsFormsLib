@@ -23,11 +23,6 @@ namespace TwinTechsFormsExample.iOS
 			AppHelper.ScreenSize = new Xamarin.Forms.Size (UIScreen.MainScreen.Bounds.Size.Width, UIScreen.MainScreen.Bounds.Size.Height);
 			GestureRecognizerExtensions.Factory = new NativeGestureRecognizerFactory ();
 
-			// Code for starting up the Xamarin Test Cloud Agent
-			#if ENABLE_TEST_CLOUD
-			Xamarin.Calabash.Start ();
-			#endif
-
 			ViewEffectExtensions.ViewExtensionProvider = new ViewMaskExtensionProvider ();
 
 			LoadApplication (new App ());
