@@ -36,6 +36,7 @@ namespace TwinTechs.Example.SvgImageSample
 			var svgButton = new Button() {
 				WidthRequest = 300,
 				HeightRequest = 300,
+				BackgroundColor = Color.Transparent,
 			};
 
 			// The root page of your application
