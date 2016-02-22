@@ -141,4 +141,6 @@ If you can't work out how to use them from the samples though, well.. you probab
 
 I will add they are WIP and that some of the android features are experimental. You can expect crashes and memory leaks. However, if you are brave enough to give them ago, we are actively supporting and developing them and will get onto your bugs in a speedy fashion. We will also lovingly aceept your pull requests :)
 
+## SvgImage (fork)
 
+A Xamarin.Forms SvgImage variant that offers stretchable 9-slice support of SVG image rendering. For usage, background information, and more, check out the dedicated [TwinTechs.SvgImage readme](https://github.com/twintechs/TwinTechsFormsLib/tree/master/TwinTechsForms/TwinTechsForms.SvgImage).
