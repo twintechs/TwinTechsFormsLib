@@ -1,11 +1,12 @@
 ﻿using System;
 
 using Xamarin.Forms;
-using System.Collections.Generic;
 using TwinTechs.Gestures;
 using System.Diagnostics;
 using System.Linq;
 using System.Collections.ObjectModel;
+
+using PanGestureRecognizer = TwinTechs.Gestures.PanGestureRecognizer;
 
 namespace TwinTechs.Example.Gestures
 {

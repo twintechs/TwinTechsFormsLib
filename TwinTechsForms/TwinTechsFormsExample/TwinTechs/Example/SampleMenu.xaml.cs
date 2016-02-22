@@ -202,6 +202,15 @@ namespace TwinTechs.Example
 		}
 
 		#endregion
+
+		#region SvgImage examples
+
+		async void OnSvgImage (object sender, EventArgs args)
+		{
+			await Navigation.PushAsync (new SvgImageSample.SvgImageSamplePage ());
+		}
+
+		#endregion
 	}
 }
 
