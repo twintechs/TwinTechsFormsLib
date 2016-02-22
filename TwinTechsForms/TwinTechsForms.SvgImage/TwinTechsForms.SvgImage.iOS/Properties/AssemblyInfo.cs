@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle ("TwinTechsForms.SvgImage.iOS")]
 [assembly: AssemblyDescription ("")]
 [assembly: AssemblyConfiguration ("")]
-[assembly: AssemblyCompany ("PatridgeDev, LLC")]
+[assembly: AssemblyCompany ("Twin Technologies, Inc.")]
 [assembly: AssemblyProduct ("")]
 [assembly: AssemblyCopyright ("")]
 [assembly: AssemblyTrademark ("")]
