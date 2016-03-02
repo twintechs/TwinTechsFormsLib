@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using Xamarin.Forms;
-using TwinTechs.Controls;
+using TwinTechsForms.NControl;
 
 namespace TwinTechs.Example.SvgImageSample
 {
@@ -41,23 +42,85 @@ namespace TwinTechs.Example.SvgImageSample
 
 			// The root page of your application
 			Title = "9-Slice SVG Scaling";
-			Content = new StackLayout {
-				VerticalOptions = LayoutOptions.Start,
-				HorizontalOptions = LayoutOptions.Center,
-				Children = {
-					insetLabel,
-					resourcePicker,
-					insetSlider,
-					new AbsoluteLayout() {
-						WidthRequest = 300,
-						HeightRequest = 300,
-						Children = {
-							slicingSvg,
-							svgButton,
+			Content = new ScrollView {
+				Content = new StackLayout {
+					VerticalOptions = LayoutOptions.Start,
+					HorizontalOptions = LayoutOptions.Center,
+					Children = {
+						new Label () {
+							Text = "Using TwinTechsForms.SvgImage",
+						},
+						new SvgImage() {
+							BackgroundColor = Color.Gray,
+							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
+							SvgPath = "TwinTechs.TwinTechs.Example.SvgImageSample.Assets.ErulisseuiinSpaceshipPack.svg",
+							WidthRequest = 100,
+							HeightRequest = 300,
+						},
+						new SvgImage() {
+							BackgroundColor = Color.Teal,
+							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
+							SvgPath = "TwinTechs.TwinTechs.Example.SvgImageSample.Assets.ErulisseuiinSpaceshipPack.svg",
+							WidthRequest = 300,
+							HeightRequest = 100,
+						},
+						new SvgImage() {
+							BackgroundColor = Color.Olive,
+							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
+							SvgPath = "TwinTechs.TwinTechs.Example.SvgImageSample.Assets.ErulisseuiinSpaceshipPack.svg",
+							WidthRequest = 300,
+							HeightRequest = 300,
+						},
+						new SvgImage() {
+							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
+							SvgPath = "TwinTechs.TwinTechs.Example.SvgImageSample.Assets.ErulisseuiinSpaceshipPack.svg",
+							WidthRequest = 50,
+							HeightRequest = 50,
+						},
+						insetLabel,
+						resourcePicker,
+						insetSlider,
+						new AbsoluteLayout() {
+							WidthRequest = 300,
+							HeightRequest = 300,
+							Children = {
+								slicingSvg,
+								svgButton,
+							},
+						},
+						new Label () {
+							Text = "Using TwinTechsForms.NControl.SvgImageView",
+						},
+						new SvgImageView () {
+							BackgroundColor = Color.Gray,
+							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
+							SvgPath = "TwinTechs.TwinTechs.Example.SvgImageSample.Assets.ErulisseuiinSpaceshipPack.svg",
+							WidthRequest = 100,
+							HeightRequest = 300,
+						},
+						new SvgImageView () {
+							BackgroundColor = Color.Teal,
+							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
+							SvgPath = "TwinTechs.TwinTechs.Example.SvgImageSample.Assets.ErulisseuiinSpaceshipPack.svg",
+							WidthRequest = 300,
+							HeightRequest = 100,
+						},
+						new SvgImageView () {
+							BackgroundColor = Color.Olive,
+							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
+							SvgPath = "TwinTechs.TwinTechs.Example.SvgImageSample.Assets.ErulisseuiinSpaceshipPack.svg",
+							WidthRequest = 300,
+							HeightRequest = 300,
+						},
+						new SvgImageView () {
+							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
+							SvgPath = "TwinTechs.TwinTechs.Example.SvgImageSample.Assets.ErulisseuiinSpaceshipPack.svg",
+							WidthRequest = 50,
+							HeightRequest = 50,
 						},
 					},
+					BindingContext = _ViewModel,
 				},
-				BindingContext = _ViewModel,
 			};
 			svgButton.Clicked += (sender, e) => {
 				DisplayAlert("Tapped!", "SVG button tapped!", "OK");

@@ -120,5 +120,17 @@
       <Project>{AD5C1A1E-2E26-47F6-8A5C-60569ACD808A}</Project>
       <Name>TwinTechsForms.SvgImage.Droid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TwinTechsForms.NControl.SvgImageView\TwinTechsForms.NControl.SvgImageView.Android\TwinTechForms.NControl.SvgImageView.Android.csproj">
+      <Project>{418F7F98-8509-4210-983E-7DEE1198426A}</Project>
+      <Name>TwinTechForms.NControl.SvgImageView.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwinTechsForms.NControl.SvgImageView\TwinTechForms.NControl.SvgImageView.csproj">
+      <Project>{05950D26-8F4C-4517-9295-C30655190F99}</Project>
+      <Name>TwinTechForms.NControl.SvgImageView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwinTechsForms.SvgImage\TwinTechsForms.SvgImage.csproj">
+      <Project>{3780F071-D298-4861-84DB-3B990987C58D}</Project>
+      <Name>TwinTechsForms.SvgImage</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
