@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>TwinTechsForms.SvgImage</id>
+    <version>0.0.2</version>
+    <title>TwinTechsForms.SvgImage</title>
+    <authors>Adam Patridge, George Cook, SvgImage contributors, et al</authors>
+    <owners>Twin Technologies, Inc.</owners>
+    <licenseUrl>https://github.com/twintechs/TwinTechsFormsLib/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/twintechs/TwinTechsFormsLib/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Custom variant of paulpatarinski's SvgImage, but running from a non-custom NGraphics, and allowing for stretchable (9-slice) SVGs.</description>
+    <releaseNotes>
+<![CDATA[
+v0.0.2
+• Fix for bug with 9-slice on output size variations
+v0.0.1 (unpublished)
+• Initial release
+]]>
+    </releaseNotes>
+    <copyright>Copyright 2016 Twin Technologies, Inc.</copyright>
+    <tags>xamarin forms android ios svg</tags>
+     <dependencies>
+      <group>
+        <dependency id="NGraphics" version="0.4.0" />
+        <dependency id="Xamarin.Forms" version="2.0.1.6505" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <!--Core-->
+    <file src="TwinTechsForms/TwinTechsForms.SvgImage/bin/Release/TwinTechsForms.SvgImage.dll" target="lib/portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10/TwinTechsForms.SvgImage.dll" />
+
+    <!--Xamarin.iOS Unified-->
+    <file src="TwinTechsForms/TwinTechsForms.SvgImage/TwinTechsForms.SvgImage.iOS/bin/Release/TwinTechsForms.SvgImage.dll" target="lib/Xamarin.iOS10/TwinTechsForms.SvgImage.dll" />
+    <file src="TwinTechsForms/TwinTechsForms.SvgImage/TwinTechsForms.SvgImage.iOS/bin/Release/TwinTechsForms.SvgImage.iOS.dll" target="lib/Xamarin.iOS10/TwinTechsForms.SvgImage.iOS.dll" />
+
+    <!--Xamarin.Android-->
+    <file src="TwinTechsForms/TwinTechsForms.SvgImage/TwinTechsForms.SvgImage.Droid/bin/Release/TwinTechsForms.SvgImage.dll" target="lib/MonoAndroid10/TwinTechsForms.SvgImage.dll" />
+    <file src="TwinTechsForms/TwinTechsForms.SvgImage/TwinTechsForms.SvgImage.Droid/bin/Release/TwinTechsForms.SvgImage.Droid.dll" target="lib/MonoAndroid10/TwinTechsForms.SvgImage.Droid.dll" />
+  </files>
+</package>

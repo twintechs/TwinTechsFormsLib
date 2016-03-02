@@ -68,6 +68,7 @@ namespace TwinTechs.Example.SvgImageSample
 			"mozilla.Text3",
 			"mozilla.Text4",
 			"mozilla.transform",
+			"funky-border",
 		}.ToDictionary(name => name, name => $"TwinTechs.TwinTechs.Example.SvgImageSample.Assets.{name}.svg").ToList();
 
 		public SvgImageSamplePageViewModel() {
