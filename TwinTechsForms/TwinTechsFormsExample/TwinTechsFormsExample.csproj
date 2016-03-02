@@ -307,6 +307,7 @@
     <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\mozilla\ellipse.svg" />
     <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\mozilla\path.svg" />
     <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\mozilla\transform.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\funky-border.svg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TwinTechs\" />
