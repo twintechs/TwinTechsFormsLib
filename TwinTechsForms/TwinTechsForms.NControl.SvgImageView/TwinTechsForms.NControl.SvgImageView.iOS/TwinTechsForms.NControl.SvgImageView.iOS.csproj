@@ -6,9 +6,9 @@
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProjectGuid>{58B41F20-DAE7-40C2-9021-980EED46857F}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>TwinTechForms.NControl</RootNamespace>
+    <RootNamespace>TwinTechsForms.NControl</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>TwinTechForms.NControl.SvgImageView.iOS</AssemblyName>
+    <AssemblyName>TwinTechsForms.NControl.SvgImageView.iOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +21,6 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -69,9 +68,9 @@
   <Import Project="..\packages\Xamarin.Forms.1.4.2.6355\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.4.2.6355\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Import Project="..\..\packages\Xamarin.Forms.2.1.0.6521\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.1.0.6521\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <ItemGroup>
-    <ProjectReference Include="..\TwinTechForms.NControl.SvgImageView.csproj">
+    <ProjectReference Include="..\TwinTechsForms.NControl.SvgImageView.csproj">
       <Project>{05950D26-8F4C-4517-9295-C30655190F99}</Project>
-      <Name>TwinTechForms.NControl.SvgImageView</Name>
+      <Name>TwinTechsForms.NControl.SvgImageView</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

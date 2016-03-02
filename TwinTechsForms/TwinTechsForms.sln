@@ -27,11 +27,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwinTechsForms.SvgImage.Dro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NControl.SvgImageView", "NControl.SvgImageView", "{6698F986-19E8-4C6B-A98E-7B7A2882BDA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwinTechForms.NControl.SvgImageView", "TwinTechsForms.NControl.SvgImageView\TwinTechForms.NControl.SvgImageView.csproj", "{05950D26-8F4C-4517-9295-C30655190F99}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwinTechsForms.NControl.SvgImageView", "TwinTechsForms.NControl.SvgImageView\TwinTechsForms.NControl.SvgImageView.csproj", "{05950D26-8F4C-4517-9295-C30655190F99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwinTechForms.NControl.SvgImageView.Android", "TwinTechsForms.NControl.SvgImageView\TwinTechsForms.NControl.SvgImageView.Android\TwinTechForms.NControl.SvgImageView.Android.csproj", "{418F7F98-8509-4210-983E-7DEE1198426A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwinTechsForms.NControl.SvgImageView.Android", "TwinTechsForms.NControl.SvgImageView\TwinTechsForms.NControl.SvgImageView.Android\TwinTechsForms.NControl.SvgImageView.Android.csproj", "{418F7F98-8509-4210-983E-7DEE1198426A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwinTechForms.NControl.SvgImageView.iOS", "TwinTechsForms.NControl.SvgImageView\TwinTechsForms.NControl.SvgImageView.iOS\TwinTechForms.NControl.SvgImageView.iOS.csproj", "{58B41F20-DAE7-40C2-9021-980EED46857F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwinTechsForms.NControl.SvgImageView.iOS", "TwinTechsForms.NControl.SvgImageView\TwinTechsForms.NControl.SvgImageView.iOS\TwinTechsForms.NControl.SvgImageView.iOS.csproj", "{58B41F20-DAE7-40C2-9021-980EED46857F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_nuspec", "_nuspec", "{DCF316FD-79C1-446A-A1C1-BE09B2703ABC}"
+	ProjectSection(SolutionItems) = preProject
+		..\TwinTechsForms.SvgImage.nuspec = ..\TwinTechsForms.SvgImage.nuspec
+		..\TwinTechsForms.NControl.SvgImageView.nuspec = ..\TwinTechsForms.NControl.SvgImageView.nuspec
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
