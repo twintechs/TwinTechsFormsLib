@@ -2,15 +2,22 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>TwinTechsForms.SvgImage</id>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <title>TwinTechsForms.SvgImage</title>
     <authors>Adam Patridge, George Cook, SvgImage contributors, et al</authors>
     <owners>Twin Technologies, Inc.</owners>
     <licenseUrl>https://github.com/twintechs/TwinTechsFormsLib/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/twintechs/TwinTechsFormsLib/</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Proof-of-concept and sample of paulpatarinski's SvgImage, but running from a non-custom NGraphics, and allowing for stretchable (9-slice) SVGs.</description>
-    <releaseNotes>Initial release.</releaseNotes>
+    <description>Custom variant of paulpatarinski's SvgImage, but running from a non-custom NGraphics, and allowing for stretchable (9-slice) SVGs.</description>
+    <releaseNotes>
+<![CDATA[
+v0.0.2
+• Fix for bug with 9-slice on output size variations
+v0.0.1 (unpublished)
+• Initial release
+]]>
+    </releaseNotes>
     <copyright>Copyright 2016 Twin Technologies, Inc.</copyright>
     <tags>xamarin forms android ios svg</tags>
      <dependencies>
