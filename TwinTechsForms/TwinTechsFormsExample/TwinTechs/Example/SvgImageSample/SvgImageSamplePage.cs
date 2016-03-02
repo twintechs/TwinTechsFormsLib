@@ -47,6 +47,17 @@ namespace TwinTechs.Example.SvgImageSample
 					VerticalOptions = LayoutOptions.Start,
 					HorizontalOptions = LayoutOptions.Center,
 					Children = {
+						insetLabel,
+						resourcePicker,
+						insetSlider,
+						new AbsoluteLayout() {
+							WidthRequest = 300,
+							HeightRequest = 300,
+							Children = {
+								slicingSvg,
+								svgButton,
+							},
+						},
 						new Label () {
 							Text = "Using TwinTechsForms.SvgImage",
 						},
@@ -92,19 +103,26 @@ namespace TwinTechs.Example.SvgImageSample
 							HeightRequest = 300,
 							HorizontalOptions = LayoutOptions.Start,
 						},
-						insetLabel,
-						resourcePicker,
-						insetSlider,
-						new AbsoluteLayout() {
-							WidthRequest = 300,
-							HeightRequest = 300,
-							Children = {
-								slicingSvg,
-								svgButton,
-							},
-						},
 						new Label () {
 							Text = "Using TwinTechsForms.NControl.SvgImageView",
+						},
+						new Label () {
+							Text = "Proportional Scaling",
+						},
+						new SvgImageView() {
+							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
+							SvgPath = "TwinTechs.TwinTechs.Example.SvgImageSample.Assets.funky-border.svg",
+							WidthRequest = 50,
+							HeightRequest = 50,
+						},
+						new SvgImageView() {
+							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
+							SvgPath = "TwinTechs.TwinTechs.Example.SvgImageSample.Assets.funky-border.svg",
+							WidthRequest = 100,
+							HeightRequest = 100,
+						},
+						new Label () {
+							Text = "9-Slice Scaling",
 						},
 						new SvgImageView () {
 							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
