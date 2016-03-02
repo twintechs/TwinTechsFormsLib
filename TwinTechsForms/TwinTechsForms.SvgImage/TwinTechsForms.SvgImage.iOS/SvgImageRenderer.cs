@@ -43,9 +43,8 @@ namespace TwinTechs.iOS
 					context.SetShouldAntialias (true);
 					context.SetShouldSmoothFonts (true);
 
-					var currentGraphic = _formsControl.LoadedGraphic;
 					var outputSize = new Size (rect.Width, rect.Height);
-					var finalCanvas = _formsControl.RenderSvgToCanvas (currentGraphic, currentGraphic.Size, outputSize, ScreenScale, CreatePlatformImageCanvas);
+					var finalCanvas = _formsControl.RenderSvgToCanvas (outputSize, ScreenScale, CreatePlatformImageCanvas);
 					var image = finalCanvas.GetImage ();
 					var uiImage = image.GetUIImage ();
 					Control.Image = uiImage;

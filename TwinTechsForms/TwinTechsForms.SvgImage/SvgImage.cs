@@ -216,8 +216,9 @@ namespace TwinTechs
 			LoadedGraphic = r.Graphic;
 		}
 
-		public IImageCanvas RenderSvgToCanvas (Graphic graphics, Size originalSvgSize, Size outputSize, double finalScale, Func<Size, double, IImageCanvas> createPlatformImageCanvas)
+		public IImageCanvas RenderSvgToCanvas (Size outputSize, double finalScale, Func<Size, double, IImageCanvas> createPlatformImageCanvas)
 		{
+			var originalSvgSize = LoadedGraphic.Size;
 			var finalCanvas = createPlatformImageCanvas (outputSize, finalScale);
 
 			if (SvgStretchableInsets != ResizableSvgInsets.Zero) {
@@ -241,15 +242,15 @@ namespace TwinTechs
 				}).ToArray ();
 
 				foreach (var sliceFramePair in sliceFramePairs) {
-					var sliceImage = RenderSectionToImage (graphics, sliceFramePair.Item1, sliceFramePair.Item2, finalScale, createPlatformImageCanvas);
+					var sliceImage = RenderSectionToImage (LoadedGraphic, sliceFramePair.Item1, sliceFramePair.Item2, finalScale, createPlatformImageCanvas);
 					finalCanvas.DrawImage (sliceImage, sliceFramePair.Item2);
 				}
 			} else {
 				// Typical approach to rendering an SVG; just draw it to the canvas.
 				double proportionalOutputScale = originalSvgSize.ScaleThatFits (outputSize);
 				// Make sure ViewBox is reset to a proportionally-scaled default in case it was previous set by slicing.
-				graphics.ViewBox = new Rect (Point.Zero, graphics.Size / proportionalOutputScale);
-				graphics.Draw (finalCanvas);
+				LoadedGraphic.ViewBox = new Rect (Point.Zero, originalSvgSize / proportionalOutputScale);
+				LoadedGraphic.Draw (finalCanvas);
 			}
 			return finalCanvas;
 		}
