@@ -47,4 +47,4 @@ Putting these changes into a pull request to the original SvgImage is definitely
 
 ## Coming Soon
 
-SvgImage use for buttons without a transparent button overlay. If you just can't wait and want that workaround to use now, check out the [Twin blog post about creating 9-slice SVGs (toward the bottom)](http://blog.twintechs.com/explorations-in-cross-platform-assets-9-slice-stretchable-svgs-in-xamarin.forms-apps).
+SvgImage use for buttons without a transparent button overlay. If you just can't wait and want that workaround to use now, check out the [Twin blog post about creating 9-slice SVGs (toward the bottom)](http://blog.twintechs.com/explorations-in-cross-platform-assets-xamarin-forms).
