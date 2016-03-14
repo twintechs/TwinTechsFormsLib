@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>TwinTechsForms.NControl.SvgImageView</id>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <title>TwinTechsForms.NControl.SvgImageView</title>
     <authors>Adam Patridge, George Cook</authors>
     <owners>Twin Technologies, Inc.</owners>
@@ -12,6 +12,8 @@
     <description>An NControl implementation for rendering an SVG with optional 9-slice insets.</description>
     <releaseNotes>
 <![CDATA[
+v0.0.3
+• Fix for Android NuGet references
 v0.0.2
 • Fix for bug with 9-slice on output size variations
 v0.0.1 (unpublished)
@@ -37,6 +39,6 @@ v0.0.1 (unpublished)
 
     <!--Xamarin.Android-->
     <file src="TwinTechsForms/TwinTechsForms.NControl.SvgImageView/TwinTechsForms.NControl.SvgImageView.Android/bin/Release/TwinTechsForms.NControl.SvgImageView.dll" target="lib/MonoAndroid10/TwinTechsForms.NControl.SvgImageView.dll" />
-    <file src="TwinTechsForms/TwinTechsForms.NControl.SvgImageView/TwinTechsForms.NControl.SvgImageView.Android/bin/Release/TwinTechsForms.NControl.SvgImageView.Android.dll" target="lib/MonoAndroid10/TwinTechsForms.NControl.SvgImageView.Droid.dll" />
+    <file src="TwinTechsForms/TwinTechsForms.NControl.SvgImageView/TwinTechsForms.NControl.SvgImageView.Android/bin/Release/TwinTechsForms.NControl.SvgImageView.Android.dll" target="lib/MonoAndroid10/TwinTechsForms.NControl.SvgImageView.Android.dll" />
   </files>
 </package>
