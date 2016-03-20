@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
 using Xamarin.Forms;
 using TwinTechsForms.NControl;
@@ -62,7 +61,10 @@ namespace TwinTechs.Example.SvgImageSample
 							Text = "Using TwinTechsForms.SvgImage",
 						},
 						new Label () {
-							Text = "Proportional Scaling",
+							Text = "Scaling",
+						},
+						new Label () {
+							Text = "• Aspect.AspectFit [default] (proportional+letterboxed)",
 						},
 						new SvgImage() {
 							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
@@ -76,6 +78,34 @@ namespace TwinTechs.Example.SvgImageSample
 							WidthRequest = 100,
 							HeightRequest = 100,
 						},
+						new Label () {
+							Text = "• Aspect.Fill (disproportionate fill)",
+						},
+						new SvgImage() {
+							Aspect = Aspect.Fill,
+							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
+							SvgPath = "TwinTechs.TwinTechs.Example.SvgImageSample.Assets.funky-border.svg",
+							HeightRequest = 50,
+							// Use width decided for us.
+						},
+						new SvgImage() {
+							Aspect = Aspect.Fill,
+							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
+							SvgPath = "TwinTechs.TwinTechs.Example.SvgImageSample.Assets.funky-border.svg",
+							WidthRequest = 150,
+							HeightRequest = 50,
+						},
+						new SvgImage() {
+							Aspect = Aspect.Fill,
+							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
+							SvgPath = "TwinTechs.TwinTechs.Example.SvgImageSample.Assets.funky-border.svg",
+							WidthRequest = 50,
+							HeightRequest = 150,
+						},
+						// TODO: AspectFill
+//						new Label () {
+//							Text = "\tAspect.AspectFill (proportional+cropped)",
+//						},
 						new Label () {
 							Text = "9-Slice Scaling",
 						},
@@ -107,7 +137,10 @@ namespace TwinTechs.Example.SvgImageSample
 							Text = "Using TwinTechsForms.NControl.SvgImageView",
 						},
 						new Label () {
-							Text = "Proportional Scaling",
+							Text = "Scaling",
+						},
+						new Label () {
+							Text = "• Aspect.AspectFit [default] (proportional+letterboxed)",
 						},
 						new SvgImageView() {
 							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
@@ -121,6 +154,34 @@ namespace TwinTechs.Example.SvgImageSample
 							WidthRequest = 100,
 							HeightRequest = 100,
 						},
+						new Label () {
+							Text = "• Aspect.Fill (disproportionate fill)",
+						},
+						new SvgImageView() {
+							Aspect = Aspect.Fill,
+							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
+							SvgPath = "TwinTechs.TwinTechs.Example.SvgImageSample.Assets.funky-border.svg",
+							HeightRequest = 50,
+							// Use width decided for us.
+						},
+						new SvgImageView() {
+							Aspect = Aspect.Fill,
+							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
+							SvgPath = "TwinTechs.TwinTechs.Example.SvgImageSample.Assets.funky-border.svg",
+							WidthRequest = 150,
+							HeightRequest = 50,
+						},
+						new SvgImageView() {
+							Aspect = Aspect.Fill,
+							SvgAssembly = typeof(App).GetTypeInfo().Assembly,
+							SvgPath = "TwinTechs.TwinTechs.Example.SvgImageSample.Assets.funky-border.svg",
+							WidthRequest = 50,
+							HeightRequest = 150,
+						},
+						// TODO: AspectFill
+						//						new Label () {
+						//							Text = "\tAspect.AspectFill (proportional+cropped)",
+						//						},
 						new Label () {
 							Text = "9-Slice Scaling",
 						},
