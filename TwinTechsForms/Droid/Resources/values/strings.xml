@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!--HACK: Keep VS Xamarin.Android from failing to build because these two strings don't exist.-->
+  <string name="ApplicationName">TwinTechsFormsExample</string>
+  <string name="Hello">Hello</string>
+</resources>
