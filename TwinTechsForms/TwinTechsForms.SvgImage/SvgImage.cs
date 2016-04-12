@@ -246,10 +246,33 @@ namespace TwinTechs
 					finalCanvas.DrawImage (sliceImage, sliceFramePair.Item2);
 				}
 			} else {
-				// Typical approach to rendering an SVG; just draw it to the canvas.
-				double proportionalOutputScale = originalSvgSize.ScaleThatFits (outputSize);
-				// Make sure ViewBox is reset to a proportionally-scaled default in case it was previous set by slicing.
-				LoadedGraphic.ViewBox = new Rect (Point.Zero, originalSvgSize / proportionalOutputScale);
+				// Typical approach to rendering an SVG; just draw it to the canvas with a single pass.
+				if (Aspect == Aspect.Fill) {
+					var finalSize = outputSize;
+					LoadedGraphic.Size = finalSize;
+					// Reset ViewBox to make sure we aren't scaling from any previous use as 9-slice or different Aspect.
+					LoadedGraphic.ViewBox = new Rect (Point.Zero, originalSvgSize);
+				}
+				else if (Aspect == Aspect.AspectFill) {
+					//(scale beyond + crop)
+					// [default] scale within + letterbox
+					double proportionalOutputScale = originalSvgSize.ScaleThatFills (outputSize);
+					var finalSize = originalSvgSize / proportionalOutputScale;
+					// Ensure ViewBox set to proportionally-scaling from any previous as 9-slice or different Aspect.
+					LoadedGraphic.ViewBox = new Rect (Point.Zero, finalSize);
+					// TODO: center on final size
+					var finalCanvasCenter = finalCanvas.Size / 2;
+					var fillCenter = finalSize / 2;
+					var centerOffset = fillCenter - finalCanvasCenter;
+					finalCanvas.Transform (Transform.Translate (centerOffset));
+				}
+				else { //if (Aspect == Aspect.AspectFit) {
+					// [default] scale within + letterbox
+					double proportionalOutputScale = originalSvgSize.ScaleThatFits (outputSize);
+					var finalSize = originalSvgSize / proportionalOutputScale;
+					// Ensure ViewBox set to proportionally-scaling from any previous as 9-slice or different Aspect.
+					LoadedGraphic.ViewBox = new Rect (Point.Zero, finalSize);
+				}
 				LoadedGraphic.Draw (finalCanvas);
 			}
 			return finalCanvas;
