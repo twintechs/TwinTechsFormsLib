@@ -61,6 +61,11 @@
 					Detail="Using a FastCell with complex xaml"
 					Tapped="OnFastComplexCell" />
 
+				<TextCell
+					Text="Complex FastCell SVG"
+					Detail="Using a FastCell with complex xaml and SVG"
+					Tapped="OnFastComplexCellSVG" />
+
 			</TableSection>
 
 			<TableSection

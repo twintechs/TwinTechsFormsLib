@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -165,6 +164,8 @@
     </Compile>
     <Compile Include="TwinTechs\Example\SvgImageSample\SvgImageSamplePage.cs" />
     <Compile Include="TwinTechs\Example\SvgImageSample\SvgImageSamplePageViewModel.cs" />
+    <Compile Include="TwinTechs\Example\FastCells\Cells\ComplexFastCellSVG.xaml.cs" />
+    <Compile Include="TwinTechs\Example\FastCells\FastCellComplexSVGSamplePage.xaml.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.0.1.6505\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
@@ -308,6 +309,8 @@
     <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\mozilla\path.svg" />
     <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\mozilla\transform.svg" />
     <EmbeddedResource Include="TwinTechs\Example\SvgImageSample\Assets\funky-border.svg" />
+    <EmbeddedResource Include="TwinTechs\Example\FastCells\FastCellComplexSVGSamplePage.xaml" />
+    <EmbeddedResource Include="TwinTechs\Example\FastCells\Cells\ComplexFastCellSVG.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="TwinTechs\" />
