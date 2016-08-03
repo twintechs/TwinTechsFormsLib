@@ -8,6 +8,9 @@ using TwinTechs.Example.Gestures;
 using TwinTechs.Example.PageInPage;
 using TwinTechs.Example.CircleView;
 
+using Xamarin.Forms.Xaml;
+
+[assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace TwinTechs.Example
 {
 	public partial class SampleMenu : ContentPage
@@ -47,6 +50,11 @@ namespace TwinTechs.Example
 		void OnFastComplexCell (object sender, object args)
 		{
 			Navigation.PushAsync (new FastCellComplexSamplePage ());
+		}
+
+		void OnFastComplexCellSVG (object sender, object args)
+		{
+			Navigation.PushAsync (new FastCellComplexSVGSamplePage ());
 		}
 
 		#endregion
