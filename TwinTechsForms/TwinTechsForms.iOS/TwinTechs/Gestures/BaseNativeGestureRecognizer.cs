@@ -36,7 +36,7 @@ namespace TwinTechs.Gestures
 
 		bool _NativeRecognizer_ShouldRecognizeSimultaneously (UIGestureRecognizer gestureRecognizer, UIGestureRecognizer otherGestureRecognizer)
 		{
-			var renderer = Recognizer.View.GetRenderer ();
+			var renderer = Platform.GetRenderer(Recognizer.View);
 			return renderer != null && Recognizer.IsConsumingTouchesInParallel;
 		}
 
@@ -54,7 +54,7 @@ namespace TwinTechs.Gestures
 		public void AddRecognizer (BaseGestureRecognizer recognizer)
 		{
 			Recognizer = (T)recognizer;
-			var renderer = Recognizer.View.GetRenderer ();
+			var renderer = Platform.GetRenderer(Recognizer.View);
 			if (renderer == null) {
 				Recognizer.View.PropertyChanged += Recognizer_View_PropertyChanged;
 			} else {
@@ -65,7 +65,7 @@ namespace TwinTechs.Gestures
 		void Recognizer_View_PropertyChanged (object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 			if (e.PropertyName == "Renderer") {
-				var renderer = Recognizer.View.GetRenderer ();
+				var renderer = Platform.GetRenderer(Recognizer.View);
 				if (renderer != null && NativeView == null) {
 					InitializeNativeRecognizer ();
 				} else if (renderer == null && NativeView != null && NativeRecognizer != null) {
@@ -76,7 +76,7 @@ namespace TwinTechs.Gestures
 
 		void InitializeNativeRecognizer ()
 		{
-			var renderer = Recognizer.View.GetRenderer ();
+			var renderer = Platform.GetRenderer(Recognizer.View);
 			if (renderer == null) {
 				throw new InvalidOperationException ("attempted to initialize a native gesture recognizers for a view before it had created it's renderer");
 			}
@@ -133,8 +133,7 @@ namespace TwinTechs.Gestures
 		public Point LocationInView (VisualElement view)
 		{
 			if (NativeRecognizer != null) {
-				
-				var renderer = view.GetRenderer ();
+				var renderer = Platform.GetRenderer(view);
 				return NativeRecognizer.LocationInView (renderer.NativeView).ToPoint ();
 			} else {
 				return Point.Zero;
@@ -144,7 +143,7 @@ namespace TwinTechs.Gestures
 		public Point LocationOfTouch (int touchIndex, VisualElement view)
 		{
 			if (NativeRecognizer != null) {
-				var renderer = view.GetRenderer ();
+				var renderer = Platform.GetRenderer(view);
 				return NativeRecognizer.LocationOfTouch (touchIndex, renderer.NativeView).ToPoint ();
 			} else {
 				return Point.Zero;

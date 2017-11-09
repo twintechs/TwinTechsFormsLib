@@ -39,7 +39,7 @@ namespace TwinTechs.Ios.Controls
 		{
 			if (page != null) {
 				page.Parent = Element.GetParentPage ();
-				var pageRenderer = page.GetRenderer ();
+				var pageRenderer = Platform.GetRenderer(page);
 				UIViewController viewController = null;
 				if (pageRenderer != null && pageRenderer.ViewController != null) {
 					viewController = pageRenderer.ViewController;
@@ -47,7 +47,7 @@ namespace TwinTechs.Ios.Controls
 					viewController = page.CreateViewController ();
 				}
 				var parentPage = Element.GetParentPage ();
-				var renderer = parentPage.GetRenderer ();
+				var renderer = Platform.GetRenderer(parentPage);
 				Control.ParentViewController = renderer.ViewController;
 				Control.ViewController = viewController;
 				_initializedPage = page;

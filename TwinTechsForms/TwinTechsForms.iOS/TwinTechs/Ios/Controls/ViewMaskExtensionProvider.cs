@@ -7,6 +7,7 @@ using CoreGraphics;
 using UIKit;
 using TwinTechs.Ios.Extensions;
 using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 namespace TwinTechs.Ios.Controls
 {
@@ -20,7 +21,7 @@ namespace TwinTechs.Ios.Controls
 
 		public void ApplyMaskToView (Xamarin.Forms.View view, ViewMaskerType maskType)
 		{
-			var renderer = view.GetRenderer ();
+			var renderer = Platform.GetRenderer(view);
 			var nativeView = renderer.NativeView;
 			if (maskType == ViewMaskerType.None) {
 				view.SizeChanged -= OnSizeChanged;
@@ -38,7 +39,7 @@ namespace TwinTechs.Ios.Controls
 
 		public void ToggleViewShadow (Xamarin.Forms.View view, bool isOn)
 		{
-			var renderer = view.GetRenderer ();
+			var renderer = Platform.GetRenderer(view);
 			var nativeView = renderer.NativeView;
 			nativeView.Layer.ShadowColor = UIColor.Black.CGColor;
 			nativeView.Layer.ShadowOpacity = isOn ? 1 : 0;
@@ -86,7 +87,7 @@ namespace TwinTechs.Ios.Controls
 		void OnSizeChanged (object sender, EventArgs e)
 		{
 			var view = sender as Xamarin.Forms.View;
-			var renderer = view.GetRenderer ();
+			var renderer = Platform.GetRenderer(view);
 			var nativeView = renderer.NativeView;
 			var maskLayer = nativeView.Layer.Mask;
 			if (maskLayer != null) {
